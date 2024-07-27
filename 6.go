@@ -53,10 +53,17 @@ func main(){
         s = string(match[1])
     }
     res := ""
+    res2 := ""
+    seen := make(map[string]bool)
     for _, cmt := range comments {
         res += cmt
+        if cmt != "\n" && !seen[cmt] {
+            seen[cmt] = true
+            res2 += cmt
+        }
     }
     fmt.Println(res)
+    fmt.Println(res2)
 }
 
 // unzip
