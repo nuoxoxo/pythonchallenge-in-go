@@ -38,10 +38,9 @@ func main(){
         cont, err := ioutil.ReadAll(fopen)
         cmt := f.Comment
         char := cmt
-        if char == "\n" {
-            char = "( newline )"
-        }
-        fmt.Println(s, "\t", string(cont), char)
+        if char == "\n" { char = "(newline)" }
+        if char == " " { char = "(space)" }
+        fmt.Println(s, "\t", string(cont), "\t", char)
         comments = append(comments, cmt)
         // get the next filename
         match := re.FindSubmatch(cont)
