@@ -1,1 +1,2 @@
-- _5/ -_ better to be done in `python/pickle`
+- _5/ -_ done in python w/ `pickle`
+- _9/ -_ done in python w/ `pillow`
