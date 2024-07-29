@@ -38,8 +38,11 @@ func main(){
     fmt.Println("w/", C, "h/", R)
 
     mid := R / 2
-    //set := make(map[Pixel]bool)
     pixels := []Pixel{}
+    // finding sizeof a grey segment while making the []Pixel
+    lenmap := make(map[int]int)
+    var prev Pixel
+    runlen, seglen := 0, -1
     c := 0
     for c < C {
         color := img.At(c, mid)
@@ -50,16 +53,44 @@ func main(){
             B: int8(b),
             A: int8(a),
         }
+        if c == 0 {
+            prev = pixel
+        } else {
+            if pixel == prev {
+                runlen++
+            } else {
+                lenmap[runlen]++
+                runlen = 0
+                prev = pixel
+            }
+        }
         pixels = append(pixels, pixel)
-        c += 7
+        c++
     }
+
+    maxtimes := -1
+    for l, times := range lenmap {
+        // fmt.Println(l, ":", times)
+        if maxtimes < times {
+            maxtimes = times
+            seglen = l
+        }
+    }
+
+    fmt.Println("seg/", seglen)
+
     asc := []int8{}
-    for _, p := range pixels {
+    c = 0
+    for c < C {
+        p := pixels[c]
         if p.R == p.G && p.G == p.B {
             asc = append(asc, p.R)
         }
+        c += seglen + 1
     }
-    //fmt.Println("int/", asc)
+
+    // fmt.Println("int/", asc)
+
     msg := ""
     for _, char := range asc {
         msg += string(char)
