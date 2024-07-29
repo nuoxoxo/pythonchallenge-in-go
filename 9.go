@@ -61,29 +61,29 @@ func main(){
 
     i = 0
     for i < len(p1) - 4 {
-        BresenhamDraw(imgBresenham, p1[i], p1[i + 1], p1[i + 2], p1[i + 3], green)
+        Bresenham(imgBresenham, p1[i], p1[i + 1], p1[i + 2], p1[i + 3], green)
         NaiveDraw(imgNaiveDraw, p1[i], p1[i + 1], p1[i + 2], p1[i + 3], green)
         i += 2
     }
     i = 0
     for i < len(p2) - 4 {
-        BresenhamDraw(imgBresenham, p2[i], p2[i + 1], p2[i + 2], p2[i + 3], orange)
+        Bresenham(imgBresenham, p2[i], p2[i + 1], p2[i + 2], p2[i + 3], orange)
         NaiveDraw(imgNaiveDraw, p2[i], p2[i + 1], p2[i + 2], p2[i + 3], orange)
         i += 2
     }
 
-    bresenham, _ := os.Create("output_bresenham.png")
-    defer bresenham.Close()
-    png.Encode(bresenham, imgBresenham)
+    outBresenham, _ := os.Create("output_bresenham.png")
+    defer outBresenham.Close()
+    png.Encode(outBresenham, imgBresenham)
 
-    naive, _ := os.Create("output_naive.png")
-    defer naive.Close()
-    png.Encode(naive, imgNaiveDraw)
+    outNaiveDraw, _ := os.Create("output_naive.png")
+    defer outNaiveDraw.Close()
+    png.Encode(outNaiveDraw, imgNaiveDraw)
 
 }
 
 
-func BresenhamDraw(img *image.RGBA, r, c, rr, cc int, clr color.Color) {
+func Bresenham(img *image.RGBA, r, c, rr, cc int, clr color.Color) {
     dr := rr - r
     if dr < 0 {
         dr = -dr
