@@ -11,8 +11,9 @@ var content string
 
 func main(){
 
-    // grap the 2 pts that matter as []str
     fmt.Println("init/", content)
+
+    // grap the 2 pts that matter as []str
     first := "first:"
     second := "second:"
     endcomment := "-->"
@@ -24,7 +25,7 @@ func main(){
     fmt.Println("p1/", tmp1, reflect.TypeOf(tmp1))
     fmt.Println("p2/", tmp2, reflect.TypeOf(tmp2))
 
-    // conv both list 
+    // convert both list to []int - find side len
     p1, p2 := make([]int, len(tmp1)), make([]int, len(tmp2))
     for i, num := range tmp1 {
         n, _ := strconv.Atoi(strings.TrimSpace(num))
@@ -40,7 +41,7 @@ func main(){
     }
     fmt.Println("p1/", p1, reflect.TypeOf(p1))
     fmt.Println("p2/", p2, reflect.TypeOf(p2))
-    fmt.Println("sidelen/", side)
+    fmt.Println("side/", side)
 
 }
 
