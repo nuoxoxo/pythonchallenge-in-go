@@ -1,4 +1,6 @@
 *
 !.gitignore
 !*.go
+!5.py
+!9.py
 temp.go

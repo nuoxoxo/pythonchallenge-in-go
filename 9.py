@@ -1,52 +1,4 @@
-package main
-
-import (
-    "fmt"
-    "strings"
-    "strconv"
-    "reflect"
-)
-
-var content string
-
-func main(){
-
-    fmt.Println("init/", content)
-
-    // grap the 2 pts that matter as []str
-    first := "first:"
-    second := "second:"
-    endcomment := "-->"
-    fir := strings.Index(content, first)
-    sec := strings.Index(content, second)
-    end := strings.Index(content, endcomment)
-    tmp1 := strings.Split(content[fir + len(first) : sec], ",")
-    tmp2 := strings.Split(content[sec + len(second) : end], ",")
-    fmt.Println("p1/", tmp1, reflect.TypeOf(tmp1))
-    fmt.Println("p2/", tmp2, reflect.TypeOf(tmp2))
-
-    // convert both list to []int - find side len
-    p1, p2 := make([]int, len(tmp1)), make([]int, len(tmp2))
-    for i, num := range tmp1 {
-        n, _ := strconv.Atoi(strings.TrimSpace(num))
-        p1[i] = n
-    }
-    side := -1
-    for i, num := range tmp2 {
-        n, _ := strconv.Atoi(strings.TrimSpace(num))
-        p2[i] = n
-        if side < n {
-            side = n
-        }
-    }
-    fmt.Println("p1/", p1, reflect.TypeOf(p1))
-    fmt.Println("p2/", p2, reflect.TypeOf(p2))
-    fmt.Println("side/", side)
-
-}
-
-func init(){
-    content = `<!--
+content = """<!--
 
 first+second=?
 
@@ -77,7 +29,21 @@ second:
 77,155,81,148,87,140,96,138,105,141,110,136,111,126,113,129,118,117,128,114,137,115,146,114,155,115,
 158,121,157,128,156,134,157,136,156,136
 
--->`
-}
+-->"""
+
+import re 
+temp = content.split("second:")
+first = list(map(int, re.findall(r'\d+', temp[0])))
+second = list(map(int, re.findall(r'\d+', temp[1])))
+side = max(max(first), max(second))
+print(first, "len/", len(first))
+print(second, "len/", len(second))
+print("side/", side)
 
 
+from PIL import Image, ImageDraw
+res = Image.new("RGB", (side, side))
+drw = ImageDraw.Draw(res)
+drw.polygon( first, fill='yellow' )
+drw.polygon( second, fill='cyan' )
+res.show()
