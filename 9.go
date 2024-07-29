@@ -72,11 +72,11 @@ func main(){
         i += 2
     }
 
-    outBresenham, _ := os.Create("output_bresenham.png")
+    outBresenham, _ := os.Create("files/output_bresenham.png")
     defer outBresenham.Close()
     png.Encode(outBresenham, imgBresenham)
 
-    outNaiveDraw, _ := os.Create("output_naive.png")
+    outNaiveDraw, _ := os.Create("files/output_naive.png")
     defer outNaiveDraw.Close()
     png.Encode(outNaiveDraw, imgNaiveDraw)
 
