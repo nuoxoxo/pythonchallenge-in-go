@@ -9,7 +9,7 @@ import (
 
 func main() {
 
-    imgfile, _ := os.Open("cave.jpg")
+    imgfile, _ := os.Open("files/cave.jpg")
     defer imgfile.Close()
 
     img, _, _ := image.Decode( imgfile )
@@ -36,11 +36,11 @@ func main() {
     }
 
     // save both jpg
-    imgfileEven, _ := os.Create("1.jpg")
+    imgfileEven, _ := os.Create("files/1.jpg")
     defer imgfileEven.Close()
     jpeg.Encode( imgfileEven, Even, nil )
 
-    imgfileOdd, _ := os.Create("2.jpg")
+    imgfileOdd, _ := os.Create("files/2.jpg")
     defer imgfileOdd.Close()
     jpeg.Encode (imgfileOdd, Odd, nil)
 }
