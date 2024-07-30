@@ -31,7 +31,13 @@ func init(){
 
 level | keyword
 ----- | -----------
-15| ~~?~~
+21|
+20|
+19|
+18|
+17|
+16|
+15| _mozart_
 14| _cat - his/her name_
 13| _italy_
 12| _disproportional_
@@ -46,4 +52,4 @@ level | keyword
 3 | _linkedlist_
 2 | _eqaulity_
 1 | _ocr_
-0 | 2^38
+0 | ` `
