@@ -15,10 +15,10 @@ func main(){
 }
 
 func init(){
-    URL, UUU, PPP := "", "", ""
+    URL := ""
     conn := & http.Client{}
     req, _ := http.NewRequest("GET", URL, nil)
-    req.SetBasicAuth( UUU, PPP )
+    req.SetBasicAuth("", "")
     resp, _ := conn.Do(req)
 
     defer resp.Body.Close()
