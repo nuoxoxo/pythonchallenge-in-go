@@ -2,9 +2,10 @@ package main
 
 import (
     "fmt"
-    _"net/http"
+    "net/http"
     "github.com/kolo/xmlrpc"
     "reflect"
+    "io/ioutil"
 )
 
 func main() {
@@ -73,8 +74,25 @@ func main() {
         i++
     }
 
+    // why bert - see lv. 12
+
+    URL = "http://www.pythonchallenge.com/pc/return/evil4.jpg"
+    user := "huge"
+    pass := "file"
+    client := & http.Client{}
+    req, err := http.NewRequest("GET", URL, nil)
+    if err != nil {fmt.Println("err/", err)}
+    req.SetBasicAuth( user, pass )
+    resp, _ := client.Do(req)
+    defer resp.Body.Close()
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println("msg/", string(body))
+
+    evil := string(body)[:4]
+    fmt.Println("evil/", evil)
+
     var _phone interface{}
-    err = conn.Call(cmds[0], "Bert", & _phone)
+    err = conn.Call(cmds[0], evil, & _phone)
     if err != nil { fmt.Println("err/", err) }
     fmt.Println("phone/", _phone, "\nend/\n")
     fmt.Println("type/", reflect.TypeOf(_phone))
