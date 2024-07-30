@@ -29,7 +29,7 @@ func init(){
 level | keyword
 ----- | -----------
 15| ~~?~~
-14| _cat_
+14| _cat - his/her name_
 13| _italy_
 12| _disproportional_
 11| _evil_
