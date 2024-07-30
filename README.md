@@ -1,3 +1,5 @@
+# notes
+
 - _5/ -_ using `pickle` 🟡
 - _7/ -_ read and analyze w/ `res.At(x,y)`
 - _9/ -_ draw lines around a polygon
@@ -24,7 +26,8 @@ func init(){
     PAGE = string(body)
 }
 ```
-- keep it up
+
+# keys
 
 level | keyword
 ----- | -----------
