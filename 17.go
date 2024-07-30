@@ -108,7 +108,7 @@ func linkedlist_revisited() string {
 
 func init(){
 
-    URL := "http://www.pythonchallenge.com/pc/return/mozart.html"
+    URL := "http://www.pythonchallenge.com/pc/return/romance.html"
     ups, mid := "hugefile", 4
     conn := & http.Client{}
     req, err := http.NewRequest("GET", URL, nil)
