@@ -6,6 +6,7 @@ import (
     "os"
     "io/ioutil"
     "strconv"
+    "net/http"
 )
 
 func main(){
@@ -24,6 +25,19 @@ func main(){
         outfile.Close()
         i++
     }
+
+    // extra : get a msg for next level
+    URL := "http://www.pythonchallenge.com/pc/return/evil4.jpg"
+    user := "huge"
+    pass := "file"
+    conn := & http.Client{}
+    req, err := http.NewRequest("GET", URL, nil)
+    if err != nil {fmt.Println("err/", err)}
+    req.SetBasicAuth( user, pass )
+    resp, _ := conn.Do(req)
+    defer resp.Body.Close()
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println("msg/", string(body))
 }
 
 
