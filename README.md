@@ -31,6 +31,12 @@ func init(){
 
 level | keyword
 ----- | -----------
+21|
+20|
+19|
+18|
+17|
+16|
 15| ~~?~~
 14| _cat - his/her name_
 13| _italy_
