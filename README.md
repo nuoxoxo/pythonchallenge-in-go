@@ -28,19 +28,19 @@ func init(){
 
 level | keyword
 ----- | -----------
-15| ~~~~
-14| ~~chat~~
-13| ~~ita~~
-12| ~~disproportion~~
-11| ~~evl~~
-10| ~~508~~
-9 | ~~bul~~
+15| ~~?~~
+14| _cat_
+13| _italy_
+12| _disproportional_
+11| _evil_
+10| _5808_
+9 | _bull_
 8 | ` `
-7 | ~~integ~~
-6 | ~~oxy~~
-5 | ~~chan~~
-4 | ~~pea~~
-3 | ~~linkedl~~
-2 | ~~equal~~
-1 | ~~oc~~
-0 | ` `
+7 | _integrity_
+6 | _oxygen_
+5 | _channel_
+4 | _peak_
+3 | _linkedlist_
+2 | _eqaulity_
+1 | _ocr_
+0 | 2^38
