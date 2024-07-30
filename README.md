@@ -52,4 +52,4 @@ level | keyword
 3 | _linkedlist_
 2 | _eqaulity_
 1 | _ocr_
-0 | 2^38
+0 | ` `
