@@ -6,8 +6,8 @@
     - new image w/ `image.NewRGBA(image.Rect(sx,sy,ex,ey))`
     - draw w/ `res.Set(x,y,colour)`
 - _11/ -_ new image w/ `image.NewRGBA( mypic.Bounds() )`
-- _16/ -_ longest substring of repeats ?
-  - each row has 1 (or mult) uni-color segment 
+- _16/ -_ longest substring of repeats 👉 YES
+    - not _move_ the pink segment but _Rotate_
 - GET from a URL
 ```go
 var PAGE string
