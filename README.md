@@ -8,6 +8,14 @@
 - _11/ -_ new image w/ `image.NewRGBA( mypic.Bounds() )`
 - _16/ -_ longest substring of repeats 👉 YES
     - not _move_ the pink segment but _Rotate_
+- _18/ -_
+    - strategy: imagine 2 byte slices, a and b
+```
+create 3 new bytes slices, such that
+first one contains what is in a, but not in b
+second one contains what is in b and not in a
+third one contains what is in both a and b
+```
 - GET from a URL
 ```go
 var PAGE string
