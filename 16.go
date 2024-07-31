@@ -11,9 +11,6 @@ import (
     "reflect"
     "strconv"
 )
-const offset int = 5
-const offl int = 0
-const offr int = 0
 
 func main(){
     gf, _ := os.Open("files/mozart.gif")
@@ -26,12 +23,11 @@ func main(){
     fmt.Println("rows/", R, "cols/", C)
 
     // try something like Paletted
-    palettedImg, _ := mozart.(*image.Paletted)
+    plt, _ := mozart.(*image.Paletted)
 
-    res := image.NewPaletted( bounds, palettedImg.Palette )
-    // res := image.NewPaletted( bounds, nil )
-    fmt.Println("init/", /*res,*/ reflect.TypeOf(res))
-    
+    res := image.NewPaletted( bounds, plt.Palette)
+    res := image.NewPaletted( bounds, nil) // BUG
+    fmt.Println("init/type", reflect.TypeOf(res))
 
     r = 0
     for r < R {
@@ -48,17 +44,16 @@ func main(){
         // 1 - finding out about that strip|segment
         //  observation/
         //  {255 0 255 255} --> pink-ish, len-5 segment found
-        ///*s, e :=*/findingLongestSegment(row, C)
+        // findingLongestSegment(row, C)
 
         // 2 - find index-pairs of all pink segments
         //  assert/
-        //  assert/there is only one such pair
-        //  once we see a |255,0,255,255| we do e = s + 5 and i += 5
+        //  there is only one such pair; a pinkdot's L-index is sufficient
         s := findingPinkSegment(row, C)
 
         // 3 - move pink segments at the end of row (ie. res[r])
+        // append(append(row[s:e], row[:s]...), row[e:]...) // BUG
         row = append(row[s:], row[:s]...)
-        // row = append(append(row[s:e], row[:s]...), row[e:]...)
 
         c = 0
         for c < C {
@@ -66,16 +61,14 @@ func main(){
             c++
         }
         r++
-        // . . . . . .
     }
     outfile, _ := os.Create("res.gif")
     defer outfile.Close()
     _ = gif.Encode(outfile, res, nil)
-    // done?
 }
 
 
-func findingPinkSegment(row[]color.Color, C int)(int/*,int*/)/*(color.Color,int,int,int,string)*/{
+func findingPinkSegment(row[]color.Color, C int) int {
 
     s, e := 0, 0
     c := 1
@@ -83,24 +76,21 @@ func findingPinkSegment(row[]color.Color, C int)(int/*,int*/)/*(color.Color,int,
         cl := row[c]
         rr, gg, bb, aa := cl.RGBA()
         r8, g8, b8, a8 := uint8(rr>>8), uint8(gg>>8), uint8(bb>>8), uint8(aa>>8)
-        // assert curr==next is sufficient to target a 5-pix segment
-        if r8 == 255 && g8 == 0 && b8 == 255 && a8 == 255 && row[c]==row[c+1] && row[c+1]==row[c+2] {
-            // fmt.Println(cl)
-            //return s
+        // observation/ first pinkdot we meet suffices
+        if r8 == 255 && g8 == 0 && b8 == 255 && a8 == 255 /*&& row[c]==row[c+1] && row[c+1]==row[c+2]*/ {
             s = c
             e = c + 5
             c += 5
-        } else {
-            c++
+            continue
         }
-        //c++
+        c++
     }
     fmt.Println(row[s], s, e, e - s)
     return s//, e
 }
 
 
-func findingLongestSegment(row[]color.Color, C int)(int,int)/*(color.Color,int,int,int,string)*/{
+func findingLongestSegment(row[]color.Color, C int) (int, int) {
 
     // here we do longest uni-char substring 
     var commoncolor color.Color = row[0] // most seen
@@ -113,7 +103,7 @@ func findingLongestSegment(row[]color.Color, C int)(int,int)/*(color.Color,int,i
             dist := c - scurr
             if maxlen < dist {
                 // crucial BugFix
-                commoncolor = currentcolor// row[c] // BUG
+                commoncolor = currentcolor //row[c] // BUG
                 s = scurr
                 e = c
                 maxlen = dist
@@ -124,7 +114,6 @@ func findingLongestSegment(row[]color.Color, C int)(int,int)/*(color.Color,int,i
         c++
     }
     SE := strconv.Itoa(s) + "-" + strconv.Itoa(e)
-    //fmt.Println(r, "\b/", "color/", commoncolor, SE, "len/", maxlen)
     fmt.Println(commoncolor, SE, "len/", maxlen)
     return s, e
 }
