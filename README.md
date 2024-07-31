@@ -36,7 +36,7 @@ level | keyword
 21|
 20|
 19|
-18|
+18| _brightness -_
 17| _violin - balloons_
 16| _romance_
 15| _mozart_
