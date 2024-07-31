@@ -6,38 +6,37 @@ import (
     "io/ioutil"
     "image"
     "image/gif"
+    "image/color"
     "os"
     "reflect"
 )
 
 func main(){
-    mozart, _ := os.Open("files/mozart.gif")
-    defer mozart.Close()
-    mozartgif, _ := gif.Decode(mozart)
-    bounds := mozartgif.Bounds()
-    fmt.Println("bounds/", bounds, reflect.TypeOf(bounds))
-    fmt.Println("rows", bounds.Dy())
-    fmt.Println("cols", bounds.Dx())
-    R := bounds.Dy()
-    C := bounds.Dx()
-
-    // paletted := image.NewPaletted(bounds, mozartgif.(*image.Paletted).Palette)
-    pimg, _ := mozartgif.(*image.Paletted)
-    r := 0
+    FILE, _ := os.Open("files/mozart.gif")
+    defer FILE.Close()
+    mozart, _ := gif.Decode(FILE)
+    bounds := mozart.Bounds()
+    var R, C, r, c int
+    R, C = bounds.Dy(), bounds.Dx()
+    fmt.Println("size/", bounds, reflect.TypeOf(bounds))
+    fmt.Println("rows/", R, "cols/", C)
+    res := image.NewPaletted( bounds, nil )
+    fmt.Println("init/", res, reflect.TypeOf(res))
+    r = 0
     for r < R {
-        row := make(map[uint8]int)
-        c := 0
+        // row reprented as a rgb(a) slice
+        row := make([]color.Color, C)
+        c = 0
         for c < C {
-            color := pimg.ColorIndexAt(c, r)
-            row[color]++
-            c++
+            cl := mozart.At(c, r)
+            fmt.Println("color/", cl, reflect.TypeOf(cl))
+            row[c] = cl
         }
-        for k, v := range row {
-            fmt.Println("row/", k, v)
-        }
-        fmt.Println("")
+        // here we do longest uni-char substring 
+        // todo...
         r++
     }
+
 }
 
 func init(){
