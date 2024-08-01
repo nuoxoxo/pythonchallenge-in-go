@@ -3,4 +3,4 @@
 !*.go
 !5.py
 *copy*
-temp.go
+temp*.go

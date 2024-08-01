@@ -8,9 +8,13 @@ import (
     "io"
     "os"
     "reflect"
-    _"encoding/hex"
+    "encoding/hex"
     "bytes"
     "bufio"
+    _"image"
+    _"image/color"
+    _"image/png"
+    "io/ioutil"
 )
 
 var block []uint8
@@ -20,7 +24,7 @@ func main(){
     reader := bytes.NewReader(block)
     scanner := bufio.NewScanner(reader)
 
-    //scanner.Scan() // inspect the first line 
+    // scanner.Scan() // inspect the first line 
     //for i, thing := range scanner.Bytes() { fmt.Println(i, "/", thing, reflect.TypeOf(thing)) }
 
     //  observation/ 3 slots of 32/sp in the middle
@@ -36,7 +40,16 @@ func main(){
     for scanner.Scan() {
         i++
         line := scanner.Bytes()
-        l, r := line[:53], line[56:]
+        ll, rr := line[:53], line[56:]
+
+        // added
+        //ll = bytes.TrimSpace(ll)
+        //rr = bytes.TrimSpace(rr)
+
+        l, _ := hex.DecodeString(string(ll))
+        r, _ := hex.DecodeString(string(rr))
+
+        //fmt.Println(len(l), ":", len(r))
         L = append(L, l)
         R = append(R, r)
     }
@@ -48,8 +61,8 @@ func main(){
     fmt.Println("dbg/", "R -", len(R), reflect.TypeOf(R), "len/0", len(R[0]))
 
     // step: diff
-    //inA, inB, Both := [][]byte{}, [][]byte{}, [][]byte{}
-    inA, inB, Both := []byte{}, []byte{}, []byte{}
+    //A, B, AB := [][]byte{}, [][]byte{}, [][]byte{}
+    A, B, AB := []byte{}, []byte{}, []byte{}
     N := len(L)
     if N != len(R) {
         panic("different lengths/" + strconv.Itoa(N) + ":" + strconv.Itoa(len(R)))
@@ -67,25 +80,26 @@ func main(){
 
         for _, val := range l {
             if mb[val] {
-                Both = append(Both, val)
+                AB = append(AB, val)
             } else {
-                inA = append(inA, val)
+                A = append(A, val)
             }
         }
         for _, val := range r {
             if ! ma[val] {
-                inB = append(inB, val)
+                B = append(B, val)
             }
         }
         i++
     }
-    fmt.Println("len only a/", len(inA))
-    fmt.Println("len only b/", len(inB))
-    fmt.Println("len Both/", len(Both))
+    fmt.Println("len only a/", len(A))
+    fmt.Println("len only b/", len(B))
+    fmt.Println("len AB/", len(AB))
 
-    img1, _ := os.Create("out1")
-    defer img1.Close()
-    img1.Write(inA)
+    out1, _ := os.Create("out1.png")
+    defer out1.Close()
+    _ = ioutil.WriteFile("out1.png", A, 0644)
+
 }
 
 
