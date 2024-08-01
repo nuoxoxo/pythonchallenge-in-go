@@ -8,8 +8,7 @@
 - _11/ -_ new image w/ `image.NewRGBA( mypic.Bounds() )`
 - _16/ -_ longest substring of repeats 👉 YES
     - not _move_ the pink segment but _Rotate_
-- _18/ -_
-    - todo/ redo byte strings conversion - common.png not written properly
+- _18/ -_ common.png not written properly
     - strategy: imagine 2 byte slices, a and b
 ```
 create 3 new bytes slices, such that
