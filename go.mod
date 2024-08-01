@@ -1,4 +1,4 @@
-module pc13
+module pych
 
 go 1.22.4
 
