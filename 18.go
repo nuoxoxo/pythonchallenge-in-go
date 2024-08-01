@@ -1,115 +1,108 @@
 package main
 
 import (
-    "fmt"
-    "strconv"
-    _"strings"
-    "compress/gzip"
-    "io"
-    "os"
-    "reflect"
-    "encoding/hex"
+    _"strconv"
     "bytes"
-    "bufio"
-    _"image"
-    _"image/color"
-    _"image/png"
-    "io/ioutil"
+    "compress/gzip"
+    "encoding/hex"
+    "fmt"
+    _"io"
+    "os"
+    "strings"
+    "github.com/pmezard/go-difflib/difflib"
 )
 
-var block []uint8
-
-func main(){
-
-    reader := bytes.NewReader(block)
-    scanner := bufio.NewScanner(reader)
-
-    // scanner.Scan() // inspect the first line 
-    //for i, thing := range scanner.Bytes() { fmt.Println(i, "/", thing, reflect.TypeOf(thing)) }
-
-    //  observation/ 3 slots of 32/sp in the middle
-    //      len/108 ...
-    //      52 / 48 uint8
-    //      53 / 32 uint8
-    //      54 / 32 uint8
-    //      55 / 32 uint8
-    //      56 / 56 uint8
-
-    L, R := [][]uint8{}, [][]uint8{}
-    i := 0
-    for scanner.Scan() {
-        i++
-        line := scanner.Bytes()
-        ll, rr := line[:53], line[56:]
-
-        // added
-        //ll = bytes.TrimSpace(ll)
-        //rr = bytes.TrimSpace(rr)
-
-        l, _ := hex.DecodeString(string(ll))
-        r, _ := hex.DecodeString(string(rr))
-
-        //fmt.Println(len(l), ":", len(r))
-        L = append(L, l)
-        R = append(R, r)
+func main() {
+    // Open the gzip file
+    file, err := os.Open("files/deltas.gz")
+    if err != nil {
+        fmt.Println("Error opening file:", err)
+        return
     }
-
-    // DBG
-    fmt.Println("i/", i) // total lines: 2291
-    fmt.Println("dbg/", "L -", len(L), reflect.TypeOf(L), "len/0", len(L[0]))
-    fmt.Println("dbg/", "L/last", L[len(L) - 1], "len/-1", len(L[len(L) - 1]))
-    fmt.Println("dbg/", "R -", len(R), reflect.TypeOf(R), "len/0", len(R[0]))
-
-    // step: diff
-    //A, B, AB := [][]byte{}, [][]byte{}, [][]byte{}
-    A, B, AB := []byte{}, []byte{}, []byte{}
-    N := len(L)
-    if N != len(R) {
-        panic("different lengths/" + strconv.Itoa(N) + ":" + strconv.Itoa(len(R)))
-    }
-    i = 0
-    for i < N {
-        l, r := L[i], R[i]
-        ma, mb := make(map[byte]bool), make(map[byte]bool)
-        for _, val := range l {
-            ma[val] = true
-        }
-        for _, val := range r {
-            mb[val] = true
-        }
-
-        for _, val := range l {
-            if mb[val] {
-                AB = append(AB, val)
-            } else {
-                A = append(A, val)
-            }
-        }
-        for _, val := range r {
-            if ! ma[val] {
-                B = append(B, val)
-            }
-        }
-        i++
-    }
-    fmt.Println("len only a/", len(A))
-    fmt.Println("len only b/", len(B))
-    fmt.Println("len AB/", len(AB))
-
-    out1, _ := os.Create("out1.png")
-    defer out1.Close()
-    _ = ioutil.WriteFile("out1.png", A, 0644)
-
-}
-
-
-func init(){
-    file, _ := os.Open("files/deltas.gz")
     defer file.Close()
-    reader, _ := gzip.NewReader(file)
-    defer reader.Close()
-    data, _ := io.ReadAll(reader)
-    block = data
+
+    // Create a gzip reader
+gzReader, err := gzip.NewReader(file)
+if err != nil {
+fmt.Println("Error creating gzip reader:", err)
+return
+}
+defer gzReader.Close()
+
+var d1, d2 []string
+buf := new(bytes.Buffer)
+if _, err = buf.ReadFrom(gzReader); err != nil {
+fmt.Println("Error reading gzip data:", err)
+return
+}
+lines := strings.Split(buf.String(), "\n")
+
+for _, line := range lines {
+if len(line) >= 56 {
+d1 = append(d1, line[:53])
+d2 = append(d2, line[56:])
+} else {
+d1 = append(d1, line)
+d2 = append(d2, line)
+
+fmt.Println("56 ?/", len(line))
+}
 }
 
+diff, _ := difflib.GetUnifiedDiffString(difflib.UnifiedDiff{
+A:        difflib.SplitLines(strings.Join(d1, "\n")),
+B:        difflib.SplitLines(strings.Join(d2, "\n")),
+Context:  3,
+})
+
+f, _ := os.Create("f0.png")
+defer f.Close()
+f1, _ := os.Create("f1.png")
+defer f1.Close()
+f2, _ := os.Create("f2.png")
+defer f2.Close()
+
+//fmt.Println(diff)
+
+for i, line := range strings.Split(diff, "\n") {
+if len(line) == 0 {
+continue
+}
+
+var bs []byte
+if !strings.HasPrefix(line, "@") {//&& (strings.HasPrefix(line, "+") || strings.HasPrefix(line, "-")) {
+hexData := line[1:]
+fmt.Println(i, line)
+bs, _ = hexStringToBytes(hexData)
+//hexData := strings.TrimSpace(line[1:])
+//bs, _ = hexStringToBytes(hexData)
+}
+//if len(bs) < 1 { continue } 
+//switch {
+if strings.HasPrefix(line, "+") {
+f1.Write(bs)
+//fmt.Println("+/", line)
+} else if strings.HasPrefix(line, "-") {
+f2.Write(bs)
+//fmt.Println("-/", strconv.Quote(line))
+} else if strings.HasPrefix(line, " "){
+f.Write(bs)
+fmt.Println(i, "prefix!=@/", len(bs), line)
+} 
+/*else {
+fmt.Println(i, "default/", line)
+}*/
+//default:
+//fmt.Println(i, "default/", line)
+//}
+}
+}
+
+func hexStringToBytes(hexStr string) ([]byte, error) {
+hexStr = strings.ReplaceAll(hexStr, " ", "")
+if len(hexStr)%2 != 0 {
+hexStr = "0" + hexStr
+}
+return hex.DecodeString(hexStr)
+}
 
