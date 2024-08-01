@@ -25,8 +25,8 @@ func main(){
     // try something like Paletted
     plt, _ := mozart.(*image.Paletted)
 
-    res := image.NewPaletted( bounds, plt.Palette)
-    res := image.NewPaletted( bounds, nil) // BUG
+    //res := image.NewPaletted( bounds, nil) // BUG
+    res := image.NewPaletted( bounds, plt.Palette) // bugdix
     fmt.Println("init/type", reflect.TypeOf(res))
 
     r = 0
@@ -52,8 +52,8 @@ func main(){
         s := findingPinkSegment(row, C)
 
         // 3 - move pink segments at the end of row (ie. res[r])
+        row = append(row[s:], row[:s]...) // bugfix
         // append(append(row[s:e], row[:s]...), row[e:]...) // BUG
-        row = append(row[s:], row[:s]...)
 
         c = 0
         for c < C {
@@ -102,8 +102,8 @@ func findingLongestSegment(row[]color.Color, C int) (int, int) {
         if currentcolor != row[c] {
             dist := c - scurr
             if maxlen < dist {
-                // crucial BugFix
-                commoncolor = currentcolor //row[c] // BUG
+                commoncolor = currentcolor // bugfix
+                // commoncolor = row[c] // BUG
                 s = scurr
                 e = c
                 maxlen = dist
