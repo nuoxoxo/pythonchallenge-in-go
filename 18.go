@@ -3,86 +3,60 @@ package main
 import (
     "fmt"
     "strconv"
-    "strings"
+    _"strings"
     "compress/gzip"
     "io"
     "os"
     "reflect"
-    "encoding/hex"
-    _"bytes"
-    _"image/png"
+    _"encoding/hex"
+    "bytes"
+    "bufio"
 )
 
-var lines []string
+var block []uint8
 
 func main(){
 
-    fmt.Println("res/")
-    discrepancy := 1
-    L, R := []string{}, []string{}
-    for i, line := range lines {
-        if len(line) < 64 {
-            fmt.Println("empty?/", strconv.Quote(line), "len", len(line))
-        } else {
-            l, r := line[:53], line[56:]
-            fmt.Println(i, line, strconv.Itoa(len(l)) + ":" + strconv.Itoa(len(r)))
-            if len(l) != len(r) {
-                fmt.Println("error?/\t", discrepancy)
-                discrepancy++
-            }
-            L, R = append(L, l), append(R, r)
-        }
+    reader := bytes.NewReader(block)
+    scanner := bufio.NewScanner(reader)
+
+    //scanner.Scan() // inspect the first line 
+    //for i, thing := range scanner.Bytes() { fmt.Println(i, "/", thing, reflect.TypeOf(thing)) }
+
+    //  observation/ 3 slots of 32/sp in the middle
+    //      len/108 ...
+    //      52 / 48 uint8
+    //      53 / 32 uint8
+    //      54 / 32 uint8
+    //      55 / 32 uint8
+    //      56 / 56 uint8
+
+    L, R := [][]uint8{}, [][]uint8{}
+    i := 0
+    for scanner.Scan() {
+        i++
+        line := scanner.Bytes()
+        l, r := line[:53], line[56:]
+        L = append(L, l)
+        R = append(R, r)
     }
 
     // DBG
-    test := 100
-    testL, testR := L[test], R[test]
-    fmt.Println("dbg/", len(L), reflect.TypeOf(L), testL, len(testL), testL[len(testL) - 1])
-    fmt.Println("dbg/", len(R), reflect.TypeOf(R), testR, len(testR), testR[len(testR) - 1])
+    fmt.Println("i/", i) // total lines: 2291
+    fmt.Println("dbg/", "L -", len(L), reflect.TypeOf(L), "len/0", len(L[0]))
+    fmt.Println("dbg/", "L/last", L[len(L) - 1], "len/-1", len(L[len(L) - 1]))
+    fmt.Println("dbg/", "R -", len(R), reflect.TypeOf(R), "len/0", len(R[0]))
 
-    // []string ---> []bytes
-    bytesL, bytesR := make([][]byte, len(L)), make([][]byte, len(R))
-    for i, line := range L {
-        pairs := strings.Split(line, " ")
-        fmt.Println(len(pairs))
-        temp := make([]byte, len(pairs))
-        for j, pair := range pairs {
-            val, _ := hex.DecodeString(pair)
-            if len(val) > 0 {
-                temp[j] = val[0]
-            } else {
-                temp[j] = 0x00
-            }
-        }
-        bytesL[i] = temp
+    // step: diff
+    //inA, inB, Both := [][]byte{}, [][]byte{}, [][]byte{}
+    inA, inB, Both := []byte{}, []byte{}, []byte{}
+    N := len(L)
+    if N != len(R) {
+        panic("different lengths/" + strconv.Itoa(N) + ":" + strconv.Itoa(len(R)))
     }
-    for i, line := range R {
-        pairs := strings.Split(line, " ")
-        if len(pairs) == 0 {continue}
-        temp := make([]byte, len(pairs))
-        for j, pair := range pairs {
-            val, _ := hex.DecodeString(pair)
-            if len(val) > 0 {
-                temp[j] = val[0]
-            } else {
-                temp[j] = 0x00
-            }
-        }
-        bytesR[i] = temp
-    }
-    fmt.Println(bytesL[0], bytesL[42])
-    fmt.Println(bytesR[0], bytesR[42])
-
-
-    // diff
-    onlya, onlyb, both := [][]byte{}, [][]byte{}, [][]byte{}
-    N := len(bytesL)
-    if N != len(bytesR) {
-        panic("different lengths/" + strconv.Itoa(N) + ":" + strconv.Itoa(len(bytesR)))
-    }
-    i := 0
+    i = 0
     for i < N {
-        l, r := bytesL[i], bytesR[i]
+        l, r := L[i], R[i]
         ma, mb := make(map[byte]bool), make(map[byte]bool)
         for _, val := range l {
             ma[val] = true
@@ -91,52 +65,27 @@ func main(){
             mb[val] = true
         }
 
-        oa, ob, bo := []byte{}, []byte{}, []byte{}
         for _, val := range l {
             if mb[val] {
-                bo = append(bo, val)
+                Both = append(Both, val)
             } else {
-                oa = append(oa, val)
+                inA = append(inA, val)
             }
         }
         for _, val := range r {
-            if ma[val] { // in fact it's been done in above loop
-                bo = append(bo, val)
-            } else {
-                ob = append(ob, val)
+            if ! ma[val] {
+                inB = append(inB, val)
             }
         }
-        onlya = append(onlya, oa)
-        onlyb = append(onlyb, ob)
-        both = append(both, bo)
         i++
     }
-    fmt.Println("len only a/", len(onlya))
-    fmt.Println("len only b/", len(onlyb))
-    fmt.Println("len both/", len(both))
+    fmt.Println("len only a/", len(inA))
+    fmt.Println("len only b/", len(inB))
+    fmt.Println("len Both/", len(Both))
 
-    /*
-    aData := []byte{}
-    for _, data := range onlya {
-        aData = append(aData, data...)
-    }
-    fmt.Println(aData)
-    reader := bytes.NewReader(aData)
-    img1, err := png.Decode(reader)
-    if err != nil {
-        fmt.Println("err/", err)
-    }
-    img1out, _ := os.Create("img1.png")
-    defer img1out.Close()
-    png.Encode(img1out, img1)
-    */
-    img1, _ := os.Create("1.png")
+    img1, _ := os.Create("out1")
     defer img1.Close()
-    for i, line := range onlya[:2218] {
-        _, err := img1.Write(line)
-        fmt.Println(i, line, len(line))
-        if err != nil {fmt.Println(err)}
-    }
+    img1.Write(inA)
 }
 
 
@@ -146,7 +95,7 @@ func init(){
     reader, _ := gzip.NewReader(file)
     defer reader.Close()
     data, _ := io.ReadAll(reader)
-    lines = strings.Split(string(data), "\n")
+    block = data
 }
 
 
