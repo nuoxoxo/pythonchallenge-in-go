@@ -1,6 +1,7 @@
 *
 !.gitignore
 !*.go
+!*.mod
 !5.py
 *copy*
 temp*.go

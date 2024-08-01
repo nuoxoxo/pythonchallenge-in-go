@@ -9,100 +9,87 @@ import (
     _"io"
     "os"
     "strings"
+
     "github.com/pmezard/go-difflib/difflib"
 )
 
 func main() {
-    // Open the gzip file
-    file, err := os.Open("files/deltas.gz")
-    if err != nil {
-        fmt.Println("Error opening file:", err)
-        return
-    }
+
+    file, _ := os.Open("files/deltas.gz")
     defer file.Close()
 
-    // Create a gzip reader
-gzReader, err := gzip.NewReader(file)
-if err != nil {
-fmt.Println("Error creating gzip reader:", err)
-return
-}
-defer gzReader.Close()
+    gzReader, _ := gzip.NewReader(file)
+    defer gzReader.Close()
 
-var d1, d2 []string
-buf := new(bytes.Buffer)
-if _, err = buf.ReadFrom(gzReader); err != nil {
-fmt.Println("Error reading gzip data:", err)
-return
-}
-lines := strings.Split(buf.String(), "\n")
+    var L, R []string
+    buffer := new(bytes.Buffer)
+    _, _ = buffer.ReadFrom(gzReader)
 
-for _, line := range lines {
-if len(line) >= 56 {
-d1 = append(d1, line[:53])
-d2 = append(d2, line[56:])
-} else {
-d1 = append(d1, line)
-d2 = append(d2, line)
+    lines := strings.Split(buffer.String(), "\n")
+    for _, line := range lines {
+        if len(line) < 56 {
+            fmt.Println("56 ?/", len(line))
+        } else {
+            L = append(L, line[:53])
+            R = append(R, line[56:])
+        }
+    }
 
-fmt.Println("56 ?/", len(line))
-}
-}
+    diff, _ := difflib.GetUnifiedDiffString(difflib.UnifiedDiff{
+        A: difflib.SplitLines(strings.Join(L, "\n")),
+        B: difflib.SplitLines(strings.Join(R, "\n")),
+        Context: 3,
+    })
 
-diff, _ := difflib.GetUnifiedDiffString(difflib.UnifiedDiff{
-A:        difflib.SplitLines(strings.Join(d1, "\n")),
-B:        difflib.SplitLines(strings.Join(d2, "\n")),
-Context:  3,
-})
+    p1, _ := os.Create("p1.png")
+    defer p1.Close()
 
-f, _ := os.Create("f0.png")
-defer f.Close()
-f1, _ := os.Create("f1.png")
-defer f1.Close()
-f2, _ := os.Create("f2.png")
-defer f2.Close()
+    p2, _ := os.Create("p2.png")
+    defer p2.Close()
 
-//fmt.Println(diff)
+    p3, _ := os.Create("p3.png")
+    defer p3.Close()
 
-for i, line := range strings.Split(diff, "\n") {
-if len(line) == 0 {
-continue
-}
+    //fmt.Println(diff)
 
-var bs []byte
-if !strings.HasPrefix(line, "@") {//&& (strings.HasPrefix(line, "+") || strings.HasPrefix(line, "-")) {
-hexData := line[1:]
-fmt.Println(i, line)
-bs, _ = hexStringToBytes(hexData)
-//hexData := strings.TrimSpace(line[1:])
-//bs, _ = hexStringToBytes(hexData)
-}
-//if len(bs) < 1 { continue } 
-//switch {
-if strings.HasPrefix(line, "+") {
-f1.Write(bs)
-//fmt.Println("+/", line)
-} else if strings.HasPrefix(line, "-") {
-f2.Write(bs)
-//fmt.Println("-/", strconv.Quote(line))
-} else if strings.HasPrefix(line, " "){
-f.Write(bs)
-fmt.Println(i, "prefix!=@/", len(bs), line)
-} 
-/*else {
-fmt.Println(i, "default/", line)
-}*/
-//default:
-//fmt.Println(i, "default/", line)
-//}
-}
-}
+    for i, line := range strings.Split(diff, "\n") {
+        if len(line) == 0 {
+            continue
+        }
 
-func hexStringToBytes(hexStr string) ([]byte, error) {
-hexStr = strings.ReplaceAll(hexStr, " ", "")
-if len(hexStr)%2 != 0 {
-hexStr = "0" + hexStr
-}
-return hex.DecodeString(hexStr)
+        var bs []byte
+        if !strings.HasPrefix(line, "@") {//&& (strings.HasPrefix(line, "+") || strings.HasPrefix(line, "-")) {
+            data := line[1:]
+            fmt.Println(i, line)
+            bs, _ = hexstring2bytes(data)
+            //data := strings.TrimSpace(line[1:])
+            //bs, _ = hexstring2bytes(data)
+        }
+        //if len(bs) < 1 { continue } 
+        //switch {
+        if strings.HasPrefix(line, "+") {
+            p2.Write(bs)
+            //fmt.Println("+/", line)
+        } else if strings.HasPrefix(line, "-") {
+            p3.Write(bs)
+            //fmt.Println("-/", strconv.Quote(line))
+        } else if strings.HasPrefix(line, " "){
+            p1.Write(bs)
+            fmt.Println(i, "prefix!=@/", len(bs), line)
+        } 
+        /*else {
+            fmt.Println(i, "default/", line)
+        }*/
+        //default:
+        //fmt.Println(i, "default/", line)
+        }
+    }
+
+func hexstring2bytes(hexstring string) ([]byte, error) {
+    hexstring = strings.ReplaceAll(hexstring, " ", "")
+    if len(hexstring) % 2 != 0 {
+        hexstring = "0" + hexstring
+    }
+    return hex.DecodeString(hexstring)
 }
 
