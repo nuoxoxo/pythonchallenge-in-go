@@ -38,15 +38,6 @@ func main() {
         }
     }
 
-    diff, _ := difflib.GetUnifiedDiffString( difflib.UnifiedDiff {
-        A:  difflib.SplitLines(strings.Join(L, "\n")),
-        B:  difflib.SplitLines(strings.Join(R, "\n")),
-        Context: 3,
-    })
-
-
-    fmt.Println(diff, "\nend/")
-
     // create images
     p1, _ := os.Create("p1.png")
     defer p1.Close()
@@ -57,24 +48,38 @@ func main() {
     p3, _ := os.Create("p3.png")
     defer p3.Close()
 
+    diff, _ := difflib.GetUnifiedDiffString( difflib.UnifiedDiff {
+        A:  difflib.SplitLines(strings.Join(L, "\n")),
+        B:  difflib.SplitLines(strings.Join(R, "\n")),
+        Context: len(L), // <--- FIXME/ bugfix: 3 is too small thats all
+    })
+
+    // print out the whole DIFF sequence
+    fmt.Println(diff, "\nend/")
+
     for i, line := range strings.Split(diff, "\n") {
+        //if i == 100 {break}
         if len(line) == 0 {
             fmt.Println("line/", i, "(null)")
             continue
         }
 
         bytes := []byte{}
-
-        if !strings.HasPrefix(line, "@") {//&& (strings.HasPrefix(line, "+") || strings.HasPrefix(line, "-")) {
+        if !strings.HasPrefix(line, "@") {
             data := line[1:]
-            // fmt.Println(i, line)
-            //data := strings.TrimSpace(line[1:])
             bytes, _ = hexpair(data)
         }
-        if strings.HasPrefix(line, "+") { p1.Write(bytes) }
-        if strings.HasPrefix(line, "-") { p2.Write(bytes) }
-        if strings.HasPrefix(line, "?") { p3.Write(bytes) }
-        if !strings.HasPrefix(line, "+") && !strings.HasPrefix(line, "-") && !strings.HasPrefix(line, " "){
+
+        if strings.HasPrefix(line, "+") {
+            p1.Write(bytes)
+        } else if strings.HasPrefix(line, "-") {
+            p2.Write(bytes)
+        } else if strings.HasPrefix(line, " ") {
+            //fmt.Println(i, bytes)
+            p3.Write(bytes)
+        } else if strings.HasPrefix(line, "@"){
+            fmt.Println(i, "@ lines/", line)
+        } else {
             fmt.Println(i, "default/", line)
         }
     }
