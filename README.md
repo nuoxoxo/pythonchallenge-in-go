@@ -10,6 +10,7 @@
     - not _move_ the pink segment but _Rotate_
 - _18/ -_ now shows p3 correctly ~~common.png not written properly~~
     - strategy: imagine 2 byte slices, a and b
+- _19/ -_  `Big endian` is we write the most significant byte first - `Little endian`, the least significant byte first.
 ```
 create 3 new bytes slices, such that
 first one contains what is in a, but not in b
