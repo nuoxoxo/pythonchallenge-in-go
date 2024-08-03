@@ -8,16 +8,16 @@ import (
     _"strings"
     "regexp"
     "strings"
-    _"os"
-    _"io"
+    "encoding/base64"
 )
 
-var URL, BODY string
+var URL, BODY, filename, b64 string
 
 func main(){
 
     // parsing done in init
-
+    b64data, _ := base64.StdEncoding.DecodeString( b64 )
+    ioutil.WriteFile(filename, b64data, 0644)
 }
 
 func init(){
@@ -36,9 +36,14 @@ func init(){
     fmt.Println(string(body), "\nbody ends/\n\n")
     BODY = string(body)
 
-    // get the bound
-    re := regexp.MustCompile(`(?s)boundary="(.*?)"`)
+    // filename
+    re := regexp.MustCompile(`(?s)name="(.*?)"`)
     matches := re.FindAllStringSubmatch(BODY, -1)
+    filename = matches[0][1]
+
+    // get the bound
+    re = regexp.MustCompile(`(?s)boundary="(.*?)"`)
+    matches = re.FindAllStringSubmatch(BODY, -1)
     bound := "--" + matches[0][1]
     N := len(matches[0])
     fmt.Println("len/", len(matches[0]), "matches/", matches)
@@ -56,7 +61,8 @@ func init(){
     fmt.Println("aft/", matches[0][1][: offset], "bef/", matches[0][1][end :])
 
     trunk := strings.Split(matches[0][1], "\n\n")
-    N = len(trunk[1])
+    b64 = trunk[1]
+    N = len( b64 )
     end = N - offset
     fmt.Println("len/", len(trunk))
     fmt.Println("aft/", trunk[1][: offset], "bef/", trunk[1][end :])
