@@ -16,31 +16,8 @@ var URL, BODY string
 
 func main(){
 
-    // get the bound
-    re := regexp.MustCompile(`(?s)boundary="(.*?)"`)
-    matches := re.FindAllStringSubmatch(BODY, -1)
-    bound := "--" + matches[0][1]
-    N := len(matches[0])
-    fmt.Println("len/", len(matches[0]), "matches/", matches)
-    fmt.Println("match/", strconv.Quote( matches[0][1] ))
-    fmt.Println("modf./", strconv.Quote( bound ))
-    fmt.Println("lookfor/", "--===============1295515792==")
+    // parsing done in init
 
-
-    re = regexp.MustCompile(fmt.Sprintf(`(?s)%s(.*?)%s`, bound, bound))
-    matches = re.FindAllStringSubmatch(BODY, -1)
-    offset := 42
-    N = len(matches[0][1])
-    end := N - offset
-    fmt.Println("\nlen/", len(matches[0]))
-    fmt.Println("aft/", matches[0][1][: offset], "bef/", matches[0][1][end :])
-
-    //fmt.Println("1/", matches[0][1], "1/ends")
-    trunk := strings.Split(matches[0][1], "\n\n")
-    N = len(trunk[1])
-    end = N - offset
-    fmt.Println("len/", len(trunk))
-    fmt.Println("aft/", trunk[1][: offset], "bef/", trunk[1][end :])
 }
 
 func init(){
@@ -58,5 +35,30 @@ func init(){
     body, _ := ioutil.ReadAll(resp.Body)
     fmt.Println(string(body), "\nbody ends/\n\n")
     BODY = string(body)
+
+    // get the bound
+    re := regexp.MustCompile(`(?s)boundary="(.*?)"`)
+    matches := re.FindAllStringSubmatch(BODY, -1)
+    bound := "--" + matches[0][1]
+    N := len(matches[0])
+    fmt.Println("len/", len(matches[0]), "matches/", matches)
+    fmt.Println("match/", strconv.Quote( matches[0][1] ))
+    fmt.Println("modf./", strconv.Quote( bound ))
+    fmt.Println("check/", "--===============1295515792==")
+
+    // get the bounded trunk which should look base64 encoded
+    re = regexp.MustCompile(fmt.Sprintf(`(?s)%s(.*?)%s`, bound, bound))
+    matches = re.FindAllStringSubmatch(BODY, -1)
+    offset := 42
+    N = len(matches[0][1])
+    end := N - offset
+    fmt.Println("\nlen/", len(matches[0]))
+    fmt.Println("aft/", matches[0][1][: offset], "bef/", matches[0][1][end :])
+
+    trunk := strings.Split(matches[0][1], "\n\n")
+    N = len(trunk[1])
+    end = N - offset
+    fmt.Println("len/", len(trunk))
+    fmt.Println("aft/", trunk[1][: offset], "bef/", trunk[1][end :])
 }
 
