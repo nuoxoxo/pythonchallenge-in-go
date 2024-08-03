@@ -9,6 +9,7 @@ import (
     "regexp"
     "strings"
     "encoding/base64"
+    "encoding/binary"
 )
 
 var URL, BODY, filename, b64 string
@@ -18,6 +19,11 @@ func main(){
     // parsing done in init
     b64data, _ := base64.StdEncoding.DecodeString( b64 )
     ioutil.WriteFile(filename, b64data, 0644)
+
+    // not working - todo/ basically we have to convert it to little endian
+    //bytes := []byte( b64 )
+    little_endian := binary.LittleEndian( byte[b64] )
+    ioutil.WriteFile(/*filename*/"new.wav", little_endian, 0644)
 }
 
 func init(){
@@ -50,6 +56,7 @@ func init(){
     fmt.Println("match/", strconv.Quote( matches[0][1] ))
     fmt.Println("modf./", strconv.Quote( bound ))
     fmt.Println("check/", "--===============1295515792==")
+
 
     // get the bounded trunk which should look base64 encoded
     re = regexp.MustCompile(fmt.Sprintf(`(?s)%s(.*?)%s`, bound, bound))
