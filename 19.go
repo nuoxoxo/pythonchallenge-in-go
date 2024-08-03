@@ -7,24 +7,45 @@ import (
     "strconv"
     _"strings"
     "regexp"
-    "os"
-    "io"
+    "strings"
+    _"os"
+    _"io"
 )
 
-//var URL, BODY string
-
+var URL, BODY string
 
 func main(){
 
+    // get the bound
+    re := regexp.MustCompile(`(?s)boundary="(.*?)"`)
+    matches := re.FindAllStringSubmatch(BODY, -1)
+    bound := "--" + matches[0][1]
+    N := len(matches[0])
+    fmt.Println("len/", len(matches[0]), "matches/", matches)
+    fmt.Println("match/", strconv.Quote( matches[0][1] ))
+    fmt.Println("modf./", strconv.Quote( bound ))
+    fmt.Println("lookfor/", "--===============1295515792==")
 
 
+    re = regexp.MustCompile(fmt.Sprintf(`(?s)%s(.*?)%s`, bound, bound))
+    matches = re.FindAllStringSubmatch(BODY, -1)
+    offset := 42
+    N = len(matches[0][1])
+    end := N - offset
+    fmt.Println("\nlen/", len(matches[0]))
+    fmt.Println("aft/", matches[0][1][: offset], "bef/", matches[0][1][end :])
 
-
+    //fmt.Println("1/", matches[0][1], "1/ends")
+    trunk := strings.Split(matches[0][1], "\n\n")
+    N = len(trunk[1])
+    end = N - offset
+    fmt.Println("len/", len(trunk))
+    fmt.Println("aft/", trunk[1][: offset], "bef/", trunk[1][end :])
 }
 
 func init(){
 
-    URL := "http://www.pythonchallenge.com/pc/hex/bin.html"
+    URL = "http://www.pythonchallenge.com/pc/hex/bin.html"
     ups, sep := "butterfly", 6
     conn := & http.Client{}
     req, err := http.NewRequest("GET", URL, nil)
@@ -36,28 +57,6 @@ func init(){
 
     body, _ := ioutil.ReadAll(resp.Body)
     fmt.Println(string(body), "\nbody ends/\n\n")
-    BODY := string(body)
-
-    re := regexp.MustCompile(`(?s)name="(.*?)"`)
-    matches := re.FindAllStringSubmatch(BODY, -1)
-
-    fmt.Println("len/", len(matches), "matches/", matches)
-
-    filename := matches[0][1]
-    fmt.Println("match/", strconv.Quote( filename ))
-
-    conn = & http.Client{}
-    req, err = http.NewRequest("GET", URL + "/" + filename, nil)
-    
-    if err != nil {fmt.Println("err/", err)}
-
-    req.SetBasicAuth(ups[: sep], ups[sep :])
-    resp, _ = conn.Do(req)
-    defer resp.Body.Close()
-    fmt.Println("status/", resp.StatusCode, resp.Status)
-
-    f, _ := os.Create(filename)
-    defer f.Close()
-    _, _ = io.Copy(f, resp.Body)
+    BODY = string(body)
 }
 
