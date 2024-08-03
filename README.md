@@ -43,7 +43,7 @@ level | keyword
 ----- | -----------
 21|
 20|
-19|
+19| _indian -_
 18| _brightness - beurre:fly_
 17| _violin - balloons_
 16| _romance_
