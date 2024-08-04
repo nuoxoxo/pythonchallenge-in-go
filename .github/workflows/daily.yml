@@ -19,13 +19,10 @@ jobs:
       run: |
         go get github.com/pmezard/go-difflib
         go get github.com/kolo/xmlrpc
-        go get github.com/go-audio/wav
-        go get github.com/go-audio/riff
-        go get github.com/go-audio/audio
         outfile=".github/workflows/outfile"
         echo "init/..." > $outfile 
         for file in $(find . -name '*.go'); do
-          echo "$file/" >> $outfile
+          go run $file >> $outfile 2>&1 || echo "err/go run" >> $outfile
           echo "" >> $outfile
         done
         echo "end/" >> $outfile
