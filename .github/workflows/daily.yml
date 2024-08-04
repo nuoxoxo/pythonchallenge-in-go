@@ -22,14 +22,17 @@ jobs:
         go get github.com/go-audio/wav
         go get github.com/go-audio/riff
         go get github.com/go-audio/audio
-        outfile=".github/workflows/outfile"
+        outfile="outfile"
         echo "init/..." > $outfile 
         for file in $(find . -name '*.go'); do
           echo "$file/" >> $outfile
-          go run $file >> $outfile 2>&1
-          echo "" >> $outfile  # added nl
+          if ! go run $file >> $outfile 2>&1; then
+            echo "err/" >> $outfile
+            exit 1
+          fi
+          echo "" >> $outfile
         done
-        echo "end/"
+        echo "end/" >> $outfile
     - name: Check compilation
       if: ${{ success() }}
       run: echo "compiled successfully"
