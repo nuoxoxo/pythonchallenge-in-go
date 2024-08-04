@@ -23,8 +23,7 @@ jobs:
         go get github.com/go-audio/riff
         go get github.com/go-audio/audio
         outfile=".github/workflows/outfile"
-        echo "init/..."
-        > $outfile 
+        echo "init/..." > $outfile 
         for file in $(find . -name '*.go'); do
           echo "$file/" >> $outfile
           go run $file >> $outfile 2>&1
