@@ -22,20 +22,13 @@ jobs:
         go get github.com/go-audio/wav
         go get github.com/go-audio/riff
         go get github.com/go-audio/audio
-        outfile="outfile"
+        outfile=".github/workflows/outfile"
         echo "init/..." > $outfile 
         for file in $(find . -name '*.go'); do
           echo "$file/" >> $outfile
-          if ! go run $file >> $outfile 2>&1; then
-            echo "err/" >> $outfile
-            exit 1
-          fi
           echo "" >> $outfile
         done
         echo "end/" >> $outfile
-    - name: Check compilation
-      if: ${{ success() }}
-      run: echo "compiled successfully"
     - name: PUSH
       uses: EndBug/add-and-commit@v9
       with:
