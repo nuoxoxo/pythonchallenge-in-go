@@ -1,0 +1,44 @@
+name: Compilation checker
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+    - name: Go setup
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.22'
+    - name: Compile
+      run: |
+        go get github.com/pmezard/go-difflib
+        go get github.com/kolo/xmlrpc
+        go get github.com/go-audio/wav
+        go get github.com/go-audio/riff
+        go get github.com/go-audio/audio
+        outfile="outfile"
+        echo "init/..." > $outfile 
+        for file in $(find . -name '*.go'); do
+          echo "$file/" >> $outfile
+          if ! go run $file >> $outfile 2>&1; then
+            echo "err/" >> $outfile
+            exit 1
+          fi
+          echo "" >> $outfile
+        done
+        echo "end/" >> $outfile
+    - name: Check compilation
+      if: ${{ success() }}
+      run: echo "compiled successfully"
+    - name: PUSH
+      uses: EndBug/add-and-commit@v9
+      with:
+        # branch: main
+        message: "daily"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
