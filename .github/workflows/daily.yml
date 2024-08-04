@@ -23,11 +23,9 @@ jobs:
     - name: Check compilation
       if: ${{ success() }}
       run: echo "compiled successfully"
-    - name: Commit on main
-      if : ${{ success }}
-      run: |
-        git add -A
-        git commit -m "minor"
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: PUSH
+      uses: EndBug/add-and-commit@v9
+      with:
+        # branch: main
+        message: "daily"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
