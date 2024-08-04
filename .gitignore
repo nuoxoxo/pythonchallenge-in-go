@@ -3,5 +3,6 @@
 !*.go
 !*.mod
 !5.py
+!outfile
 *copy*
 temp*.go
