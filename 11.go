@@ -1,16 +1,26 @@
 package main
 
 import (
-    _"fmt"
+    "fmt"
     "os"
+    "io"
+    "net/http"
     "image"
     "image/jpeg"
+    _"io/ioutil"
 )
+
+const Filename string = "cave.jpg"
 
 func main() {
 
-    imgfile, _ := os.Open("files/cave.jpg")
+    imgfile, _ := os.Open( Filename )
     defer imgfile.Close()
+
+    defer func(){
+        err := os.Remove(Filename)
+        fmt.Println("err/del.", err)
+    }()
 
     img, _, _ := image.Decode( imgfile )
     bounds := img.Bounds()
@@ -36,12 +46,33 @@ func main() {
     }
 
     // save both jpg
-    imgfileEven, _ := os.Create("files/1.jpg")
+    imgfileEven, _ := os.Create("1.jpg")
     defer imgfileEven.Close()
     jpeg.Encode( imgfileEven, Even, nil )
 
-    imgfileOdd, _ := os.Create("files/2.jpg")
+    imgfileOdd, _ := os.Create("2.jpg")
     defer imgfileOdd.Close()
     jpeg.Encode (imgfileOdd, Odd, nil)
+}
+
+func init(){
+
+    f, err := os.Create( Filename )
+    fmt.Println("err/init", err)
+    defer f.Close()
+
+    URL := "http://www.pythonchallenge.com/pc/return/"
+    ups, mid := "hugefile", 4
+
+    conn := &http.Client{}
+    req, err := http.NewRequest("GET", URL + Filename, nil)
+    fmt.Println("err/GET", err)
+
+    req.SetBasicAuth(ups[:mid], ups[mid:])
+    resp, err := conn.Do( req )
+    fmt.Println("err/GET", err, resp.StatusCode)
+    defer resp.Body.Close()
+
+    _, _ = io.Copy(f, resp.Body)
 }
 
