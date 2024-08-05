@@ -5,6 +5,9 @@ import (
     "bytes"
     "compress/bzip2"
     "io/ioutil"
+    "net/http"
+    "regexp"
+    "strconv"
 )
 
 var un, pw string
@@ -24,6 +27,25 @@ func main () {
 }
 
 func init(){
-    un = "BZh91AY&SYA\xaf\x82\r\x00\x00\x01\x01\x80\x02\xc0\x02\x00 \x00!\x9ah3M\x07<]\xc9\x14\xe1BA\x06\xbe\x084"
-    pw = "BZh91AY&SY\x94$|\x0e\x00\x00\x00\x81\x00\x03$ \x00!\x9ah3M\x13<]\xc9\x14\xe1BBP\x91\xf08"
+
+    URL := "http://www.pythonchallenge.com/pc/def/integrity.html"
+    resp, _ := http.Get(URL)
+    body, _ := ioutil.ReadAll( resp.Body )
+    defer resp.Body.Close()
+
+    re := regexp.MustCompile(`(?s)'(.*?)'`)
+    matches := re.FindAllStringSubmatch(string(body), -1)
+    for i, m := range matches {
+        for j, m2 := range m {
+            fmt.Println(i, j, m2)
+        }
+    }
+
+    // Trick/
+    //  quotes/ adde double quotes to enable Go-style string literal
+    //  unquote/ 'decode' all escape sequences like this
+    un, _ = strconv.Unquote("\"" + matches[0][1] + "\"")
+    pw, _ = strconv.Unquote("\"" + matches[1][1] + "\"")
+    fmt.Println("u/", un)
+    fmt.Println("p/", pw)
 }
