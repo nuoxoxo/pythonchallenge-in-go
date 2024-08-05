@@ -9,7 +9,8 @@ import (
     "image"
     "image/color"
     "image/png"
-    _"image/draw"
+    "net/http"
+    "io/ioutil"
 )
 
 var content string
@@ -72,11 +73,11 @@ func main(){
         i += 2
     }
 
-    outBresenham, _ := os.Create("files/output_bresenham.png")
+    outBresenham, _ := os.Create("output_bresenham.png")
     defer outBresenham.Close()
     png.Encode(outBresenham, imgBresenham)
 
-    outNaiveDraw, _ := os.Create("files/output_naive.png")
+    outNaiveDraw, _ := os.Create("output_naive.png")
     defer outNaiveDraw.Close()
     png.Encode(outNaiveDraw, imgNaiveDraw)
 
@@ -170,8 +171,24 @@ func fabs(a float64) float64 {
 // use init() to avoid spam
 
 func init(){
-    content = `<!--
 
+    URL := "http://www.pythonchallenge.com/pc/return/good.html"
+    ups, mid := "hugefile", 4
+
+    conn := &http.Client{}
+    req, err := http.NewRequest("GET", URL, nil)
+    fmt.Println("err/GET", err)
+
+    req.SetBasicAuth(ups[:mid], ups[mid:])
+    resp, err := conn.Do( req )
+    body, _ := ioutil.ReadAll(resp.Body)
+    defer resp.Body.Close()
+
+    content = string(body)///*`<!--
+    lookup := "first+second=?"
+    start := strings.Index(content, lookup)
+    content = content[start + len(lookup):]
+/*
 first+second=?
 
 first:
@@ -201,6 +218,6 @@ second:
 77,155,81,148,87,140,96,138,105,141,110,136,111,126,113,129,118,117,128,114,137,115,146,114,155,115,
 158,121,157,128,156,134,157,136,156,136
 
--->`
+-->`*/
 }
 
