@@ -17,26 +17,6 @@ first one contains what is in a, but not in b
 second one contains what is in b and not in a
 third one contains what is in both a and b
 ```
-- GET from a URL
-```go
-var PAGE string
-
-func main(){
-    fmt.Println(PAGE, "\nbody ends/")
-}
-
-func init(){
-    URL := ""
-    conn := & http.Client{}
-    req, _ := http.NewRequest("GET", URL, nil)
-    req.SetBasicAuth("", "")
-    resp, _ := conn.Do(req)
-
-    defer resp.Body.Close()
-    body, _ := ioutil.ReadAll(resp.Body) 
-    PAGE = string(body)
-}
-```
 
 # keys
 
