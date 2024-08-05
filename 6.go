@@ -5,6 +5,9 @@ import (
     "regexp"
     "archive/zip"
     "io/ioutil"
+    "os"
+    "net/http"
+    "io"
 )
 
 func main(){
@@ -76,6 +79,23 @@ func read_inside_zip (openreader * zip.ReadCloser, target string) (*zip.File, er
         return f, nil
     }
     return nil, fmt.Errorf("err/not found: %s", target)
+}
+
+// download channel.zip
+func init(){
+
+    URL := "http://www.pythonchallenge.com/pc/def/channel.zip"
+    f, err := os.Create("channel.zip")
+    fmt.Println("err/download", err)
+    defer f.Close()
+
+    resp, err := http.Get( URL )
+    fmt.Println("err/GET", err, resp.StatusCode)
+    defer resp.Body.Close()
+
+    _, _ = io.Copy(f, resp.Body)
+
+
 }
 
 
