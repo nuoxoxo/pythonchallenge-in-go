@@ -7,7 +7,7 @@
     - draw w/ `res.Set(x,y,colour)`
 - _11/ -_ new image w/ `image.NewRGBA( mypic.Bounds() )`
 - _16/ -_ longest substring of repeats 👉 YES
-    - not _move_ the pink segment but _Rotate_
+    - not move, but _Rotate_ the pink segment
 - _18/ -_ now shows p3 correctly ~~common.png not written properly~~
     - strategy: imagine 2 byte slices, a and b
 - _19/ -_  `Big endian` is we write the most significant byte first - `Little endian`, the least significant byte first
