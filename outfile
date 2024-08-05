@@ -1,12 +1,10 @@
 init/...
-panic: runtime error: invalid memory address or nil pointer dereference
-[signal SIGSEGV: segmentation violation code=0x1 addr=0x20 pc=0x51fe79]
-
-goroutine 1 [running]:
-main.main()
-	/home/runner/work/pythonlibrarychallenge-in-go/pythonlibrarychallenge-in-go/7.go:36 +0x99
-exit status 2
-err/go run
+w/ 629 h/ 95
+seg/ 6
+msg/ smart guy, you made it. the next level is [105, 110, 116, 101, 103, 114, 105, 116, 121]
+num/ [105 110 116 101 103 114 105 116 121] []string
+res/ integrity
+err/del. <nil>
 
 <html>
 <head>
@@ -1287,7 +1285,6 @@ $#_}*!(+([_&%{^&[([%]}*^{{([@+@]@*&@_!]_+([(#&!]]#$$#]@#{_]][_{@]{*))$({%}_![@$]
  
 find rare characters in the mess below:
 
-t/ 1 
 y/ 1 
 e/ 1 
 q/ 1 
@@ -1295,6 +1292,7 @@ u/ 1
 a/ 1 
 l/ 1 
 i/ 1 
+t/ 1 
 res/ equality
 
 panic: runtime error: invalid memory address or nil pointer dereference
@@ -1306,7 +1304,7 @@ compress/gzip.(*Reader).Close(...)
 	/opt/hostedtoolcache/go/1.22.5/x64/src/compress/gzip/gunzip.go:290
 panic({0x4aa7a0?, 0x55dac0?})
 	/opt/hostedtoolcache/go/1.22.5/x64/src/runtime/panic.go:770 +0x132
-compress/gzip.(*Reader).Read(0xc00007c0c0?, {0xc00010e000?, 0x0?, 0xc00007c0c0?})
+compress/gzip.(*Reader).Read(0xc00007c0c0?, {0xc00008e000?, 0x0?, 0x0?})
 	/opt/hostedtoolcache/go/1.22.5/x64/src/compress/gzip/gunzip.go:247 +0x22
 bytes.(*Buffer).ReadFrom(0xc00007c0c0, {0x4e0978, 0x0})
 	/opt/hostedtoolcache/go/1.22.5/x64/src/bytes/buffer.go:211 +0x98
@@ -1315,7 +1313,7 @@ main.init.0()
 exit status 2
 err/go run
 
-2024/08/05 22:08:27 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:11:11 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 
 cmds/ []string
 cmd/ phone
@@ -1324,26 +1322,26 @@ cmd/ system.methodHelp
 cmd/ system.methodSignature
 cmd/ system.multicall
 cmd/ system.getCapabilities
-2024/08/05 22:08:28 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:11:11 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 phone/ [] 
 end/
 
-2024/08/05 22:08:28 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:11:11 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 system.methodHelp Returns the phone of a person <nil> 
 end/
 
-2024/08/05 22:08:28 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:11:11 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 system.methodHelp Returns the phone of a person 
 end/
 
-2024/08/05 22:08:28 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:11:11 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 system.methodSignature [[string string]] 
 end/
 
 msg/ Bert is evil! go back!
 
 evil/ Bert
-2024/08/05 22:08:28 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:11:12 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 phone/ 555-ITALY 
 end/
 
@@ -1392,22 +1390,934 @@ monyears/ [1176 1356 1576 1756 1976] len/ 5
 
 find out yourself what to do next
 
-open reader/ open ./channel.zip: no such file or directory
-panic: runtime error: invalid memory address or nil pointer dereference
-	panic: runtime error: invalid memory address or nil pointer dereference
-[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x4c7b9b]
+err/download <nil>
+err/GET <nil> 200
+90052 	 Next nothing is 94191 	 *
+94191 	 Next nothing is 85503 	 *
+85503 	 Next nothing is 70877 	 *
+70877 	 Next nothing is 15409 	 *
+15409 	 Next nothing is 60838 	 *
+60838 	 Next nothing is 80009 	 *
+80009 	 Next nothing is 21347 	 *
+21347 	 Next nothing is 24164 	 *
+24164 	 Next nothing is 13836 	 *
+13836 	 Next nothing is 80123 	 *
+80123 	 Next nothing is 92453 	 *
+92453 	 Next nothing is 69556 	 *
+69556 	 Next nothing is 31491 	 *
+31491 	 Next nothing is 13371 	 *
+13371 	 Next nothing is 88143 	 *
+88143 	 Next nothing is 82593 	 *
+82593 	 Next nothing is 30645 	 *
+30645 	 Next nothing is 88985 	 *
+88985 	 Next nothing is 27190 	 *
+27190 	 Next nothing is 24448 	 *
+24448 	 Next nothing is 37468 	 *
+37468 	 Next nothing is 49892 	 *
+49892 	 Next nothing is 54714 	 *
+54714 	 Next nothing is 75161 	 *
+75161 	 Next nothing is 893 	 *
+893 	 Next nothing is 57882 	 *
+57882 	 Next nothing is 40033 	 *
+40033 	 Next nothing is 29521 	 *
+29521 	 Next nothing is 5289 	 *
+5289 	 Next nothing is 4701 	 *
+4701 	 Next nothing is 32742 	 *
+32742 	 Next nothing is 18751 	 *
+18751 	 Next nothing is 68586 	 *
+68586 	 Next nothing is 53984 	 *
+53984 	 Next nothing is 52184 	 *
+52184 	 Next nothing is 43807 	 *
+43807 	 Next nothing is 56300 	 *
+56300 	 Next nothing is 97649 	 *
+97649 	 Next nothing is 88244 	 *
+88244 	 Next nothing is 91669 	 *
+91669 	 Next nothing is 88394 	 *
+88394 	 Next nothing is 77575 	 *
+77575 	 Next nothing is 70208 	 *
+70208 	 Next nothing is 78211 	 *
+78211 	 Next nothing is 84854 	 *
+84854 	 Next nothing is 87594 	 *
+87594 	 Next nothing is 26234 	 *
+26234 	 Next nothing is 63181 	 *
+63181 	 Next nothing is 68559 	 *
+68559 	 Next nothing is 37695 	 *
+37695 	 Next nothing is 64397 	 *
+64397 	 Next nothing is 55356 	 *
+55356 	 Next nothing is 8258 	 *
+8258 	 Next nothing is 77074 	 *
+77074 	 Next nothing is 28389 	 *
+28389 	 Next nothing is 39983 	 *
+39983 	 Next nothing is 40210 	 *
+40210 	 Next nothing is 69972 	 *
+69972 	 Next nothing is 48089 	 *
+48089 	 Next nothing is 34764 	 *
+34764 	 Next nothing is 46945 	 *
+46945 	 Next nothing is 97812 	 *
+97812 	 Next nothing is 95662 	 *
+95662 	 Next nothing is 55220 	 *
+55220 	 Next nothing is 86793 	 (newline)
+86793 	 Next nothing is 69785 	 *
+69785 	 Next nothing is 85827 	 *
+85827 	 Next nothing is 75722 	 *
+75722 	 Next nothing is 37259 	 *
+37259 	 Next nothing is 57622 	 *
+57622 	 Next nothing is 57566 	 *
+57566 	 Next nothing is 98181 	 *
+98181 	 Next nothing is 57831 	 *
+57831 	 Next nothing is 68947 	 *
+68947 	 Next nothing is 29834 	 *
+29834 	 Next nothing is 67060 	 *
+67060 	 Next nothing is 48669 	 *
+48669 	 Next nothing is 12761 	 *
+12761 	 Next nothing is 47882 	 *
+47882 	 Next nothing is 98339 	 *
+98339 	 Next nothing is 9058 	 *
+9058 	 Next nothing is 14745 	 *
+14745 	 Next nothing is 60138 	 *
+60138 	 Next nothing is 47842 	 *
+47842 	 Next nothing is 71178 	 *
+71178 	 Next nothing is 1091 	 *
+1091 	 Next nothing is 52205 	 *
+52205 	 Next nothing is 98709 	 *
+98709 	 Next nothing is 4992 	 *
+4992 	 Next nothing is 97673 	 *
+97673 	 Next nothing is 92736 	 *
+92736 	 Next nothing is 98119 	 *
+98119 	 Next nothing is 97515 	 *
+97515 	 Next nothing is 98939 	 *
+98939 	 Next nothing is 36656 	 *
+36656 	 Next nothing is 85839 	 *
+85839 	 Next nothing is 33746 	 *
+33746 	 Next nothing is 64122 	 *
+64122 	 Next nothing is 41968 	 *
+41968 	 Next nothing is 56617 	 *
+56617 	 Next nothing is 83808 	 *
+83808 	 Next nothing is 68613 	 *
+68613 	 Next nothing is 99714 	 *
+99714 	 Next nothing is 67196 	 *
+67196 	 Next nothing is 11992 	 *
+11992 	 Next nothing is 38192 	 *
+38192 	 Next nothing is 61837 	 *
+61837 	 Next nothing is 29034 	 *
+29034 	 Next nothing is 77480 	 *
+77480 	 Next nothing is 12737 	 *
+12737 	 Next nothing is 39310 	 *
+39310 	 Next nothing is 89307 	 *
+89307 	 Next nothing is 36624 	 *
+36624 	 Next nothing is 81412 	 *
+81412 	 Next nothing is 51450 	 *
+51450 	 Next nothing is 21690 	 *
+21690 	 Next nothing is 46726 	 *
+46726 	 Next nothing is 74576 	 *
+74576 	 Next nothing is 57901 	 *
+57901 	 Next nothing is 92043 	 *
+92043 	 Next nothing is 78130 	 *
+78130 	 Next nothing is 23647 	 *
+23647 	 Next nothing is 39258 	 *
+39258 	 Next nothing is 76629 	 *
+76629 	 Next nothing is 48614 	 *
+48614 	 Next nothing is 74736 	 *
+74736 	 Next nothing is 53027 	 *
+53027 	 Next nothing is 3713 	 *
+3713 	 Next nothing is 30339 	 *
+30339 	 Next nothing is 42197 	 (newline)
+42197 	 Next nothing is 12539 	 *
+12539 	 Next nothing is 98095 	 *
+98095 	 Next nothing is 176 	 (space)
+176 	 Next nothing is 64956 	 (space)
+64956 	 Next nothing is 78307 	 (space)
+78307 	 Next nothing is 35035 	 (space)
+35035 	 Next nothing is 36894 	 (space)
+36894 	 Next nothing is 76017 	 (space)
+76017 	 Next nothing is 67036 	 (space)
+67036 	 Next nothing is 33179 	 (space)
+33179 	 Next nothing is 64085 	 (space)
+64085 	 Next nothing is 90506 	 (space)
+90506 	 Next nothing is 94079 	 (space)
+94079 	 Next nothing is 76441 	 (space)
+76441 	 Next nothing is 16146 	 (space)
+16146 	 Next nothing is 78399 	 (space)
+78399 	 Next nothing is 98044 	 (space)
+98044 	 Next nothing is 64045 	 (space)
+64045 	 Next nothing is 69444 	 (space)
+69444 	 Next nothing is 78862 	 (space)
+78862 	 Next nothing is 51492 	 (space)
+51492 	 Next nothing is 52349 	 (space)
+52349 	 Next nothing is 86079 	 (space)
+86079 	 Next nothing is 8001 	 (space)
+8001 	 Next nothing is 68750 	 (space)
+68750 	 Next nothing is 65764 	 (space)
+65764 	 Next nothing is 11419 	 (space)
+11419 	 Next nothing is 96644 	 (space)
+96644 	 Next nothing is 63154 	 (space)
+63154 	 Next nothing is 70397 	 (space)
+70397 	 Next nothing is 91046 	 (space)
+91046 	 Next nothing is 61274 	 (space)
+61274 	 Next nothing is 50678 	 (space)
+50678 	 Next nothing is 94118 	 (space)
+94118 	 Next nothing is 86774 	 (space)
+86774 	 Next nothing is 47673 	 (space)
+47673 	 Next nothing is 90792 	 (space)
+90792 	 Next nothing is 95791 	 (space)
+95791 	 Next nothing is 72442 	 (space)
+72442 	 Next nothing is 57730 	 (space)
+57730 	 Next nothing is 79566 	 (space)
+79566 	 Next nothing is 66349 	 (space)
+66349 	 Next nothing is 40521 	 (space)
+40521 	 Next nothing is 59808 	 (space)
+59808 	 Next nothing is 14628 	 (space)
+14628 	 Next nothing is 39820 	 (space)
+39820 	 Next nothing is 100 	 (space)
+100 	 Next nothing is 84844 	 (space)
+84844 	 Next nothing is 39890 	 (space)
+39890 	 Next nothing is 12930 	 (space)
+12930 	 Next nothing is 97979 	 (space)
+97979 	 Next nothing is 16870 	 (space)
+16870 	 Next nothing is 3928 	 (space)
+3928 	 Next nothing is 71245 	 (space)
+71245 	 Next nothing is 8289 	 (space)
+8289 	 Next nothing is 9118 	 (space)
+9118 	 Next nothing is 81768 	 (space)
+81768 	 Next nothing is 68242 	 (space)
+68242 	 Next nothing is 65768 	 (space)
+65768 	 Next nothing is 94363 	 (space)
+94363 	 Next nothing is 34013 	 (space)
+34013 	 Next nothing is 85632 	 (space)
+85632 	 Next nothing is 82706 	 *
+82706 	 Next nothing is 97089 	 *
+97089 	 Next nothing is 67999 	 (newline)
+67999 	 Next nothing is 53542 	 *
+53542 	 Next nothing is 68609 	 *
+68609 	 Next nothing is 91136 	 (space)
+91136 	 Next nothing is 95660 	 (space)
+95660 	 Next nothing is 30395 	 (space)
+30395 	 Next nothing is 19822 	 O
+19822 	 Next nothing is 55325 	 O
+55325 	 Next nothing is 33630 	 (space)
+33630 	 Next nothing is 65277 	 (space)
+65277 	 Next nothing is 34563 	 (space)
+34563 	 Next nothing is 44890 	 (space)
+44890 	 Next nothing is 54001 	 O
+54001 	 Next nothing is 75838 	 O
+75838 	 Next nothing is 83931 	 (space)
+83931 	 Next nothing is 68010 	 (space)
+68010 	 Next nothing is 62369 	 (space)
+62369 	 Next nothing is 30318 	 (space)
+30318 	 Next nothing is 79479 	 X
+79479 	 Next nothing is 31117 	 X
+31117 	 Next nothing is 43267 	 (space)
+43267 	 Next nothing is 9623 	 (space)
+9623 	 Next nothing is 46206 	 (space)
+46206 	 Next nothing is 56408 	 (space)
+56408 	 Next nothing is 91586 	 (space)
+91586 	 Next nothing is 60171 	 (space)
+60171 	 Next nothing is 21279 	 Y
+21279 	 Next nothing is 74921 	 Y
+74921 	 Next nothing is 91523 	 Y
+91523 	 Next nothing is 82519 	 Y
+82519 	 Next nothing is 40257 	 (space)
+40257 	 Next nothing is 76116 	 (space)
+76116 	 Next nothing is 7556 	 (space)
+7556 	 Next nothing is 99775 	 (space)
+99775 	 Next nothing is 74219 	 G
+74219 	 Next nothing is 82223 	 G
+82223 	 Next nothing is 35247 	 (space)
+35247 	 Next nothing is 52390 	 (space)
+52390 	 Next nothing is 89160 	 (space)
+89160 	 Next nothing is 16586 	 (space)
+16586 	 Next nothing is 24065 	 G
+24065 	 Next nothing is 69983 	 G
+69983 	 Next nothing is 55163 	 (space)
+55163 	 Next nothing is 73389 	 (space)
+73389 	 Next nothing is 91965 	 E
+91965 	 Next nothing is 98094 	 E
+98094 	 Next nothing is 11616 	 E
+11616 	 Next nothing is 3651 	 E
+3651 	 Next nothing is 56582 	 E
+56582 	 Next nothing is 70915 	 E
+70915 	 Next nothing is 16041 	 (space)
+16041 	 Next nothing is 22628 	 N
+22628 	 Next nothing is 21140 	 N
+21140 	 Next nothing is 24595 	 (space)
+24595 	 Next nothing is 2015 	 (space)
+2015 	 Next nothing is 1063 	 (space)
+1063 	 Next nothing is 81810 	 (space)
+81810 	 Next nothing is 16744 	 (space)
+16744 	 Next nothing is 63875 	 (space)
+63875 	 Next nothing is 55449 	 N
+55449 	 Next nothing is 93756 	 N
+93756 	 Next nothing is 90763 	 (space)
+90763 	 Next nothing is 92265 	 (space)
+92265 	 Next nothing is 12362 	 *
+12362 	 Next nothing is 31981 	 *
+31981 	 Next nothing is 33177 	 (newline)
+33177 	 Next nothing is 64602 	 *
+64602 	 Next nothing is 95085 	 *
+95085 	 Next nothing is 22509 	 (space)
+22509 	 Next nothing is 16043 	 (space)
+16043 	 Next nothing is 75290 	 (space)
+75290 	 Next nothing is 50374 	 O
+50374 	 Next nothing is 67572 	 O
+67572 	 Next nothing is 37055 	 (space)
+37055 	 Next nothing is 77186 	 (space)
+77186 	 Next nothing is 32544 	 (space)
+32544 	 Next nothing is 1878 	 (space)
+1878 	 Next nothing is 65126 	 O
+65126 	 Next nothing is 72092 	 O
+72092 	 Next nothing is 17712 	 (space)
+17712 	 Next nothing is 81039 	 (space)
+81039 	 Next nothing is 87476 	 X
+87476 	 Next nothing is 18375 	 X
+18375 	 Next nothing is 29494 	 X
+29494 	 Next nothing is 46210 	 X
+46210 	 Next nothing is 12351 	 X
+12351 	 Next nothing is 11352 	 X
+11352 	 Next nothing is 16030 	 (space)
+16030 	 Next nothing is 3390 	 (space)
+3390 	 Next nothing is 603 	 (space)
+603 	 Next nothing is 11827 	 Y
+11827 	 Next nothing is 1123 	 Y
+1123 	 Next nothing is 3924 	 Y
+3924 	 Next nothing is 66402 	 Y
+66402 	 Next nothing is 36832 	 Y
+36832 	 Next nothing is 76131 	 Y
+76131 	 Next nothing is 51106 	 (space)
+51106 	 Next nothing is 24644 	 (space)
+24644 	 Next nothing is 66351 	 (space)
+66351 	 Next nothing is 34515 	 G
+34515 	 Next nothing is 3572 	 G
+3572 	 Next nothing is 66200 	 (space)
+66200 	 Next nothing is 63804 	 (space)
+63804 	 Next nothing is 47248 	 (space)
+47248 	 Next nothing is 4931 	 G
+4931 	 Next nothing is 41894 	 G
+41894 	 Next nothing is 88223 	 (space)
+88223 	 Next nothing is 76945 	 (space)
+76945 	 Next nothing is 18520 	 (space)
+18520 	 Next nothing is 1440 	 E
+1440 	 Next nothing is 39405 	 E
+39405 	 Next nothing is 72571 	 E
+72571 	 Next nothing is 4506 	 E
+4506 	 Next nothing is 38221 	 E
+38221 	 Next nothing is 82852 	 E
+82852 	 Next nothing is 62826 	 (space)
+62826 	 Next nothing is 24567 	 (space)
+24567 	 Next nothing is 4682 	 N
+4682 	 Next nothing is 88024 	 N
+88024 	 Next nothing is 33791 	 (space)
+33791 	 Next nothing is 29446 	 (space)
+29446 	 Next nothing is 67233 	 (space)
+67233 	 Next nothing is 17152 	 (space)
+17152 	 Next nothing is 730 	 N
+730 	 Next nothing is 28928 	 N
+28928 	 Next nothing is 88004 	 (space)
+88004 	 Next nothing is 65514 	 (space)
+65514 	 Next nothing is 88301 	 (space)
+88301 	 Next nothing is 74357 	 *
+74357 	 Next nothing is 32837 	 *
+32837 	 Next nothing is 59049 	 (newline)
+59049 	 Next nothing is 91793 	 *
+91793 	 Next nothing is 43083 	 *
+43083 	 Next nothing is 97338 	 (space)
+97338 	 Next nothing is 22601 	 (space)
+22601 	 Next nothing is 27898 	 (space)
+27898 	 Next nothing is 56149 	 O
+56149 	 Next nothing is 95637 	 O
+95637 	 Next nothing is 39483 	 (space)
+39483 	 Next nothing is 94070 	 (space)
+94070 	 Next nothing is 92752 	 (space)
+92752 	 Next nothing is 95205 	 (space)
+95205 	 Next nothing is 73840 	 O
+73840 	 Next nothing is 38673 	 O
+38673 	 Next nothing is 78668 	 (space)
+78668 	 Next nothing is 72782 	 X
+72782 	 Next nothing is 50761 	 X
+50761 	 Next nothing is 68023 	 X
+68023 	 Next nothing is 27107 	 (space)
+27107 	 Next nothing is 61416 	 (space)
+61416 	 Next nothing is 18525 	 X
+18525 	 Next nothing is 26202 	 X
+26202 	 Next nothing is 34548 	 X
+34548 	 Next nothing is 48464 	 (space)
+48464 	 Next nothing is 18987 	 Y
+18987 	 Next nothing is 2539 	 Y
+2539 	 Next nothing is 16362 	 Y
+16362 	 Next nothing is 97400 	 (space)
+97400 	 Next nothing is 35559 	 (space)
+35559 	 Next nothing is 49787 	 (space)
+49787 	 Next nothing is 27738 	 Y
+27738 	 Next nothing is 58043 	 Y
+58043 	 Next nothing is 65166 	 (space)
+65166 	 Next nothing is 63997 	 (space)
+63997 	 Next nothing is 20717 	 G
+20717 	 Next nothing is 24530 	 G
+24530 	 Next nothing is 21174 	 (space)
+21174 	 Next nothing is 68030 	 G
+68030 	 Next nothing is 55286 	 G
+55286 	 Next nothing is 17904 	 (space)
+17904 	 Next nothing is 86545 	 (space)
+86545 	 Next nothing is 95763 	 (space)
+95763 	 Next nothing is 18922 	 (space)
+18922 	 Next nothing is 27319 	 (space)
+27319 	 Next nothing is 61270 	 E
+61270 	 Next nothing is 1064 	 E
+1064 	 Next nothing is 8424 	 (space)
+8424 	 Next nothing is 59672 	 (space)
+59672 	 Next nothing is 51066 	 (space)
+51066 	 Next nothing is 44848 	 (space)
+44848 	 Next nothing is 22633 	 (space)
+22633 	 Next nothing is 25923 	 (space)
+25923 	 Next nothing is 58240 	 (space)
+58240 	 Next nothing is 51783 	 N
+51783 	 Next nothing is 33131 	 N
+33131 	 Next nothing is 75249 	 (space)
+75249 	 Next nothing is 49394 	 (space)
+49394 	 Next nothing is 87771 	 N
+87771 	 Next nothing is 404 	 N
+404 	 Next nothing is 93575 	 (space)
+93575 	 Next nothing is 82483 	 (space)
+82483 	 Next nothing is 78096 	 (space)
+78096 	 Next nothing is 28374 	 (space)
+28374 	 Next nothing is 58341 	 *
+58341 	 Next nothing is 75198 	 *
+75198 	 Next nothing is 64511 	 (newline)
+64511 	 Next nothing is 44038 	 *
+44038 	 Next nothing is 25136 	 *
+25136 	 Next nothing is 88199 	 (space)
+88199 	 Next nothing is 46518 	 (space)
+46518 	 Next nothing is 71787 	 (space)
+71787 	 Next nothing is 68974 	 O
+68974 	 Next nothing is 75307 	 O
+75307 	 Next nothing is 12176 	 O
+12176 	 Next nothing is 62030 	 O
+62030 	 Next nothing is 49856 	 O
+49856 	 Next nothing is 64466 	 O
+64466 	 Next nothing is 668 	 O
+668 	 Next nothing is 57709 	 O
+57709 	 Next nothing is 52400 	 (space)
+52400 	 Next nothing is 94833 	 X
+94833 	 Next nothing is 65415 	 X
+65415 	 Next nothing is 80057 	 (space)
+80057 	 Next nothing is 73422 	 (space)
+73422 	 Next nothing is 86874 	 (space)
+86874 	 Next nothing is 94159 	 (space)
+94159 	 Next nothing is 16466 	 X
+16466 	 Next nothing is 6549 	 X
+6549 	 Next nothing is 92525 	 (space)
+92525 	 Next nothing is 40627 	 Y
+40627 	 Next nothing is 27531 	 Y
+27531 	 Next nothing is 88177 	 (space)
+88177 	 Next nothing is 4465 	 (space)
+4465 	 Next nothing is 99189 	 (space)
+99189 	 Next nothing is 47856 	 (space)
+47856 	 Next nothing is 83694 	 (space)
+83694 	 Next nothing is 54379 	 (space)
+54379 	 Next nothing is 47454 	 (space)
+47454 	 Next nothing is 87096 	 (space)
+87096 	 Next nothing is 3469 	 G
+3469 	 Next nothing is 99254 	 G
+99254 	 Next nothing is 4630 	 G
+4630 	 Next nothing is 75878 	 (space)
+75878 	 Next nothing is 21776 	 (space)
+21776 	 Next nothing is 92781 	 (space)
+92781 	 Next nothing is 23060 	 (space)
+23060 	 Next nothing is 89587 	 (space)
+89587 	 Next nothing is 18346 	 (space)
+18346 	 Next nothing is 47867 	 (space)
+47867 	 Next nothing is 41004 	 E
+41004 	 Next nothing is 13430 	 E
+13430 	 Next nothing is 381 	 E
+381 	 Next nothing is 8755 	 E
+8755 	 Next nothing is 58832 	 E
+58832 	 Next nothing is 92450 	 (space)
+92450 	 Next nothing is 64821 	 (space)
+64821 	 Next nothing is 84642 	 (space)
+84642 	 Next nothing is 2105 	 (space)
+2105 	 Next nothing is 17305 	 (space)
+17305 	 Next nothing is 60154 	 N
+60154 	 Next nothing is 77752 	 N
+77752 	 Next nothing is 39994 	 N
+39994 	 Next nothing is 30257 	 N
+30257 	 Next nothing is 60804 	 (space)
+60804 	 Next nothing is 8060 	 (space)
+8060 	 Next nothing is 83168 	 (space)
+83168 	 Next nothing is 81281 	 (space)
+81281 	 Next nothing is 29319 	 (space)
+29319 	 Next nothing is 84291 	 *
+84291 	 Next nothing is 2134 	 *
+2134 	 Next nothing is 12889 	 (newline)
+12889 	 Next nothing is 70671 	 *
+70671 	 Next nothing is 53206 	 *
+53206 	 Next nothing is 3864 	 (space)
+3864 	 Next nothing is 71232 	 (space)
+71232 	 Next nothing is 35128 	 (space)
+35128 	 Next nothing is 45383 	 O
+45383 	 Next nothing is 43864 	 O
+43864 	 Next nothing is 83422 	 O
+83422 	 Next nothing is 45657 	 O
+45657 	 Next nothing is 90923 	 O
+90923 	 Next nothing is 93059 	 O
+93059 	 Next nothing is 82431 	 O
+82431 	 Next nothing is 32308 	 O
+32308 	 Next nothing is 94968 	 (space)
+94968 	 Next nothing is 19185 	 X
+19185 	 Next nothing is 55937 	 X
+55937 	 Next nothing is 53897 	 (space)
+53897 	 Next nothing is 62026 	 (space)
+62026 	 Next nothing is 63032 	 (space)
+63032 	 Next nothing is 81488 	 (space)
+81488 	 Next nothing is 8601 	 X
+8601 	 Next nothing is 73718 	 X
+73718 	 Next nothing is 22577 	 (space)
+22577 	 Next nothing is 99460 	 Y
+99460 	 Next nothing is 58858 	 Y
+58858 	 Next nothing is 65384 	 (space)
+65384 	 Next nothing is 13622 	 (space)
+13622 	 Next nothing is 14212 	 (space)
+14212 	 Next nothing is 90949 	 (space)
+90949 	 Next nothing is 19069 	 (space)
+19069 	 Next nothing is 48930 	 (space)
+48930 	 Next nothing is 48909 	 (space)
+48909 	 Next nothing is 55205 	 (space)
+55205 	 Next nothing is 51696 	 G
+51696 	 Next nothing is 11560 	 G
+11560 	 Next nothing is 98848 	 G
+98848 	 Next nothing is 82785 	 (space)
+82785 	 Next nothing is 85828 	 (space)
+85828 	 Next nothing is 74671 	 (space)
+74671 	 Next nothing is 47269 	 (space)
+47269 	 Next nothing is 87933 	 (space)
+87933 	 Next nothing is 83248 	 (space)
+83248 	 Next nothing is 9002 	 (space)
+9002 	 Next nothing is 55287 	 E
+55287 	 Next nothing is 81455 	 E
+81455 	 Next nothing is 47329 	 E
+47329 	 Next nothing is 16738 	 E
+16738 	 Next nothing is 68790 	 E
+68790 	 Next nothing is 31232 	 (space)
+31232 	 Next nothing is 98034 	 (space)
+98034 	 Next nothing is 45243 	 (space)
+45243 	 Next nothing is 43597 	 (space)
+43597 	 Next nothing is 98246 	 (space)
+98246 	 Next nothing is 36542 	 (space)
+36542 	 Next nothing is 54606 	 N
+54606 	 Next nothing is 9301 	 N
+9301 	 Next nothing is 87282 	 (space)
+87282 	 Next nothing is 48551 	 (space)
+48551 	 Next nothing is 91285 	 (space)
+91285 	 Next nothing is 11090 	 (space)
+11090 	 Next nothing is 71454 	 (space)
+71454 	 Next nothing is 65829 	 (space)
+65829 	 Next nothing is 44481 	 *
+44481 	 Next nothing is 23672 	 *
+23672 	 Next nothing is 34339 	 (newline)
+34339 	 Next nothing is 90980 	 *
+90980 	 Next nothing is 78901 	 *
+78901 	 Next nothing is 3423 	 (space)
+3423 	 Next nothing is 37522 	 (space)
+37522 	 Next nothing is 19932 	 (space)
+19932 	 Next nothing is 92578 	 O
+92578 	 Next nothing is 12931 	 O
+12931 	 Next nothing is 12677 	 (space)
+12677 	 Next nothing is 819 	 (space)
+819 	 Next nothing is 6125 	 (space)
+6125 	 Next nothing is 53248 	 (space)
+53248 	 Next nothing is 14469 	 O
+14469 	 Next nothing is 64440 	 O
+64440 	 Next nothing is 35616 	 (space)
+35616 	 Next nothing is 67375 	 X
+67375 	 Next nothing is 49214 	 X
+49214 	 Next nothing is 66203 	 X
+66203 	 Next nothing is 80968 	 (space)
+80968 	 Next nothing is 79396 	 (space)
+79396 	 Next nothing is 37781 	 X
+37781 	 Next nothing is 9715 	 X
+9715 	 Next nothing is 24581 	 X
+24581 	 Next nothing is 63414 	 (space)
+63414 	 Next nothing is 63949 	 Y
+63949 	 Next nothing is 46595 	 Y
+46595 	 Next nothing is 9384 	 Y
+9384 	 Next nothing is 64974 	 (space)
+64974 	 Next nothing is 94277 	 (space)
+94277 	 Next nothing is 27064 	 (space)
+27064 	 Next nothing is 55621 	 Y
+55621 	 Next nothing is 69222 	 Y
+69222 	 Next nothing is 70168 	 (space)
+70168 	 Next nothing is 63528 	 (space)
+63528 	 Next nothing is 80304 	 G
+80304 	 Next nothing is 94510 	 G
+94510 	 Next nothing is 40068 	 (space)
+40068 	 Next nothing is 86847 	 G
+86847 	 Next nothing is 4861 	 G
+4861 	 Next nothing is 91570 	 (space)
+91570 	 Next nothing is 18108 	 (space)
+18108 	 Next nothing is 92797 	 (space)
+92797 	 Next nothing is 10653 	 (space)
+10653 	 Next nothing is 58973 	 (space)
+58973 	 Next nothing is 65708 	 E
+65708 	 Next nothing is 85683 	 E
+85683 	 Next nothing is 58791 	 (space)
+58791 	 Next nothing is 84134 	 (space)
+84134 	 Next nothing is 16715 	 (space)
+16715 	 Next nothing is 4130 	 (space)
+4130 	 Next nothing is 8333 	 (space)
+8333 	 Next nothing is 2658 	 (space)
+2658 	 Next nothing is 29888 	 (space)
+29888 	 Next nothing is 92509 	 (space)
+92509 	 Next nothing is 24885 	 (space)
+24885 	 Next nothing is 85346 	 N
+85346 	 Next nothing is 88754 	 N
+88754 	 Next nothing is 87449 	 (space)
+87449 	 Next nothing is 80326 	 (space)
+80326 	 Next nothing is 41417 	 (space)
+41417 	 Next nothing is 62569 	 (space)
+62569 	 Next nothing is 34147 	 (space)
+34147 	 Next nothing is 37638 	 (space)
+37638 	 Next nothing is 28177 	 *
+28177 	 Next nothing is 59599 	 *
+59599 	 Next nothing is 98155 	 (newline)
+98155 	 Next nothing is 1035 	 *
+1035 	 Next nothing is 88241 	 *
+88241 	 Next nothing is 12774 	 (space)
+12774 	 Next nothing is 88944 	 (space)
+88944 	 Next nothing is 19873 	 (space)
+19873 	 Next nothing is 8308 	 O
+8308 	 Next nothing is 46992 	 O
+46992 	 Next nothing is 83493 	 (space)
+83493 	 Next nothing is 49337 	 (space)
+49337 	 Next nothing is 10134 	 (space)
+10134 	 Next nothing is 89272 	 (space)
+89272 	 Next nothing is 21051 	 O
+21051 	 Next nothing is 10771 	 O
+10771 	 Next nothing is 80834 	 (space)
+80834 	 Next nothing is 89357 	 (space)
+89357 	 Next nothing is 14114 	 X
+14114 	 Next nothing is 31302 	 X
+31302 	 Next nothing is 51107 	 X
+51107 	 Next nothing is 23249 	 X
+23249 	 Next nothing is 91555 	 X
+91555 	 Next nothing is 20144 	 X
+20144 	 Next nothing is 57011 	 (space)
+57011 	 Next nothing is 61058 	 (space)
+61058 	 Next nothing is 59316 	 (space)
+59316 	 Next nothing is 109 	 Y
+109 	 Next nothing is 22645 	 Y
+22645 	 Next nothing is 83445 	 Y
+83445 	 Next nothing is 66015 	 Y
+66015 	 Next nothing is 82896 	 Y
+82896 	 Next nothing is 33160 	 Y
+33160 	 Next nothing is 80234 	 (space)
+80234 	 Next nothing is 69853 	 (space)
+69853 	 Next nothing is 17729 	 (space)
+17729 	 Next nothing is 20261 	 G
+20261 	 Next nothing is 95032 	 G
+95032 	 Next nothing is 19899 	 (space)
+19899 	 Next nothing is 43848 	 (space)
+43848 	 Next nothing is 53819 	 (space)
+53819 	 Next nothing is 1946 	 G
+1946 	 Next nothing is 75651 	 G
+75651 	 Next nothing is 62387 	 (space)
+62387 	 Next nothing is 70384 	 (space)
+70384 	 Next nothing is 68507 	 (space)
+68507 	 Next nothing is 88256 	 E
+88256 	 Next nothing is 29789 	 E
+29789 	 Next nothing is 83043 	 E
+83043 	 Next nothing is 14979 	 E
+14979 	 Next nothing is 97422 	 E
+97422 	 Next nothing is 96333 	 E
+96333 	 Next nothing is 665 	 (space)
+665 	 Next nothing is 83779 	 (space)
+83779 	 Next nothing is 15008 	 (space)
+15008 	 Next nothing is 11812 	 (space)
+11812 	 Next nothing is 32086 	 (space)
+32086 	 Next nothing is 19311 	 N
+19311 	 Next nothing is 38267 	 N
+38267 	 Next nothing is 7440 	 (space)
+7440 	 Next nothing is 8587 	 (space)
+8587 	 Next nothing is 84193 	 (space)
+84193 	 Next nothing is 19413 	 (space)
+19413 	 Next nothing is 47199 	 (space)
+47199 	 Next nothing is 98913 	 (space)
+98913 	 Next nothing is 79128 	 *
+79128 	 Next nothing is 1447 	 *
+1447 	 Next nothing is 19812 	 (newline)
+19812 	 Next nothing is 7520 	 *
+7520 	 Next nothing is 58170 	 *
+58170 	 Next nothing is 78767 	 (space)
+78767 	 Next nothing is 36504 	 (space)
+36504 	 Next nothing is 12155 	 (space)
+12155 	 Next nothing is 53725 	 O
+53725 	 Next nothing is 15724 	 O
+15724 	 Next nothing is 31280 	 (space)
+31280 	 Next nothing is 531 	 (space)
+531 	 Next nothing is 21899 	 (space)
+21899 	 Next nothing is 21132 	 (space)
+21132 	 Next nothing is 45275 	 O
+45275 	 Next nothing is 14983 	 O
+14983 	 Next nothing is 9207 	 (space)
+9207 	 Next nothing is 82137 	 (space)
+82137 	 Next nothing is 13076 	 (space)
+13076 	 Next nothing is 32752 	 (space)
+32752 	 Next nothing is 94091 	 X
+94091 	 Next nothing is 91316 	 X
+91316 	 Next nothing is 17593 	 (space)
+17593 	 Next nothing is 86692 	 (space)
+86692 	 Next nothing is 83916 	 (space)
+83916 	 Next nothing is 84429 	 (space)
+84429 	 Next nothing is 6123 	 (space)
+6123 	 Next nothing is 52149 	 (space)
+52149 	 Next nothing is 35368 	 Y
+35368 	 Next nothing is 85722 	 Y
+85722 	 Next nothing is 84034 	 Y
+84034 	 Next nothing is 71297 	 Y
+71297 	 Next nothing is 226 	 (space)
+226 	 Next nothing is 20433 	 (space)
+20433 	 Next nothing is 83398 	 (space)
+83398 	 Next nothing is 5442 	 (space)
+5442 	 Next nothing is 81622 	 G
+81622 	 Next nothing is 93237 	 G
+93237 	 Next nothing is 76689 	 (space)
+76689 	 Next nothing is 67773 	 (space)
+67773 	 Next nothing is 16764 	 (space)
+16764 	 Next nothing is 12187 	 (space)
+12187 	 Next nothing is 45084 	 G
+45084 	 Next nothing is 23959 	 G
+23959 	 Next nothing is 83235 	 (space)
+83235 	 Next nothing is 38733 	 (space)
+38733 	 Next nothing is 55868 	 E
+55868 	 Next nothing is 29 	 E
+29 	 Next nothing is 83831 	 E
+83831 	 Next nothing is 80100 	 E
+80100 	 Next nothing is 14723 	 E
+14723 	 Next nothing is 60832 	 E
+60832 	 Next nothing is 72946 	 (space)
+72946 	 Next nothing is 37493 	 (space)
+37493 	 Next nothing is 27258 	 (space)
+27258 	 Next nothing is 67542 	 (space)
+67542 	 Next nothing is 28426 	 (space)
+28426 	 Next nothing is 35520 	 N
+35520 	 Next nothing is 19478 	 N
+19478 	 Next nothing is 53315 	 (space)
+53315 	 Next nothing is 89835 	 (space)
+89835 	 Next nothing is 45636 	 (space)
+45636 	 Next nothing is 84411 	 (space)
+84411 	 Next nothing is 44013 	 (space)
+44013 	 Next nothing is 67751 	 (space)
+67751 	 Next nothing is 94119 	 *
+94119 	 Next nothing is 15872 	 *
+15872 	 Next nothing is 97486 	 (newline)
+97486 	 Next nothing is 4530 	 *
+4530 	 Next nothing is 2285 	 *
+2285 	 Next nothing is 48179 	 (space)
+48179 	 Next nothing is 36594 	 (space)
+36594 	 Next nothing is 52069 	 (space)
+52069 	 Next nothing is 44214 	 (space)
+44214 	 Next nothing is 50187 	 (space)
+50187 	 Next nothing is 63191 	 (space)
+63191 	 Next nothing is 96123 	 (space)
+96123 	 Next nothing is 37905 	 (space)
+37905 	 Next nothing is 35302 	 (space)
+35302 	 Next nothing is 26074 	 (space)
+26074 	 Next nothing is 24510 	 (space)
+24510 	 Next nothing is 77136 	 (space)
+77136 	 Next nothing is 34296 	 (space)
+34296 	 Next nothing is 29704 	 (space)
+29704 	 Next nothing is 22944 	 (space)
+22944 	 Next nothing is 10945 	 (space)
+10945 	 Next nothing is 73256 	 (space)
+73256 	 Next nothing is 40940 	 (space)
+40940 	 Next nothing is 2718 	 (space)
+2718 	 Next nothing is 94666 	 (space)
+94666 	 Next nothing is 53811 	 (space)
+53811 	 Next nothing is 75159 	 (space)
+75159 	 Next nothing is 14802 	 (space)
+14802 	 Next nothing is 29858 	 (space)
+29858 	 Next nothing is 79484 	 (space)
+79484 	 Next nothing is 55887 	 (space)
+55887 	 Next nothing is 8798 	 (space)
+8798 	 Next nothing is 89519 	 (space)
+89519 	 Next nothing is 60659 	 (space)
+60659 	 Next nothing is 53544 	 (space)
+53544 	 Next nothing is 8514 	 (space)
+8514 	 Next nothing is 97430 	 (space)
+97430 	 Next nothing is 1228 	 (space)
+1228 	 Next nothing is 16133 	 (space)
+16133 	 Next nothing is 19944 	 (space)
+19944 	 Next nothing is 25547 	 (space)
+25547 	 Next nothing is 76840 	 (space)
+76840 	 Next nothing is 57327 	 (space)
+57327 	 Next nothing is 96467 	 (space)
+96467 	 Next nothing is 97937 	 (space)
+97937 	 Next nothing is 22345 	 (space)
+22345 	 Next nothing is 75533 	 (space)
+75533 	 Next nothing is 80499 	 (space)
+80499 	 Next nothing is 39170 	 (space)
+39170 	 Next nothing is 25194 	 (space)
+25194 	 Next nothing is 78713 	 (space)
+78713 	 Next nothing is 7331 	 (space)
+7331 	 Next nothing is 92642 	 (space)
+92642 	 Next nothing is 45567 	 (space)
+45567 	 Next nothing is 58155 	 (space)
+58155 	 Next nothing is 4918 	 (space)
+4918 	 Next nothing is 92414 	 (space)
+92414 	 Next nothing is 42478 	 (space)
+42478 	 Next nothing is 57589 	 (space)
+57589 	 Next nothing is 46276 	 (space)
+46276 	 Next nothing is 28529 	 (space)
+28529 	 Next nothing is 36871 	 (space)
+36871 	 Next nothing is 44875 	 (space)
+44875 	 Next nothing is 66783 	 (space)
+66783 	 Next nothing is 1043 	 (space)
+1043 	 Next nothing is 78311 	 *
+78311 	 Next nothing is 65698 	 *
+65698 	 Next nothing is 95457 	 (newline)
+95457 	 Next nothing is 28935 	 *
+28935 	 Next nothing is 58156 	 *
+58156 	 Next nothing is 12445 	 *
+12445 	 Next nothing is 21019 	 *
+21019 	 Next nothing is 81654 	 *
+81654 	 Next nothing is 82814 	 *
+82814 	 Next nothing is 75481 	 *
+75481 	 Next nothing is 41055 	 *
+41055 	 Next nothing is 55067 	 *
+55067 	 Next nothing is 49768 	 *
+49768 	 Next nothing is 7422 	 *
+7422 	 Next nothing is 30983 	 *
+30983 	 Next nothing is 81931 	 *
+81931 	 Next nothing is 45122 	 *
+45122 	 Next nothing is 75101 	 *
+75101 	 Next nothing is 71773 	 *
+71773 	 Next nothing is 52323 	 *
+52323 	 Next nothing is 41386 	 *
+41386 	 Next nothing is 36729 	 *
+36729 	 Next nothing is 24027 	 *
+24027 	 Next nothing is 82430 	 *
+82430 	 Next nothing is 53824 	 *
+53824 	 Next nothing is 75518 	 *
+75518 	 Next nothing is 38146 	 *
+38146 	 Next nothing is 27401 	 *
+27401 	 Next nothing is 1321 	 *
+1321 	 Next nothing is 20200 	 *
+20200 	 Next nothing is 30934 	 *
+30934 	 Next nothing is 43923 	 *
+43923 	 Next nothing is 9472 	 *
+9472 	 Next nothing is 87617 	 *
+87617 	 Next nothing is 7973 	 *
+7973 	 Next nothing is 40413 	 *
+40413 	 Next nothing is 34242 	 *
+34242 	 Next nothing is 51833 	 *
+51833 	 Next nothing is 7298 	 *
+7298 	 Next nothing is 26372 	 *
+26372 	 Next nothing is 22704 	 *
+22704 	 Next nothing is 87196 	 *
+87196 	 Next nothing is 1866 	 *
+1866 	 Next nothing is 10454 	 *
+10454 	 Next nothing is 8810 	 *
+8810 	 Next nothing is 14074 	 *
+14074 	 Next nothing is 77163 	 *
+77163 	 Next nothing is 15394 	 *
+15394 	 Next nothing is 5630 	 *
+5630 	 Next nothing is 17801 	 *
+17801 	 Next nothing is 80920 	 *
+80920 	 Next nothing is 22571 	 *
+22571 	 Next nothing is 25311 	 *
+25311 	 Next nothing is 270 	 *
+270 	 Next nothing is 2144 	 *
+2144 	 Next nothing is 63031 	 *
+63031 	 Next nothing is 82371 	 *
+82371 	 Next nothing is 94758 	 *
+94758 	 Next nothing is 38188 	 *
+38188 	 Next nothing is 34663 	 *
+34663 	 Next nothing is 69757 	 *
+69757 	 Next nothing is 37718 	 *
+37718 	 Next nothing is 55552 	 *
+55552 	 Next nothing is 81137 	 *
+81137 	 Next nothing is 27652 	 *
+27652 	 Next nothing is 87492 	 *
+87492 	 Next nothing is 25632 	 *
+25632 	 Next nothing is 95731 	 (newline)
+95731 	 Next nothing is 53233 	 (space)
+53233 	 Next nothing is 69684 	 *
+69684 	 Next nothing is 75600 	 *
+75600 	 Next nothing is 84135 	 *
+84135 	 Next nothing is 72452 	 *
+72452 	 Next nothing is 73281 	 *
+73281 	 Next nothing is 45808 	 *
+45808 	 Next nothing is 934 	 *
+934 	 Next nothing is 12130 	 *
+12130 	 Next nothing is 15750 	 *
+15750 	 Next nothing is 69210 	 *
+69210 	 Next nothing is 99905 	 *
+99905 	 Next nothing is 63643 	 *
+63643 	 Next nothing is 47850 	 *
+47850 	 Next nothing is 83564 	 *
+83564 	 Next nothing is 77241 	 *
+77241 	 Next nothing is 75978 	 *
+75978 	 Next nothing is 24255 	 *
+24255 	 Next nothing is 89197 	 *
+89197 	 Next nothing is 42934 	 *
+42934 	 Next nothing is 76920 	 *
+76920 	 Next nothing is 29994 	 *
+29994 	 Next nothing is 45675 	 *
+45675 	 Next nothing is 30076 	 *
+30076 	 Next nothing is 69280 	 *
+69280 	 Next nothing is 70557 	 *
+70557 	 Next nothing is 43708 	 *
+43708 	 Next nothing is 62628 	 *
+62628 	 Next nothing is 89095 	 *
+89095 	 Next nothing is 80504 	 *
+80504 	 Next nothing is 76887 	 *
+76887 	 Next nothing is 27720 	 *
+27720 	 Next nothing is 67628 	 *
+67628 	 Next nothing is 11080 	 *
+11080 	 Next nothing is 37351 	 *
+37351 	 Next nothing is 55940 	 *
+55940 	 Next nothing is 56000 	 *
+56000 	 Next nothing is 79866 	 *
+79866 	 Next nothing is 33203 	 *
+33203 	 Next nothing is 16228 	 *
+16228 	 Next nothing is 8716 	 *
+8716 	 Next nothing is 74862 	 *
+74862 	 Next nothing is 32459 	 *
+32459 	 Next nothing is 58183 	 *
+58183 	 Next nothing is 18633 	 *
+18633 	 Next nothing is 40377 	 *
+40377 	 Next nothing is 70141 	 *
+70141 	 Next nothing is 84619 	 *
+84619 	 Next nothing is 28850 	 *
+28850 	 Next nothing is 45925 	 *
+45925 	 Next nothing is 7057 	 *
+7057 	 Next nothing is 16792 	 *
+16792 	 Next nothing is 54610 	 *
+54610 	 Next nothing is 21249 	 *
+21249 	 Next nothing is 15667 	 *
+15667 	 Next nothing is 91038 	 *
+91038 	 Next nothing is 44221 	 *
+44221 	 Next nothing is 992 	 *
+992 	 Next nothing is 8700 	 *
+8700 	 Next nothing is 45100 	 *
+45100 	 Next nothing is 68628 	 *
+68628 	 Next nothing is 67824 	 *
+67824 	 Next nothing is 46145 	 *
+46145 	 Collect the comments. 	 (newline)
+****************************************************************
+****************************************************************
+**                                                            **
+**   OO    OO    XX      YYYY    GG    GG  EEEEEE NN      NN  **
+**   OO    OO  XXXXXX   YYYYYY   GG   GG   EEEEEE  NN    NN   **
+**   OO    OO XXX  XXX YYY   YY  GG GG     EE       NN  NN    **
+**   OOOOOOOO XX    XX YY        GGG       EEEEE     NNNN     **
+**   OOOOOOOO XX    XX YY        GGG       EEEEE      NN      **
+**   OO    OO XXX  XXX YYY   YY  GG GG     EE         NN      **
+**   OO    OO  XXXXXX   YYYYYY   GG   GG   EEEEEE     NN      **
+**   OO    OO    XX      YYYY    GG    GG  EEEEEE     NN      **
+**                                                            **
+****************************************************************
+ **************************************************************
 
-goroutine 1 [running]:
-archive/zip.(*ReadCloser).Close(...)
-	/opt/hostedtoolcache/go/1.22.5/x64/src/archive/zip/reader.go:199
-panic({0x4d89a0?, 0x5bc2e0?})
-	/opt/hostedtoolcache/go/1.22.5/x64/src/runtime/panic.go:770 +0x132
-main.read_inside_zip(0x4f283f?, {0xc000096070, 0x9})
-	/home/runner/work/pythonlibrarychallenge-in-go/pythonlibrarychallenge-in-go/6.go:72 +0x1c
-main.main()
-	/home/runner/work/pythonlibrarychallenge-in-go/pythonlibrarychallenge-in-go/6.go:28 +0x1af
-exit status 2
-err/go run
+* OXYGEN
+err/del. <nil>
 
 19.go:16:2: no required module provides package github.com/go-audio/audio; to add it:
 	go get github.com/go-audio/audio
@@ -1729,7 +2639,7 @@ stuff/ BZh91AY%26SY%94%3A%E2I%00%00%21%19%80P%81%11%00%AFg%9E%A0%20%00hE%3DM%B5%
 dcode/ BZh91AY&SYî:‚I  !ÄPÅ Øgû†  hE=Mµ#–‘—‚ç© len/ 117
 dcomp/ is it the 26th already? call his father and inform him that "the flowers are on their way". he'll understand. 
 
-2024/08/05 22:08:52 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:11:36 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 Leo/ 555-VIOLIN type/ string 
 
 len/ 109 l/ 61
