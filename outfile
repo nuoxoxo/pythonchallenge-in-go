@@ -1306,7 +1306,7 @@ compress/gzip.(*Reader).Close(...)
 	/opt/hostedtoolcache/go/1.22.5/x64/src/compress/gzip/gunzip.go:290
 panic({0x4aa7a0?, 0x55dac0?})
 	/opt/hostedtoolcache/go/1.22.5/x64/src/runtime/panic.go:770 +0x132
-compress/gzip.(*Reader).Read(0xc00007c0c0?, {0xc00008e000?, 0x0?, 0x0?})
+compress/gzip.(*Reader).Read(0xc00007c0c0?, {0xc00010e000?, 0x0?, 0xc00007c0c0?})
 	/opt/hostedtoolcache/go/1.22.5/x64/src/compress/gzip/gunzip.go:247 +0x22
 bytes.(*Buffer).ReadFrom(0xc00007c0c0, {0x4e0978, 0x0})
 	/opt/hostedtoolcache/go/1.22.5/x64/src/bytes/buffer.go:211 +0x98
@@ -1315,7 +1315,7 @@ main.init.0()
 exit status 2
 err/go run
 
-2024/08/05 20:09:29 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:08:27 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 
 cmds/ []string
 cmd/ phone
@@ -1324,26 +1324,26 @@ cmd/ system.methodHelp
 cmd/ system.methodSignature
 cmd/ system.multicall
 cmd/ system.getCapabilities
-2024/08/05 20:09:29 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:08:28 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 phone/ [] 
 end/
 
-2024/08/05 20:09:29 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:08:28 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 system.methodHelp Returns the phone of a person <nil> 
 end/
 
-2024/08/05 20:09:30 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:08:28 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 system.methodHelp Returns the phone of a person 
 end/
 
-2024/08/05 20:09:30 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:08:28 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 system.methodSignature [[string string]] 
 end/
 
 msg/ Bert is evil! go back!
 
 evil/ Bert
-2024/08/05 20:09:30 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:08:28 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 phone/ 555-ITALY 
 end/
 
@@ -1402,7 +1402,7 @@ archive/zip.(*ReadCloser).Close(...)
 	/opt/hostedtoolcache/go/1.22.5/x64/src/archive/zip/reader.go:199
 panic({0x4d89a0?, 0x5bc2e0?})
 	/opt/hostedtoolcache/go/1.22.5/x64/src/runtime/panic.go:770 +0x132
-main.read_inside_zip(0x4f283f?, {0xc0000121d0, 0x9})
+main.read_inside_zip(0x4f283f?, {0xc000096070, 0x9})
 	/home/runner/work/pythonlibrarychallenge-in-go/pythonlibrarychallenge-in-go/6.go:72 +0x1c
 main.main()
 	/home/runner/work/pythonlibrarychallenge-in-go/pythonlibrarychallenge-in-go/6.go:28 +0x1af
@@ -1729,7 +1729,7 @@ stuff/ BZh91AY%26SY%94%3A%E2I%00%00%21%19%80P%81%11%00%AFg%9E%A0%20%00hE%3DM%B5%
 dcode/ BZh91AY&SYî:‚I  !ÄPÅ Øgû†  hE=Mµ#–‘—‚ç© len/ 117
 dcomp/ is it the 26th already? call his father and inform him that "the flowers are on their way". he'll understand. 
 
-2024/08/05 20:09:37 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/05 22:08:52 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 Leo/ 555-VIOLIN type/ string 
 
 len/ 109 l/ 61
