@@ -12,8 +12,15 @@ import (
 
 func main(){
 
+    PATH := "./channel.zip"
+
+    defer func(){
+        err := os.Remove(PATH)
+        fmt.Println("err/del.", err)
+    }()
+
     // zip reader
-    openreader, err := zip.OpenReader("./channel.zip")
+    openreader, err := zip.OpenReader( PATH )
     if err != nil {
         fmt.Println("open reader/", err)
     }
