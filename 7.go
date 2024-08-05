@@ -4,8 +4,8 @@ import (
     "fmt"
     "image"
     "image/png"
-    _"net/http"
-    _"io"
+    "net/http"
+    "io"
     "os"
     "strings"
     "reflect"
@@ -16,19 +16,14 @@ type Pixel struct { R,G,B,A int8 }
 
 func main(){
 
-    /*
-    URL := "http://www.pythonchallenge.com/pc/def/oxygen.png"
-    resp, _ := http.Get(URL)
-    defer resp.Body.Close()
+    PATH := "./oxygen.png"
 
-    imgfile, _ := os.Create("oxygen.png")
-    defer imgfile.Close()
+    defer func(){
+        err := os.Remove( PATH )
+        fmt.Println("err/del.", err)
+    }()
 
-    _, err := io.Copy(imgfile, resp.Body)
-    if err != nil { return }
-    */
-
-    imgfile, _ := os.Open("oxygen.png")
+    imgfile, _ := os.Open( PATH)
     defer imgfile.Close()
 
     var img image.Image
@@ -109,4 +104,18 @@ func main(){
     }
     fmt.Println("res/", string(bytes))
 }
+
+func init(){
+
+    URL := "http://www.pythonchallenge.com/pc/def/oxygen.png"
+    resp, _ := http.Get(URL)
+    defer resp.Body.Close()
+
+    imgfile, _ := os.Create("oxygen.png")
+    defer imgfile.Close()
+
+    _, _ = io.Copy(imgfile, resp.Body)
+
+}
+
 
