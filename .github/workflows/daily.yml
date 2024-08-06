@@ -19,7 +19,7 @@ jobs:
       run: |
         go get github.com/pmezard/go-difflib
         go get github.com/kolo/xmlrpc
-        outfile="outfile.out"
+        outfile="out.out"
         echo "init/..." > $outfile 
         for file in $(find . -name '*.go'); do
           go run $file >> $outfile 2>&1 || echo "err/go run" >> $outfile
