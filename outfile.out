@@ -1285,14 +1285,14 @@ $#_}*!(+([_&%{^&[([%]}*^{{([@+@]@*&@_!]_+([(#&!]]#$$#]@#{_]][_{@]{*))$({%}_![@$]
  
 find rare characters in the mess below:
 
-u/ 1 
-a/ 1 
-l/ 1 
-i/ 1 
 t/ 1 
 y/ 1 
 e/ 1 
 q/ 1 
+u/ 1 
+a/ 1 
+l/ 1 
+i/ 1 
 res/ equality
 
 panic: runtime error: invalid memory address or nil pointer dereference
@@ -1304,16 +1304,16 @@ compress/gzip.(*Reader).Close(...)
 	/opt/hostedtoolcache/go/1.22.5/x64/src/compress/gzip/gunzip.go:290
 panic({0x4aa7a0?, 0x55dac0?})
 	/opt/hostedtoolcache/go/1.22.5/x64/src/runtime/panic.go:770 +0x132
-compress/gzip.(*Reader).Read(0xc0000920c0?, {0xc0000ae000?, 0x0?, 0x0?})
+compress/gzip.(*Reader).Read(0xc00007c0c0?, {0xc00008e000?, 0x0?, 0x0?})
 	/opt/hostedtoolcache/go/1.22.5/x64/src/compress/gzip/gunzip.go:247 +0x22
-bytes.(*Buffer).ReadFrom(0xc0000920c0, {0x4e0978, 0x0})
+bytes.(*Buffer).ReadFrom(0xc00007c0c0, {0x4e0978, 0x0})
 	/opt/hostedtoolcache/go/1.22.5/x64/src/bytes/buffer.go:211 +0x98
 main.init.0()
 	/home/runner/work/pythonlibrarychallenge-in-go/pythonlibrarychallenge-in-go/18.go:106 +0x110
 exit status 2
 err/go run
 
-2024/08/06 00:40:31 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 02:30:26 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 
 cmds/ []string
 cmd/ phone
@@ -1322,26 +1322,26 @@ cmd/ system.methodHelp
 cmd/ system.methodSignature
 cmd/ system.multicall
 cmd/ system.getCapabilities
-2024/08/06 00:40:31 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 02:30:26 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 phone/ [] 
 end/
 
-2024/08/06 00:40:31 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 02:30:26 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 system.methodHelp Returns the phone of a person <nil> 
 end/
 
-2024/08/06 00:40:31 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 02:30:27 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 system.methodHelp Returns the phone of a person 
 end/
 
-2024/08/06 00:40:31 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 02:30:27 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 system.methodSignature [[string string]] 
 end/
 
 msg/ Bert is evil! go back!
 
 evil/ Bert
-2024/08/06 00:40:31 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 02:30:27 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 phone/ 555-ITALY 
 end/
 
@@ -2635,7 +2635,7 @@ stuff/ BZh91AY%26SY%94%3A%E2I%00%00%21%19%80P%81%11%00%AFg%9E%A0%20%00hE%3DM%B5%
 dcode/ BZh91AY&SYî:‚I  !ÄPÅ Øgû†  hE=Mµ#–‘—‚ç© len/ 117
 dcomp/ is it the 26th already? call his father and inform him that "the flowers are on their way". he'll understand. 
 
-2024/08/06 00:40:39 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 02:30:45 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 Leo/ 555-VIOLIN type/ string 
 
 len/ 109 l/ 61
