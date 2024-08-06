@@ -30,7 +30,7 @@ body ends/
 
 err/open <nil>
 res/ *image.RGBA
-out/ &{0xc000070120} *os.File
+out/ &{0xc0000a29c0} *os.File
 
 274877906944
 
@@ -1743,14 +1743,14 @@ $#_}*!(+([_&%{^&[([%]}*^{{([@+@]@*&@_!]_+([(#&!]]#$$#]@#{_]][_{@]{*))$({%}_![@$]
  
 find rare characters in the mess below:
 
-u/ 1 
-a/ 1 
-l/ 1 
 i/ 1 
 t/ 1 
 y/ 1 
 e/ 1 
 q/ 1 
+u/ 1 
+a/ 1 
+l/ 1 
 res/ equality
 
 1/ <nil>
@@ -4746,7 +4746,7 @@ end/
 0 @ lines/ @@ -1,2291 +1,2291 @@
 line/ 2983 (null)
 
-2024/08/06 12:16:17 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 20:08:16 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 
 cmds/ []string
 cmd/ phone
@@ -4755,26 +4755,26 @@ cmd/ system.methodHelp
 cmd/ system.methodSignature
 cmd/ system.multicall
 cmd/ system.getCapabilities
-2024/08/06 12:16:17 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 20:08:16 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 phone/ [] 
 end/
 
-2024/08/06 12:16:17 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 20:08:16 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 system.methodHelp Returns the phone of a person <nil> 
 end/
 
-2024/08/06 12:16:18 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 20:08:16 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 system.methodHelp Returns the phone of a person 
 end/
 
-2024/08/06 12:16:18 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 20:08:16 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 system.methodSignature [[string string]] 
 end/
 
 msg/ Bert is evil! go back!
 
 evil/ Bert
-2024/08/06 12:16:18 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 20:08:17 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 phone/ 555-ITALY 
 end/
 
@@ -6066,7 +6066,7 @@ stuff/ BZh91AY%26SY%94%3A%E2I%00%00%21%19%80P%81%11%00%AFg%9E%A0%20%00hE%3DM%B5%
 dcode/ BZh91AY&SYî:‚I  !ÄPÅ Øgû†  hE=Mµ#–‘—‚ç© len/ 117
 dcomp/ is it the 26th already? call his father and inform him that "the flowers are on their way". he'll understand. 
 
-2024/08/06 12:16:34 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
+2024/08/06 20:08:41 Unsolicited response received on idle HTTP channel starting with "\n\n"; err=<nil>
 Leo/ 555-VIOLIN type/ string 
 
 len/ 109 l/ 61
