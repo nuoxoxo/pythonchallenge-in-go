@@ -9,6 +9,8 @@ import (
     "encoding/hex"
     "strings"
     "reflect"
+    "net/http"
+    "io"
 
     "github.com/pmezard/go-difflib/difflib"
 )
@@ -96,10 +98,25 @@ func hexpair(hexstring string) ([]byte, error) {
 
 func init() {
 
-    file, _ := os.Open("files/deltas.gz")
-    defer file.Close()
+    // todo/ download the gz
 
-    gzReader, _ := gzip.NewReader(file)
+    Filename := "deltas.gz"
+    URL := "http://www.pythonchallenge.com/pc/return/" + Filename
+    conn := & http.Client{}
+    req, err := http.NewRequest("GET", URL, nil)
+    fmt.Println("1/", err)
+    req.SetBasicAuth("huge", "file")
+    resp, err := conn.Do(req)
+    defer resp.Body.Close()
+    fmt.Println("2/", err)
+
+    f, err := os.Create( Filename )
+    defer f.Close()
+    _, _ = io.Copy(f, resp.Body)
+    fmt.Println("3/", err)
+
+    gzfile, _ := os.Open( Filename )
+    gzReader, _ := gzip.NewReader( gzfile )
     defer gzReader.Close()
 
     buffer = new(bytes.Buffer)
