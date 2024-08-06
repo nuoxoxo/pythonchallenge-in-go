@@ -14,8 +14,8 @@ import (
     _"strings"
     _"encoding/binary"
     _"bytes"
-	_"github.com/go-audio/audio"
-	_"github.com/go-audio/wav"
+    _"github.com/go-audio/audio"
+    _"github.com/go-audio/wav"
     _"io"
 )
 
