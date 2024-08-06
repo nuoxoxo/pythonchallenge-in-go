@@ -3,7 +3,7 @@ package main
 import (
     "fmt"
     "net/http"
-    "io/ioutil"
+    "io"
     "image"
     "image/gif"
     "image/color"
@@ -13,7 +13,7 @@ import (
 )
 
 func main(){
-    gf, _ := os.Open("files/mozart.gif")
+    gf, _ := os.Open("mozart.gif")
     defer gf.Close()
     mozart, _ := gif.Decode(gf)
     bounds := mozart.Bounds()
@@ -119,7 +119,9 @@ func findingLongestSegment(row[]color.Color, C int) (int, int) {
 }
 
 func init(){
-    URL := "http://www.pythonchallenge.com/pc/return/mozart.html"
+
+    // URL := "http://www.pythonchallenge.com/pc/return/mozart.html"
+    URL := "http://www.pythonchallenge.com/pc/return/mozart.gif"
     ups, mid := "hugefile", 4
     conn := & http.Client{}
     req, err := http.NewRequest("GET", URL, nil)
@@ -129,8 +131,10 @@ func init(){
     resp, _ := conn.Do(req)
     defer resp.Body.Close()
 
-    body, _ := ioutil.ReadAll(resp.Body)
-    fmt.Println(string(body), "\nbody ends/\n\n")
+    f, err := os.Create( "mozart.gif" )
+    defer f.Close()
+
+    _, _ = io.Copy(f, resp.Body)
 
 }
 
