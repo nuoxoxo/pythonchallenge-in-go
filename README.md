@@ -23,8 +23,8 @@ third one contains what is in both a and b
 level | keyword
 ----- | -----------
 21|
-20|
-19| _indian -_
+20| 
+19| _indian - idiot_
 18| _brightness - beurre:fly_
 17| _violin - balloons_
 16| _romance_
