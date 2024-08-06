@@ -9,17 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
+    - name: Checking out repo
       uses: actions/checkout@v3
-    - name: Go setup
+    - name: Setting up GO
       uses: actions/setup-go@v4
       with:
         go-version: '1.22'
-    - name: Compile
+    - name: LetItSnowSnowSnow
       run: |
         go get github.com/pmezard/go-difflib
         go get github.com/kolo/xmlrpc
-        outfile="outfile.out"
+        outfile="out.out"
         echo "init/..." > $outfile 
         for file in $(find . -name '*.go'); do
           go run $file >> $outfile 2>&1 || echo "err/go run" >> $outfile
