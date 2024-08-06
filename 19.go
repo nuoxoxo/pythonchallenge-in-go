@@ -10,6 +10,7 @@ import (
     "strings"
     "encoding/base64"
     "reflect"
+
     _"strings"
     _"encoding/binary"
     _"bytes"
@@ -24,16 +25,36 @@ const offset int = 64
 
 func main(){
 
-    // parsing done in init
     // now get the .wav sound file
     base64uint8, _ := base64.StdEncoding.DecodeString( base64string )
     fmt.Println("base64 data/head:", base64uint8[ :offset], reflect.TypeOf(base64uint8))
-    _ = os.WriteFile( Filename , base64uint8, 0644)
 
-	// open the source WAV file
-	sourceFile, _ := os.Open( Filename )
-	defer sourceFile.Close()
+    // big--->little endian 
+    lendian := []uint8{}
+    idx := 44
+    N := len(base64uint8)
+    wave := base64uint8[ :idx] // idea/ cp the wav-header not gonna reverse it
+    lendian = append(lendian, wave...)
+    for {
+        end := idx + 4
+        if end > N {
+            end = N
+        }
+        wave = base64uint8[idx : end]
+        if len(wave) < 4 {
+            if len(wave) != 0 { panic("wtf/") }
+            break
+        }
+        i := 3
+        for i > -1 {
+            lendian = append(lendian, wave[i])
+            i--
+        }
+        idx += 4
+    }
 
+    _ = os.WriteFile( Filename , base64uint8, 0644) // big
+    _ = os.WriteFile( "endian.wav" , lendian, 0644) // little
 
 }
 
