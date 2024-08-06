@@ -9,14 +9,17 @@ import (
     "image/png"
     "os"
     "reflect"
+    "io"
 )
 
 var PAGE string
+var Filename string = "wire.png"
 
 func main(){
     fmt.Println(PAGE, "\nbody ends/\n\n")
 
-    raw, _ := os.Open("files/wire.png")
+    raw, err := os.Open( Filename )
+    fmt.Println("err/open", err)
     defer raw.Close()
     var wire image.Image 
     wire, _ = png.Decode(raw)
@@ -73,7 +76,7 @@ func main(){
 
     }
 
-    f, _ := os.Create("files/res.jpg")
+    f, _ := os.Create("res14.jpg")
     defer f.Close()
     jpeg.Encode(f, res, nil)
     fmt.Println("res/", reflect.TypeOf(res))
@@ -81,19 +84,32 @@ func main(){
 }
 
 func init(){
-    URL := "http://www.pythonchallenge.com/pc/return/italy.html"
-    u, p := "huge","file"
 
+    // show bert
+    URL := "http://www.pythonchallenge.com/pc/return/italy.html"
     conn := & http.Client{}
     req, err := http.NewRequest("GET", URL, nil)
-    if err != nil {fmt.Println("err/", err)}
+    fmt.Println("err GET/url", err)
 
-    req.SetBasicAuth(u,p)
+    req.SetBasicAuth("huge", "file")
     resp, _ := conn.Do(req)
     defer resp.Body.Close()
 
     body, _ := ioutil.ReadAll(resp.Body)
     PAGE = string(body)
+
+    // todo/ download wire
+    URL = "http://www.pythonchallenge.com/pc/return/" + Filename
+    conn = & http.Client{}
+    req, err = http.NewRequest("GET", URL, nil)
+    fmt.Println("err GET/jpg", err)
+    req.SetBasicAuth("huge", "file")
+    resp, _ = conn.Do(req)
+    defer resp.Body.Close()
+
+    f, err := os.Create( Filename )
+    defer f.Close()
+    _, _ = io.Copy(f, resp.Body)
 }
 
 
