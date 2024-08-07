@@ -57,7 +57,7 @@ func main() {
     })
 
     // print out the whole DIFF sequence
-    fmt.Println(diff, "\nend/")
+    fmt.Println(diff[4096:8192], "\nend/")
 
     for i, line := range strings.Split(diff, "\n") {
         //if i == 100 {break}
