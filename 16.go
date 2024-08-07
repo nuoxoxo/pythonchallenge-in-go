@@ -85,7 +85,7 @@ func findingPinkSegment(row[]color.Color, C int) int {
         }
         c++
     }
-    fmt.Println(row[s], s, e, e - s)
+    if e < 42 { fmt.Println("row/", row[s], s, e, e - s) }
     return s//, e
 }
 
