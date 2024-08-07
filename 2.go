@@ -35,7 +35,7 @@ func main(){
     */
     // it's the 2nd match
     instr, cmt := matches[0][1], matches[1][1]
-    fmt.Println(cmt, instr)
+    fmt.Println(cmt[:42 * 42] + "\n", instr)
     dict := make(map[rune]int)
     res := []rune{}
     for _, c := range (cmt) {
