@@ -18,8 +18,8 @@
 level | keyword
 ----- | -----------
 21|
-20| 
-19| _indian - idiot_
+20| _redavni_
+19| _idiot2_
 18| _brightness - butter:fly_
 17| _violin - balloons_
 16| _romance_
