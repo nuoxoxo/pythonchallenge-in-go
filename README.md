@@ -17,7 +17,7 @@
 level | keyword
 ----- | -----------
 21|
-20| _redavni_
+20| _redavni (zip pwd)_
 19| _idiot2_
 18| _brightness - butter:fly_
 17| _violin - balloons_
