@@ -11,6 +11,7 @@
 - _18/ -_ now shows p3 correctly ~~common.png not written properly~~
 - _19/ -_ `Big endian` 👉🏻 write the most significant byte first - `Little endian`, the least significant byte first
 - _20/21 -_ see 6 : create/open a `.zip`
+- _22 -_ init: see 20 for regexp and double `conn`
 
 # keys
 
