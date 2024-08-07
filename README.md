@@ -9,7 +9,7 @@
 - _16/ -_ longest substring of repeats 👉 YES
     - not move, but _Rotate_ the pink segment
 - _18/ -_ now shows p3 correctly ~~common.png not written properly~~
-- _19/ -_ `Big endian` is we write the most significant byte first - `Little endian`, the least significant byte first
+- _19/ -_ `Big endian` 👉🏻 write the most significant byte first - `Little endian`, the least significant byte first
 - _20/21 -_ see 6 : create/open a `.zip`
 
 # keys
