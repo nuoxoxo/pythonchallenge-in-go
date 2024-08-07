@@ -20,7 +20,7 @@ level | keyword
 21|
 20| 
 19| _indian - idiot_
-18| _brightness - beurre:fly_
+18| _brightness - butter:fly_
 17| _violin - balloons_
 16| _romance_
 15| _mozart_
