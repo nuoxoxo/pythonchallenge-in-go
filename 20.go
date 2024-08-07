@@ -34,11 +34,11 @@ func init(){
     BODY := string(body)
     // fmt.Println(BODY, "body/ends")
 
-    // Step - go get `unreal`
+    // Step - go get `unreal.jpg`
     re := regexp.MustCompile(`(?s)src="(.*?)"`)
     matches := re.FindAllStringSubmatch(BODY, -1)
     path := matches[0][1]
-    sub2 := URL + path // ie. ___.jpg
+    sub2 := URL + path // ie. unreal.jpg
 
     conn = & http.Client{}
     req, _ = http.NewRequest("GET", sub2, nil)
