@@ -10,7 +10,8 @@
     - not move, but _Rotate_ the pink segment
 - _18/ -_ now shows p3 correctly ~~common.png not written properly~~
     - strategy: imagine 2 byte slices, a and b
-- _19/ -_  `Big endian` is we write the most significant byte first - `Little endian`, the least significant byte first
+- _19/ -_ `Big endian` is we write the most significant byte first - `Little endian`, the least significant byte first
+- _20/ -_ see 6 for create/open a `.zip`
 
 # keys
 
