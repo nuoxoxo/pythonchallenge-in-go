@@ -3,8 +3,8 @@
 - _5/ -_ using `pickle` 🟡
 - _7/ -_ read and analyze w/ `res.At(x,y)`
 - _9/ -_ draw lines around a polygon
-    - new image w/ `image.NewRGBA(image.Rect(sx,sy,ex,ey))`
-    - draw w/ `res.Set(x,y,colour)`
+    - `image.NewRGBA(image.Rect(sx,sy,ex,ey))`
+    - `img.Set(x,y,colour)`
 - _11/ -_ new image w/ `image.NewRGBA( mypic.Bounds() )`
 - _16/ -_ longest substring of repeats 👉 YES
     - not move, but _Rotate_ the pink segment
