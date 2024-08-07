@@ -16,7 +16,8 @@
 
 level | keyword
 ----- | -----------
-21|
+22| 
+21| _copper_
 20| _redavni (zip pwd)_
 19| _idiot2_
 18| _brightness - butter:fly_
