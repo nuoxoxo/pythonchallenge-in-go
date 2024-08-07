@@ -111,7 +111,7 @@ func init(){
     BODY := string(body)
     // fmt.Println(BODY, "body/ends")
 
-    // Step - go get `unreal`
+    // Step - go get `unreal.jpg`
     re := regexp.MustCompile(`(?s)src="(.*?)"`)
     matches := re.FindAllStringSubmatch(BODY, -1)
     sub2 := matches[0][1]

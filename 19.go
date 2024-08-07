@@ -10,13 +10,6 @@ import (
     "strings"
     "encoding/base64"
     "reflect"
-
-    _"strings"
-    _"encoding/binary"
-    _"bytes"
-    _"github.com/go-audio/audio"
-    _"github.com/go-audio/wav"
-    _"io"
 )
 
 var base64string string
