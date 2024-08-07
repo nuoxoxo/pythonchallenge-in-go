@@ -1,3 +1,5 @@
+[![Compilation checker](https://github.com/nuoxoxo/pythonchallenge-in-go/actions/workflows/daily.yml/badge.svg)](https://github.com/nuoxoxo/pythonchallenge-in-go/actions/workflows/daily.yml)
+
 # notes
 
 - _5/ -_ using `pickle` 🟡
