@@ -13,6 +13,9 @@ import (
 
 const URL string = "http://www.pythonchallenge.com/pc/hex/"
 const UPS string = "butterfly"
+const Yell string = "\033[33m" 
+const Cyan string = "\033[36m" 
+const Rest string = "\033[0m"
 
 func main(){
 
@@ -43,12 +46,14 @@ func iter2(url, user, pass string, start int){
             for k, v := range resp.Header { fmt.Println("head/", k, v) }
             _ = os.WriteFile( "readme.txt" , body, 0644)
             return
+
+            // this part to be reproduced in puzzle 21
         }
 
         s := strings.TrimSpace(string(body))
         if ! strings.Contains(s, "hiding") {
-            //fmt.Println(i, "original/", s)
-            fmt.Println(i, "reversed/", strrev(s))
+            fmt.Println(i, "original/", s)
+            fmt.Println(i, Cyan + "reversed/", strrev(s), Rest)
             start--
         } else {
             at := strings.Index(s, "at")
@@ -81,7 +86,9 @@ func iter1(url, user, pass, start string){
         defer resp.Body.Close()
         body, err := ioutil.ReadAll(resp.Body)
         fmt.Println("body/err", err)
+        if i == 4 { fmt.Print(Yell) }
         fmt.Println("\nbody/", string(body))
+        if i == 4 { fmt.Print(Rest) }
         for k, v := range resp.Header { fmt.Println("head/", k, v) }
 
         // break
