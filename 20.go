@@ -7,6 +7,7 @@ import (
     "regexp"
     "strings"
     "strconv"
+    "os"
     _"reflect"
 )
 
@@ -21,41 +22,48 @@ func main(){
 func iter2(url, user, pass string, start int){
 
     i := 0
+    found := false
     for {
-        if i==200 {break}
-        fmt.Println("\ninside iter1/", i)
         conn := & http.Client{}
-        req, err := http.NewRequest("GET", url, nil)
-        fmt.Println("req/err", err)
+        req, _ := http.NewRequest("GET", url, nil)
         req.Header.Set("Range", "bytes=" + strconv.Itoa(start) + "-")
         req.SetBasicAuth(user, pass)
-        resp, err := conn.Do(req)
-        fmt.Println("resp/err", err)
+        resp, _ := conn.Do(req)
         defer resp.Body.Close()
-        body, err := ioutil.ReadAll(resp.Body)
-        fmt.Println("body/err", err)
-        fmt.Println("\nbody/", string(body))
-        for k, v := range resp.Header { fmt.Println("head/", k, v) }
+        body, _ := ioutil.ReadAll(resp.Body)
 
-        // break
         if resp.StatusCode != 200 && resp.StatusCode != 206 || 
             len(resp.Header["Content-Range"][0]) == 0 {
             fmt.Println("break/status code", resp.StatusCode)
             fmt.Println("break/status text", http.StatusText(resp.StatusCode))
+            break
         }
-        start--
+
+        if found {
+            for k, v := range resp.Header { fmt.Println("head/", k, v) }
+            _ = os.WriteFile( "readme.txt" , body, 0644)
+            return
+        }
+
+        s := strings.TrimSpace(string(body))
+        if ! strings.Contains(s, "hiding") {
+            //fmt.Println(i, "original/", s)
+            fmt.Println(i, "reversed/", strrev(s))
+            start--
+        } else {
+            at := strings.Index(s, "at")
+            pos, _ := strconv.Atoi(s[at + 3 : len(s) - 1])
+            start = pos
+            found = true
+        }
         i++
     }
-    /*
-    var rev string
-    b := string(body)
-    i = len(b) - 1
-    for i > -1 {
-        rev += string(b[i])
-        i--
-    }
-    fmt.Println("res/", rev)
-    */
+}
+
+func strrev (s string) string {
+    var res string
+    for i:= len(s) - 1; i > -1; i-- {res += string(s[i])}
+    return res
 }
 
 func iter1(url, user, pass, start string){
