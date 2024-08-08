@@ -50,7 +50,8 @@ func main(){
             x = 0
             for x < X {
                 r, g, b, _ := frame.At(x, y).RGBA()
-                if r / 257 == 8 && g / 257 == 8 && b / 257 == 8 {
+                // if r / 257 == 8 && g / 257 == 8 && b / 257 == 8 {
+                if r >> 8 == 8 && g >> 8 == 8 && b >> 8 == 8 {
                     //fmt.Println(Cyan + "color 8/" + Rest, x, y)
                     if x == 100 && y == 100 {
                         ncenter++
