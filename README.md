@@ -1,22 +1,5 @@
 [![Compilation checker](https://github.com/nuoxoxo/pythonchallenge-in-go/actions/workflows/daily.yml/badge.svg)](https://github.com/nuoxoxo/pythonchallenge-in-go/actions/workflows/daily.yml)
 
-# notes
-
-- _5/ -_ using `pickle` 🟡
-- _7/ -_ read and analyze w/ `res.At(x,y)`
-- _9/ -_ draw lines around a polygon
-    - `image.NewRGBA(image.Rect(sx,sy,ex,ey))`
-    - `img.Set(x,y,colour)`
-- _11/ -_ new image w/ `image.NewRGBA( mypic.Bounds() )`
-- _16/ -_ longest substring of repeats 👉 YES
-    - not move, but _Rotate_ the pink segment
-- _18/ -_ now shows p3 correctly ~~common.png not written properly~~
-- _19/ -_ `Big endian` 👉🏻 write the most significant byte first - `Little endian`, the least significant byte first
-- _20/21 -_ see 6 : create/open a `.zip`
-- _22 -_ init: see 20 for regexp and double `conn`
-
-# keys
-
 level | keyword
 ----- | -----------
 24|
@@ -44,3 +27,18 @@ level | keyword
 2 | _eqaulity_
 1 | _ocr_
 0 | _-_
+
+# notes
+
+- _5/ -_ using `pickle` 🟡
+- _7/ -_ read and analyze w/ `res.At(x,y)`
+- _9/ -_ draw lines around a polygon
+    - `image.NewRGBA(image.Rect(sx,sy,ex,ey))`
+    - `img.Set(x,y,colour)`
+- _11/ -_ new image w/ `image.NewRGBA( mypic.Bounds() )`
+- _16/ -_ longest substring of repeats 👉 YES
+    - not move, but _Rotate_ the pink segment
+- _18/ -_ now shows p3 correctly ~~common.png not written properly~~
+- _19/ -_ `Big endian` 👉🏻 write the most significant byte first - `Little endian`, the least significant byte first
+- _20/21 -_ see 6 : create/open a `.zip`
+- _22 -_ init: see 20 for regexp and double `conn`
