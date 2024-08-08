@@ -9,10 +9,8 @@ import (
     "os/exec"
 )
 
-
 const URL string = "http://www.pythonchallenge.com/pc/hex/"
 const Yell, Cyan, Rest string = "\033[33m", "\033[36m", "\033[0m"
-
 
 func main(){
     res, err := exec.Command("python3", "-c", "import this").Output()
@@ -22,8 +20,7 @@ func main(){
 
     source := string(res)
     re := regexp.MustCompile(`(?is)in the face of (.*?)[, ]`)
-    matches := re.FindAllStringSubmatch( source, -1)
-    word := matches[0][1]
+    word := re.FindAllStringSubmatch( source, -1)[0][1]
     fmt.Println("word/", Cyan + word, Rest)
 }
 
@@ -42,10 +39,9 @@ func init(){
     fmt.Println(Cyan + body + Rest + "body ends/\n")
 
     re := regexp.MustCompile(`(?s)<!--\n'(.*?)'\n-->`)
-    matches := re.FindAllStringSubmatch(body, -1)
-    msg := matches[0][1]
+    msg := re.FindAllStringSubmatch(body, -1)[0][1]
     fmt.Println("cmt/", Yell + msg, Rest)
-    fmt.Println("r13/", Cyan + r13(msg), Rest)
+    fmt.Println("r13/", Cyan + r13 (msg), Rest)
 }
 
 func r13(s string)string{
