@@ -1,5 +1,4 @@
 [![Compilation checker](https://github.com/nuoxoxo/pythonchallenge-in-go/actions/workflows/daily.yml/badge.svg)](https://github.com/nuoxoxo/pythonchallenge-in-go/actions/workflows/daily.yml)
-
 <br>
 
 level | keyword
@@ -30,7 +29,7 @@ level | keyword
 1 | _ocr_
 0 | _-_
 
-## _notes/_
+## notes/
 
 - _5/ -_ using `pickle` 🟡
 - _7/ -_ read and analyze w/ `res.At(x,y)`
@@ -45,7 +44,7 @@ level | keyword
 - _20/21 -_ see 6 : create/open a `.zip`
 - _22 -_ init: see 20 for regexp and double `conn`
 
-## _stuff/_
+## stuff/
 
 ```go
       @@@          @@@      @@@@@@@@    @@@@@@@@    @@@@@@@@@@  @@@@@@@@
