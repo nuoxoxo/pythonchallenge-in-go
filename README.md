@@ -19,7 +19,9 @@
 
 level | keyword
 ----- | -----------
-22| 
+24|
+23| _ambiguity_
+22| _bonus_
 21| _copper_
 20| _redavni (zip pwd)_
 19| _idiot2_
