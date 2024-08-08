@@ -32,13 +32,13 @@ func main(){
 
     pxlmap := make(map[color.Color]int)
     ncenter := 0
-    xoffset, yoffset, offset := 1000, 1000, 98 // now we know 98,98
-    xbound, ybound := -1, -1
 
     // we also know 100,100 happens 5 times
-    FiveGuys := [][][]int{}
+    FiveGuys := [][][]int {}
     for i := 0; i < 5; i++ { FiveGuys = append(FiveGuys, [][]int{}) }
 
+    xcurr, ycurr := 100, 100
+    xmin, xmax, ymin, ymax := 200, -1, 200, -1
     for _, frame := range readgif.Image {
         nframes++
         frameset[frame.Bounds()] = true
@@ -51,15 +51,20 @@ func main(){
             for x < X {
                 r, g, b, _ := frame.At(x, y).RGBA()
                 if r / 257 == 8 && g / 257 == 8 && b / 257 == 8 {
-                    fmt.Println(Cyan + "color 8/" + Rest, x, y)
-                    if x == 100 && y == 100 { ncenter++ }
-                    if xoffset > x { xoffset = x } // know a priori:
-                    if yoffset > y { yoffset = y } //   offset/ 98,98
-                    if xbound < x { xbound = x }
-                    if ybound < y { ybound = y }
-
+                    //fmt.Println(Cyan + "color 8/" + Rest, x, y)
+                    if x == 100 && y == 100 {
+                        ncenter++
+                        xcurr, ycurr = 100, 100
+                    }
+                    if x < 100 { xcurr-- } else if x > 100 { xcurr++ }
+                    if y < 100 { ycurr-- } else if y > 100 { ycurr++ }
+                    if xmin > xcurr { xmin = xcurr }
+                    if xmax < xcurr { xmax = xcurr }
+                    if ymin > ycurr { ymin = ycurr }
+                    if ymax < ycurr { ymax = ycurr }
+                    //fmt.Println("x,y/", x, y, "curr/", xcurr, ycurr, "nth letter/", ncenter)
                     FiveGuys[ncenter-1] = append(
-                        FiveGuys[ncenter-1], []int{x - offset, y - offset})
+                        FiveGuys[ncenter-1], []int{ xcurr, ycurr })
                 }
                 pxlmap[frame.At(x, y)]++
                 x++
@@ -67,23 +72,24 @@ func main(){
             y++
         }
     }
+
+    // deduction along the way
     fmt.Println("nframes/", nframes, "set/", frameset)
     fmt.Println(Yell + "\t^ a total of 133 frames" + Rest)
     for k, v := range pxlmap { fmt.Println("color/", k, "qty", v) }
     fmt.Println(Yell + "\t^ one of 2 existing colors has but 1-pix per frame" + Rest)
     fmt.Println("ncenter/", "coor(100, 100) reached", ncenter, "times")
-    fmt.Println("offsets/", xoffset, yoffset)
-    fmt.Println("rbounds/", xbound, ybound)
 
     // Bruteforce
-    xbound, ybound = xbound - xoffset + 1, ybound - yoffset + 1
-    for _, coors := range FiveGuys {
+    xoffset, yoffset := xmax - xmin + 1, ymax - ymin + 1
+    for i, coors := range FiveGuys {
         char := [][]string{}
-        r := 0
-        for r < ybound {
+        var r, c int
+        r = 0
+        for r < yoffset {
             temp := []string{}
-            c := 0
-            for c < xbound {
+            c = 0
+            for c < xoffset {
                 temp = append(temp, " ")
                 c++
             }
@@ -92,19 +98,20 @@ func main(){
         }
         for _, coor := range coors {
             x, y := coor[0], coor[1]
-            char[x][y] = "@"
+            char[y - ymin][x - xmin] = "@"
         }
         r = 0
-        for r < ybound {
-            c := 0
-            for c < xbound {
-                fmt.Print(char[r][c])
+        for r < yoffset {
+            c = 0
+            s := ""
+            for c < xoffset {
+                s += char[r][c]
                 c++
             }
-            fmt.Println()
+            fmt.Println(s, "//")
             r++
         }
-        fmt.Println("---")
+        fmt.Println(Yell + "\n\t---", i, "---\n", Rest)
     }
 }
 
