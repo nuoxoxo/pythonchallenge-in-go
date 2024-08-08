@@ -1,6 +1,6 @@
 [![Compilation checker](https://github.com/nuoxoxo/pythonchallenge-in-go/actions/workflows/daily.yml/badge.svg)](https://github.com/nuoxoxo/pythonchallenge-in-go/actions/workflows/daily.yml)
 
-\-
+<br>
 
 level | keyword
 ----- | -----------
