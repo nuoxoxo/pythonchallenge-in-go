@@ -30,7 +30,7 @@ level | keyword
 1 | _ocr_
 0 | _-_
 
-# notes
+### notes
 
 - _5/ -_ using `pickle` 🟡
 - _7/ -_ read and analyze w/ `res.At(x,y)`
@@ -45,7 +45,7 @@ level | keyword
 - _20/21 -_ see 6 : create/open a `.zip`
 - _22 -_ init: see 20 for regexp and double `conn`
 
-# stuff
+### stuff
 
 ```go
       @@@          @@@      @@@@@@@@    @@@@@@@@    @@@@@@@@@@  @@@@@@@@
