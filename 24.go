@@ -12,13 +12,15 @@ import (
     "image/color"
     "os"
     "archive/zip"
+    "strings"
+    "io"
+    "image/gif"
 )
 
 const Yell, Cyan, Rest string = "\033[33m", "\033[36m", "\033[0m"
 var img *image.NRGBA
 
 func main(){
-
 
     X, Y := img.Bounds().Max.X, img.Bounds().Max.Y
     fmt.Println("typ/png", reflect.TypeOf(img), "bound/", X, Y)
@@ -97,6 +99,45 @@ func main(){
     // reveal files inside zip
     for _, file := range zipreader.File {
         fmt.Println("f/", file.Name)
+
+        /// for level 26
+
+        if strings.Contains(file.Name, "zip") {
+
+            fmt.Println("zipfound/", file.Name)
+
+            nestedfile, _ := file.Open()
+            var nesteddata bytes.Buffer
+            _, _ = io.Copy(& nesteddata, nestedfile)
+            nestedfile.Close()
+
+            nestedzipreader, _ := zip.NewReader(bytes.NewReader(nesteddata.Bytes()),
+                int64(nesteddata.Len()))
+
+            for _, deepfile := range nestedzipreader.File {
+
+                fmt.Println("ff/", deepfile.Name)
+                if ! strings.Contains(deepfile.Name, "gif") { panic("wtf/") }
+
+                giffile, err := deepfile.Open()
+                fmt.Println("err/giffle", err)
+
+                // XXX
+                gifimage, err := gif.Decode(giffile)
+                giffile.Close()
+                fmt.Println("err/gifimage", err) // BUG
+
+                // idea/
+                //  should use md5 provided in lv.26
+
+                outfile, _ := os.Create( deepfile.Name )
+                fmt.Println("err/giffle", err)
+
+                err = gif.Encode(outfile, gifimage, nil)
+                fmt.Println("err/encode", err)
+                outfile.Close()
+            }
+        }
     }
 }
 
