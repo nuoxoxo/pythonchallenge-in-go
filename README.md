@@ -3,7 +3,8 @@
 
 level | keyword
 ----- | -----------
-25|
+26| 
+25| _decent_
 24| _lake_ 
 23| _ambiguity_
 22| _bonus_
