@@ -12,44 +12,67 @@ import (
 )
 
 const URL string = "http://www.pythonchallenge.com/pc/hex/"
-const UPS string = "butterfly"
-const Yell string = "\033[33m" 
-const Cyan string = "\033[36m" 
-const Rest string = "\033[0m"
+const Yell, Cyan, Rest string = "\033[33m", "\033[36m", "\033[0m"
+
+// observation/
+//  Content-Range [bytes 0-30202/2123456789]
+//  Content-Length [30203]
+// sizeof/ 30203 - should be == content-length
+// conclusion/ read again w/ range set
 
 func main(){
 
-    // todo
+    // go to the URL
+    resp, _ := getresponse("idiot2.html", "")
+    defer resp.Body.Close()
+    bodybytes, _ := ioutil.ReadAll(resp.Body)
+    body := string(bodybytes)
+    fmt.Println(body, "body/ends")
+
+    // get path - `unreal.jpg`
+    re := regexp.MustCompile(`(?s)src="(.*?)"`)
+    matches := re.FindAllStringSubmatch(body, -1)
+    sub := matches[0][1]
+    resp, _ = getresponse(sub, "")
+    defer resp.Body.Close()
+
+    // get len and range for iter
+    ContentLength := resp.Header["Content-Length"][0]
+    cr := resp.Header["Content-Range"][0]
+    idx := strings.Index(cr, "/")
+    ContentEnd, _ := strconv.Atoi(cr[idx + 1:])
+    resp, _ = getresponse(sub, ContentLength)
+    defer resp.Body.Close()
+    bodybytes, _ = ioutil.ReadAll(resp.Body)
+    fmt.Println("\nbody/", string(bodybytes))
+    for k, v := range resp.Header { fmt.Println("head/", k, v) }
+
+    iter1( sub, ContentLength )
+    iter2( sub, ContentEnd )
 }
 
-func iter2(url, user, pass string, start int){
+func iter2(sub string, start int){
 
     i := 0
     found := false
     for {
-        conn := & http.Client{}
-        req, _ := http.NewRequest("GET", url, nil)
-        req.Header.Set("Range", "bytes=" + strconv.Itoa(start) + "-")
-        req.SetBasicAuth(user, pass)
-        resp, _ := conn.Do(req)
+        fmt.Println("\ninside iter2/", i)
+        resp, _ := getresponse(sub, strconv.Itoa(start))
         defer resp.Body.Close()
         body, _ := ioutil.ReadAll(resp.Body)
-
         if resp.StatusCode != 200 && resp.StatusCode != 206 || 
             len(resp.Header["Content-Range"][0]) == 0 {
             fmt.Println("break/status code", resp.StatusCode)
             fmt.Println("break/status text", http.StatusText(resp.StatusCode))
-            break
+            return
         }
 
         if found {
             for k, v := range resp.Header { fmt.Println("head/", k, v) }
             _ = os.WriteFile( "readme.txt" , body, 0644)
             return
-
             // this part to be reproduced in puzzle 21
         }
-
         s := strings.TrimSpace(string(body))
         if ! strings.Contains(s, "hiding") {
             fmt.Println(i, "original/", s)
@@ -71,18 +94,12 @@ func strrev (s string) string {
     return res
 }
 
-func iter1(url, user, pass, start string){
+func iter1(sub, start string){
 
     i := 0
     for {
         fmt.Println("\ninside iter1/", i)
-        conn := & http.Client{}
-        req, err := http.NewRequest("GET", url, nil)
-        fmt.Println("req/err", err)
-        req.Header.Set("Range", "bytes=" + start + "-")// + end)
-        req.SetBasicAuth(user, pass)
-        resp, err := conn.Do(req)
-        fmt.Println("resp/err", err)
+        resp, _ := getresponse(sub, start)
         defer resp.Body.Close()
         body, err := ioutil.ReadAll(resp.Body)
         fmt.Println("body/err", err)
@@ -91,14 +108,12 @@ func iter1(url, user, pass, start string){
         if i == 4 { fmt.Print(Rest) }
         for k, v := range resp.Header { fmt.Println("head/", k, v) }
 
-        // break
         if resp.StatusCode != 200 && resp.StatusCode != 206 || 
             len(resp.Header["Content-Range"][0]) == 0 {
             fmt.Println("break/status code", resp.StatusCode)
             fmt.Println("break/status text", http.StatusText(resp.StatusCode))
             break
         }
-
         // parse header
         re := regexp.MustCompile(`(?s)bytes (.*?)/`)
         matches := re.FindAllStringSubmatch(resp.Header["Content-Range"][0], -1)
@@ -111,71 +126,16 @@ func iter1(url, user, pass, start string){
     }
 }
 
-func init(){
-
-    // Step - go to the url
-    sub1 := "idiot2.html"
+func getresponse(sub, rangestart string) (*http.Response, error) {
     conn := & http.Client{}
-    req, _ := http.NewRequest("GET", URL + sub1, nil)
-
-    req.SetBasicAuth(UPS[:6], UPS[6:])
-    resp, _ := conn.Do(req)
-    defer resp.Body.Close()
-
-    body, _ := ioutil.ReadAll(resp.Body)
-    BODY := string(body)
-    // fmt.Println(BODY, "body/ends")
-
-    // Step - go get `unreal.jpg`
-    re := regexp.MustCompile(`(?s)src="(.*?)"`)
-    matches := re.FindAllStringSubmatch(BODY, -1)
-    sub2 := matches[0][1]
-
-    conn = & http.Client{}
-    req, _ = http.NewRequest("GET", URL + sub2, nil)
-
-    req.SetBasicAuth(UPS[:6], UPS[6:])
-    resp, _ = conn.Do(req)
-    defer resp.Body.Close()
-
-    body, _ = ioutil.ReadAll(resp.Body)
-    data := []byte(string(body))
-
-    // fmt.Println("header/gross", resp.Header, reflect.TypeOf(resp.Header))
-    for k, v := range resp.Header { fmt.Println("head/", k, v) }
-    fmt.Println("sizeof/", len(data))
-
-    // observation/
-    //  Content-Range [bytes 0-30202/2123456789]
-    //  Content-Length [30203]
-    // sizeof/ 30203 - should be == content-length
-    // conclusion/ read again w/ range set
-
-    // Step - get len and range for iter fns
-    ContentLength := resp.Header["Content-Length"][0]
-    cr := resp.Header["Content-Range"][0]
-    idx := strings.Index(cr, "/")
-    ContentEnd, _ := strconv.Atoi(cr[idx + 1:])
-
-    // Step - set range in header and go again
-    conn = & http.Client{}
-    req, _ = http.NewRequest("GET", URL + sub2, nil)
-
-    req.Header.Set("Range", "bytes=" + ContentLength + "-")
-
-    req.SetBasicAuth(UPS[:6], UPS[6:])
-    resp, _ = conn.Do(req)
-    defer resp.Body.Close()
-
-    body, _ = ioutil.ReadAll(resp.Body)
-    fmt.Println("\nbody/", string(body))
-    for k, v := range resp.Header { fmt.Println("head/", k, v) }
-
-    // Step - iter
-    //  iter1 ends at 5th iteration
-    iter1( URL + sub2, UPS[:6], UPS[6:], ContentLength )
-    iter2( URL + sub2, UPS[:6], UPS[6:], ContentEnd )
-
+    req, _ := http.NewRequest("GET", URL + sub, nil)
+    req.SetBasicAuth( "butter", "fly" )
+    if rangestart != "" {
+        req.Header.Set("Range", "bytes=" + rangestart + "-")// + end)
+    }
+    response, _ := conn.Do(req)
+    return response, nil
+    // todo/ defer response.Body.Close() after called
 }
 
 
