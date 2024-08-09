@@ -42,10 +42,10 @@ func init() {
     img, _ := png.Decode(reader)
     bounds := img.Bounds()
     fmt.Println("typ/png", reflect.TypeOf(img), "bounds/", bounds)
-    //if tmp, ok := img.(*image.NRGBA); ok { inspect_img(tmp) } // INSPECT
+    //if tmp, ok := img.(*image.NRGBA); ok { inspect (tmp) }
 }
 
-func inspect_img(img *image.NRGBA) {
+func inspect(img *image.NRGBA) {
     bounds := img.Bounds()
     X, Y := bounds.Max.X, bounds.Max.Y
     var x, y int
