@@ -11,8 +11,7 @@ import (
     "image/png"
     "image/color"
     "os"
-    _"log"
-    _"archive/zip"
+    "archive/zip"
 )
 
 const Yell, Cyan, Rest string = "\033[33m", "\033[36m", "\033[0m"
@@ -27,7 +26,7 @@ func main(){
     pair := Blackdots(img)
     fmt.Println("dot/", pair)
     if len(pair) != 2 { panic("wtf/") }
-    start, end := pair[1], pair[0]
+    start, end := pair[0], pair[1]
     ex, ey := end[0], end[1]
 
     // BFS
@@ -39,10 +38,12 @@ func main(){
     dy := []int{ 0,1,0,-1}
     var r, g, b uint32
 
+    fmt.Println("s/e", start, end)
+
     for len(Q) > 0 {
         src := Q[0]
         Q = Q[1:]
-        fmt.Println(src[0], src[1])
+        //fmt.Println(src[0], src[1])
         if src[0] == ex && src[1] == ey {
             break
         }
@@ -59,34 +60,44 @@ func main(){
             }
         }
     }
-    fmt.Println("s/e", start, end)
 
-    uint32data := []uint32{}
+    // done mapping
+    fmt.Println("mapping/len", len(mapping))
+
+    redcolor := []byte{} // all red channel w/ 0 on every other byte
+    data := []byte{} // for a cleaned-up slice w/ all 0 byte skipped
+
+    // done retrieving all red channels
     for end != start {
         r, _, _, _ = img.NRGBAAt(end[0], end[1]).RGBA()
-        if r >> 8 != 0 { uint32data = append(uint32data, r) }
+        redcolor = append(redcolor, uint8(r >> 8))
         end = mapping[end]
     }
+    fmt.Println("redcolor/len", redcolor[:42], len(redcolor))
 
-    uint8data := make([]uint8, len(uint32data) * 4)//[]uint8{}
-    for i, n := range uint32data {
-        uint8data[i * 4] = byte(n >> 24)
-        uint8data[i * 4 + 1] = byte(n >> 16)
-        uint8data[i * 4 + 2] = byte(n >> 8)
-        uint8data[i * 4 + 3] = byte(n)
-        /*
-        uint8data[i * 4 + 3] = byte(n)
-        uint8data[i * 4 + 2] = byte(n >> 8)
-        uint8data[i * 4 + 1] = byte(n >> 16)
-        uint8data[i * 4] = byte(n >> 24)
-        */
+    // done scrapping all 0's from slice of red
+    for i := 1; i < len(redcolor); i += 2 {
+        data = append(data, redcolor[i])
     }
 
-    // FIXME
+    // output a zip
     f, _ := os.Create("out.zip")
     defer f.Close()
-    err, _ := f.Write(uint8data)
+    err, _ := f.Write(data)
     fmt.Println(err)
+
+    // read data like a zip
+    reader := bytes.NewReader(data)
+    zipreader, zerr := zip.NewReader(reader, int64(len(data)))
+    if zerr != nil {
+        fmt.Println("err/", zerr)
+        return
+    }
+
+    // reveal files inside zip
+    for _, file := range zipreader.File {
+        fmt.Println("f/", file.Name)
+    }
 }
 
 func Blackdots(img *image.NRGBA) [][2]int {
@@ -96,10 +107,10 @@ func Blackdots(img *image.NRGBA) [][2]int {
     for x := 0; x < X; x++ {
 
         r, g, b, _ = img.NRGBAAt(x, 0).RGBA()
-        if r == 0 && g == 0 && b == 0 { res = append(res, [2]int{x, 0}) }
+        if r == 0 && g == 0 && b == 0 {res = append(res, [2]int{x, 0})}
 
         r, g, b, _ = img.NRGBAAt(x, Y - 1).RGBA()
-        if r == 0 && g == 0 && b == 0 { res = append(res, [2]int{x, Y - 1}) }
+        if r == 0 && g == 0 && b == 0 {res = append(res, [2]int{x, Y - 1})}
     }
     return res
 }
@@ -159,3 +170,4 @@ func getbody(sub string) ( []uint8, error ) {
     data, _ := ioutil.ReadAll(resp.Body)
     return data, nil
 }
+
