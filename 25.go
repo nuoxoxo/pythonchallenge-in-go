@@ -13,7 +13,7 @@ func main(){
     N := getlastindex(1, ".wav")
     waves := getwaves(N, ".wav")
     
-    // one long continous data w/o wave header
+    // flattened/ one long continous data w/o wave header
     res := []uint8{}
     idx := 44
     for _, wave := range waves {
