@@ -5,7 +5,7 @@ level | keyword
 ----- | -----------
 26| 
 25| _decent_
-24| _lake_ 
+24/26| _lake_ 
 23| _ambiguity_
 22| _bonus_
 21| _copper_
