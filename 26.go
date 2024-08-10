@@ -7,6 +7,8 @@ import (
     "strings"
     "sync"
 )
+
+// md5/ bbb8b499a0eef99b52c7f13f4e78c24b
 const yelo, cyan, rest string = "\033[33m", "\033[36m", "\033[0m"
 
 func main(){
@@ -38,17 +40,17 @@ func main(){
     err := cmd.Run()
     if err != nil { fmt.Println(yelo+"err/out"+rest, err) }
 
-    // rmv zip
-    cmd = exec.Command("rm", "maze.jpg", "out.zip")
-    cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
-    err = cmd.Run()
-    if err != nil { fmt.Println(yelo+"err/rm"+rest, err) }
-
     // unzip mybroken.zip
     cmd = exec.Command("unzip", "mybroken.zip")
     cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
     err = cmd.Run()
     if err != nil { fmt.Println(yelo+"err/mybroken"+rest, err) }
+
+    // rmv zip
+    cmd = exec.Command("rm", "maze.jpg", "out.zip", "mybroken.zip")
+    cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
+    err = cmd.Run()
+    if err != nil { fmt.Println(yelo+"err/rm"+rest, err) }
 
     // correction/ TODO
 }
