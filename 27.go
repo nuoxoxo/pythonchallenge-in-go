@@ -14,6 +14,9 @@ import (
     "image/draw"
     "reflect"
     "os"
+    "compress/bzip2"
+    "strings"
+    "os/exec"
 )
 
 var data []uint8
@@ -35,63 +38,89 @@ func main(){
     }
     fmt.Println(bloc, Rest)
     diff := []int{}
-    raw := imgToBytes(pimg)
-	trans := translateBytes(raw, palette)
-    for i := 1; i < len(raw); i++ {
-        if raw[i] != trans[i-1] {
+    flattened := pimg.Pix
+	lookup := palettelookup(flattened, palette)
+    for i := 1; i < len(flattened); i++ {
+        if flattened[i] != lookup[i - 1] {
             diff = append(diff, i)
 		}
     }
     fmt.Println("diff/len", len(diff), "snip/", diff[:42])
-    // does not work...
-    /*
-    diff := make(map[uint8][2]uint8)
-    np := 1024 // next pixel
-    for i := 0; i < len(pimg.Pix); i++ {
-        index := pimg.Pix[i]
-        curr := palette[int(index)]
-        if np != 1024 && uint8(np) != curr {
-            diff[uint8(i)] = [2]uint8{uint8(np), curr}
-        }
-        np = int(curr)
-    }*/
     fmt.Println("diff/len", len(diff))
+
+    // step - re-create an image
     bounds := pimg.Bounds()
-    X/*, Y*/ := bounds.Max.X//, bounds.Max.Y
-    res := image.NewRGBA(bounds)
-    blackdot := color.RGBA{ 0, 0, 0, 255 }
+    X /*, Y*/:= bounds.Max.X//, bounds.Max.Y
+    whiteres := image.NewRGBA(bounds)
     whitedot := color.RGBA{ 255, 255, 255, 255 }
-    draw.Draw(res, bounds, & image.Uniform{ whitedot }, image.Point{}, draw.Src)
-    outfile, _ := os.Create("lv27.png")
-    defer outfile.Close()
+    draw.Draw(whiteres, bounds, & image.Uniform{ whitedot }, image.Point{}, draw.Src)
+    whiteout, _ := os.Create("lv27w.png")
+    defer whiteout.Close()
+
+    blackres := image.NewRGBA(bounds)
+    blackdot := color.RGBA{ 0, 0, 0, 255 }
+    draw.Draw(blackres, bounds, & image.Uniform{ blackdot }, image.Point{}, draw.Src)
+    blackout, _ := os.Create("lv27b.png")
+    defer blackout.Close()
     for _, i := range diff {
         x, y := i % X, i / X
-        res.Set(x, y, blackdot)
+        whiteres.Set(x, y, blackdot)
+        blackres.Set(x, y, whitedot)
     }
-    _ = png.Encode(outfile, res)
+    _ = png.Encode(whiteout, whiteres)
+    _ = png.Encode(blackout, blackres)
+
+    // the output image says/ not KEY word - busy?
+    DIFF := make([]uint8, len(diff))
+    for i, index := range diff {
+        DIFF[i] = flattened[index]
+    }
+    fmt.Println(yell("DIFF/snip"), string(DIFF)[:42])
+    buff := bytes.NewBuffer(DIFF)
+    bzreader := bzip2.NewReader(buff)
+    bzdata, err := ioutil.ReadAll(bzreader)
+    fmt.Println(yell("err/readall"), err)
+    text := string(bzdata)
+    fmt.Println(yell("text/snip"), text[:42])
+    words := strings.Split(text, " ")
+    fmt.Println(yell("len/"), len(words))
+    set := make(map[string]bool)
+    unique := []string{}
+    for _, word := range words {
+        if !set[word] {
+            set[word] = true
+            unique = append(unique, word)
+        }
+    }
+    fmt.Println(yell("unique/len"), len(unique))
+    for _, word := range unique {
+        fmt.Println(yell("unique/"), word)
+    }
+
+    // step - list all keywords in p3
+    cmd := exec.Command("python3", "-c", "import keyword; print(keyword.kwlist)")
+    output, err := cmd.Output()
+    fmt.Println(yell("err/exec"), err)
+    temp := string(output)
+    fmt.Print(yell("exec/out "), temp)
+    keywords := strings.Split(temp[2:len(temp) - 3], "', '")
+    // 👆 square bracket & single quote trimmed
+    fmt.Println(yell("exec/list"), keywords)
+
+    // step - bruteforce filter
+    for _, word := range unique {
+        found := false
+        for _, keyword := range keywords {
+            if word == keyword { found = true }
+        }
+        if !found { fmt.Println(yell("!keyword/"), word) }
+    }
 }
 
-func translateBytes(raw []byte, palette [256]uint8) []byte {
-	trans := make([]byte, len(raw))
-	for i, b := range raw {
-		trans[i] = palette[b]
-	}
-	return trans
-}
-
-func imgToBytes(img image.Image) []byte {
-	bounds := img.Bounds()
-	width, height := bounds.Max.X, bounds.Max.Y
-	raw := make([]byte, 0, width*height)
-
-	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
-		for x := bounds.Min.X; x < bounds.Max.X; x++ {
-			r, _, _, _ := img.At(x, y).RGBA()
-			raw = append(raw, uint8(r>>8))
-		}
-	}
-
-	return raw
+func palettelookup(flattened []uint8, palette [256]uint8) []uint8 {
+    lookup := make([]uint8, len(flattened))
+    for i, b := range flattened { lookup[i] = palette[b] }
+    return lookup
 }
 
 func rgb8bit(c color.Color) (byte, byte, byte) {
