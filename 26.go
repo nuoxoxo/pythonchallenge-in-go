@@ -48,8 +48,8 @@ func main(){
     cmd = exec.Command("unzip", "mybroken.zip")
     cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
     err = cmd.Run()
-    // no panic still going
     if err != nil { fmt.Println(yelo+"err/mybroken"+rest, err) }
 
+    // correction/ TODO
 }
 
