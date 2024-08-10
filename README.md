@@ -3,8 +3,9 @@
 
 level | keyword
 ----- | -----------
-28|
-27|
+29| _-_
+28| _green\|grin.html -_
+27| _repeat:switch_
 26/24| _speedboat_ 
 25| _decent_
 24/26| _lake_ 
