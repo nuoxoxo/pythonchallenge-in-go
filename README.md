@@ -3,7 +3,9 @@
 
 level | keyword
 ----- | -----------
-26| 
+28|
+27|
+26/24| _speedboat_ 
 25| _decent_
 24/26| _lake_ 
 23| _ambiguity_
