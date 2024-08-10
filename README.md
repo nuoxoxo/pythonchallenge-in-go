@@ -45,5 +45,13 @@ level | keyword
 - _19/ -_ `Big endian` 👉🏻 write the most significant byte first - `Little endian`, the least significant byte first
 - _20/21 -_ see 6 : create/open a `.zip`
 - _22 -_ init: see 20 for regexp and double `conn`
+- _26_
+```
+Never mind that.
 
+Have you found my broken zip?
 
+md5: bbb8b499a0eef99b52c7f13f4e78c24b
+
+Can you believe what one mistake can lead to?
+```
