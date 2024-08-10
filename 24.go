@@ -111,7 +111,8 @@ func main(){
             _, _ = io.Copy(& nesteddata, nestedfile)
             nestedfile.Close()
 
-            nestedzipreader, _ := zip.NewReader(bytes.NewReader(nesteddata.Bytes()),
+            nestedzipreader, _ := zip.NewReader(
+                bytes.NewReader(nesteddata.Bytes()),
                 int64(nesteddata.Len()))
 
             for _, deepfile := range nestedzipreader.File {
@@ -120,12 +121,19 @@ func main(){
                 if ! strings.Contains(deepfile.Name, "gif") { panic("wtf/") }
 
                 giffile, err := deepfile.Open()
-                fmt.Println("err/giffle", err)
+                if err != nil {
+                    fmt.Println("err/giffle", err)
+                    panic(err)
+                }
 
-                // XXX
+                /// intentional BUG
                 gifimage, err := gif.Decode(giffile)
                 giffile.Close()
-                fmt.Println("err/gifimage", err) // BUG
+                if err != nil {
+                    // TODO:FIXME
+                    yell("\n\tsee correction (w/ md5) in lv.26\n")
+                    panic(fmt.Sprintf("err/gifimage %s", err))
+                }
 
                 // idea/
                 //  should use md5 provided in lv.26
