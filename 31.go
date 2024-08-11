@@ -15,6 +15,7 @@ import (
     "bytes"
     "io"
     "image/draw"
+    "math/cmplx"
 )
 
 var mandgrey *image.RGBA
@@ -39,19 +40,35 @@ func main(){
         Color1, Color2 color.Color
 	}*/
     var diff [][2]uint8
+    diffmap := make(map[[2]uint8]int)
+    var r,g,b uint32
     for y := 0; y < Y; y++ {
         for x := 0; x < X; x++ {
-            _, _, l, _ := mb.At(x, y).RGBA()
-            r, _, _, _ := mg.At(x, Y-1-y).RGBA()
-            L, R := uint8(l >> 8), uint8(r >> 8)
+            r, g, b, _ = mb.At(x, y).RGBA()
+            /*
+            L := uint8(0.299 * float64(r >> 8)) +
+                uint8(0.587 * float64(g >> 8)) +
+                uint8(0.114 * float64(b >> 8))
+            */
+            L := uint8(0.2126 * float64(r >> 8)) +
+                uint8(0.7152 * float64(g >> 8)) +
+                uint8(0.0722 * float64(b >> 8))
+            r, _, _, _ = mg.At(x, y).RGBA()
+            R := uint8(r >> 8)
+            //fmt.Println(mb.At(x,y), mg.At(x,y))//.RGBA())
             if L != R {
                 //fmt.Println(L, Yell+"vs/"+Rest, R, L - R)
                 diff = append(diff, [2]uint8{L, R})
+                diffmap[[2]uint8{L, R}]++
             }
         }
     }
     fmt.Println(diff[:42])
     fmt.Println(len(diff), "/should be around 1600")
+    for k, v := range diffmap {
+        fmt.Println("diff/", k, v)
+    }
+    fmt.Println("len/", len(diffmap))
 }
 
 func rgb8bit(c color.Color) (byte, byte, byte) {
@@ -118,8 +135,9 @@ func init(){
     //mandgrey = image.NewGray(image.Rect(0, 0, W, H))
     mandgrey = image.NewRGBA(image.Rect(0, 0, W, H))
     ///fmt.Println(Cyan + "mandgrey/typ" + Rest, reflect.TypeOf(mandgrey))
-    for w := 0; w < W; w++ {
-        for h := 0; h < H; h++ {
+    for h := H - 1; h > -1; h-- {
+    //for h := 0; h < H; h++ {
+        for w := 0; w < W; w++ {
             realpt := L + float64(w) * X / float64(W)
             imagpt := T + float64(h) * Y / float64(H)
             c := complex( realpt, imagpt )
@@ -127,9 +145,10 @@ func init(){
             var i int
             for i = 0; i < 128; i++ {
                 z = z * z + c
-                if real(z) * real(z) + imag(z) * imag(z) > 4 {break}
+                if cmplx.Abs(z) > 4 {break}
+                //if real(z) * real(z) + imag(z) * imag(z) > 4 {break}
                 grey := uint8(255 * i / 128)
-                mandgrey.Set(w, h, color.RGBA{ R: grey, G: grey, B: grey, A: 255 })
+                mandgrey.Set(w, H - 1 - h, color.RGBA{ R: grey, G: grey, B: grey, A: grey })
             }
         }
     }
