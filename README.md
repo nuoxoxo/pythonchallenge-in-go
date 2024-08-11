@@ -3,7 +3,8 @@
 
 level | keyword
 ----- | -----------
-29| _-_
+30| _-_
+29| _yankeedoodle_
 28| _green\|grin.html - guido_
 27| _repeat:switch_
 26/24| _speedboat_ 
