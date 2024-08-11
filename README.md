@@ -10,7 +10,7 @@ level | keyword
 27| _repeat:switch_
 26/24| _speedboat_ 
 25| _decent_
-24/26| _lake_ 
+24/26| _lake:🟡🟡🟡_ 
 23| _ambiguity_
 22| _bonus_
 21| _copper_
