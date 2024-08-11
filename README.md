@@ -3,7 +3,7 @@
 
 level | keyword
 ----- | -----------
-31| _kohsamui:thailand_ 
+31| _kohsamui:thailand - (stuck 🟡)_ 
 30| _grandpa_
 29| _yankeedoodle_
 28| _green\|grin.html - guido_
