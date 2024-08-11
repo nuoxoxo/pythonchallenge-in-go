@@ -14,28 +14,57 @@ import (
     "os"
     "bytes"
     "io"
+    "image/draw"
 )
 
-
+var mandgrey *image.RGBA
+var mandblue *gif.GIF
 
 func main(){
-    fg, _ := os.Open("mandelbrot.gif")
-    defer fg.Close()
-    fp, _ := os.Open("mandelbrot_grey.png")
-    defer fp.Close()
+    fmt.Println("bounds/", mandgrey.Bounds(), mandblue.Image[0].Bounds()) 
 
-    dcg, _, _ := image.Decode(fg)
-    dcp, _, _ := image.Decode(fp)
-    fmt.Println(reflect.TypeOf(dcg), reflect.TypeOf(dcp))
+    bounds := mandgrey.Bounds()
+    Y, X := bounds.Dy(), bounds.Dx()
 
-    var buffg, buffp bytes.Buffer
-    _ = png.Encode(& buffp, dcp)
-    _ = png.Encode(& buffg, dcg) // use png.Encode for gif
-    fmt.Println(buffg.Bytes()[:42], Yell + "buffer/gif" + Rest, len(buffg.Bytes()))
-    fmt.Println(buffp.Bytes()[:42], Yell + "buffer/png" + Rest, len(buffp.Bytes()))
+    //X, Y := mandgrey.Bounds().Dx(), mandgrey.Bounds().Dy()
+    mb := image.NewRGBA( mandblue.Image[0].Bounds() )
+    mg := image.NewRGBA( mandgrey.Bounds() ) // now both are *image.RGBA
 
-    //var diff [][2]uint8
-    
+    fmt.Println(Cyan+"mb/Image type/"+Rest, reflect.TypeOf(mandblue.Image))
+    fmt.Println(Cyan+"mb/Image type[0]/"+Rest, reflect.TypeOf(mandblue.Image[0]))
+    draw.Draw(mb, bounds, mandblue.Image[0], bounds.Min, draw.Src)
+    draw.Draw(mg, bounds, mandgrey, bounds.Min, draw.Src)
+    /*var diff []struct {
+        X, Y  int
+        Color1, Color2 color.Color
+	}*/
+    var diff [][2]uint8
+    for y := 0; y < Y; y++ {
+        for x := 0; x < X; x++ {
+            _, _, l, _ := mb.At(x, y).RGBA()
+            r, _, _, _ := mg.At(x, Y-1-y).RGBA()
+            L, R := uint8(l >> 8), uint8(r >> 8)
+            if L != R {
+                //fmt.Println(L, Yell+"vs/"+Rest, R, L - R)
+                diff = append(diff, [2]uint8{L, R})
+            }
+        }
+    }
+    fmt.Println(diff[:42])
+    fmt.Println(len(diff), "/should be around 1600")
+}
+
+func rgb8bit(c color.Color) (byte, byte, byte) {
+    r,g,b,_ := c.RGBA()
+    return uint8(r >> 8), uint8(g >> 8), uint8(b >> 8)
+}
+
+func color2int (src color.Color) uint32 {
+    rr,gg,bb, _ := src.RGBA()
+    r := uint8(rr >> 8)
+    g := uint8(gg >> 8)
+    b := uint8(bb >> 8)
+    return (uint32(r) << 16) | (uint32(g) << 8) | uint32(b)
 }
 
 func init(){
@@ -64,7 +93,7 @@ func init(){
     }
     fmt.Println(Cyan + "fourfloats/" + Rest, fourfloats)
 
-    // original mandelbrot.gif on main page
+    // original mandelbrot.GIF on main page
     prev := sub[:5]
     re = regexp.MustCompile(`(?s)img src="(.*?)"`)
     sub = re.FindAllStringSubmatch(string(data), -1)[0][1]
@@ -72,22 +101,23 @@ func init(){
     data, _ = getbody(prev + sub, "kohsamui", "thailand")
     fmt.Println(string(data)[:123])
     yell("body ends/\n")
-    f, _ := os.Create(sub)
-    defer f.Close()
 
     // read as GIF
     reader := bytes.NewReader(data)
+    f, _ := os.Create(sub)
+    defer f.Close()
     _, _ = io.Copy(f, reader) // save it for later use
     reader.Seek(0, 0)
-    mandel, _ := gif.DecodeAll(reader)
-    fmt.Println("mandel/typ", reflect.TypeOf(mandel),
-        "dim/", mandel.Image[0].Bounds())
-    W, H := mandel.Image[0].Bounds().Dx(), mandel.Image[0].Bounds().Dy()
-    fmt.Println("w/h", W, H)
-
+    mandblue, _ = gif.DecodeAll(reader)
+    fmt.Println(Cyan + "original mandblue/typ" + Rest, reflect.TypeOf(mandblue),
+        "dim/", mandblue.Image[0].Bounds())
+    W, H := mandblue.Image[0].Bounds().Dx(), mandblue.Image[0].Bounds().Dy()
+    fmt.Println(Cyan + "original mandblue/w/h" + Rest, W, H)
     // make new mandelbrot
     var L,T,X,Y float64 = fourfloats[0],fourfloats[1],fourfloats[2],fourfloats[3]
-    mdb := image.NewGray(image.Rect(0, 0, W, H))
+    //mandgrey = image.NewGray(image.Rect(0, 0, W, H))
+    mandgrey = image.NewRGBA(image.Rect(0, 0, W, H))
+    ///fmt.Println(Cyan + "mandgrey/typ" + Rest, reflect.TypeOf(mandgrey))
     for w := 0; w < W; w++ {
         for h := 0; h < H; h++ {
             realpt := L + float64(w) * X / float64(W)
@@ -98,14 +128,17 @@ func init(){
             for i = 0; i < 128; i++ {
                 z = z * z + c
                 if real(z) * real(z) + imag(z) * imag(z) > 4 {break}
-                mdb.SetGray(w, h, color.Gray{Y: uint8(255 * i / 128)})
+                grey := uint8(255 * i / 128)
+                mandgrey.Set(w, h, color.RGBA{ R: grey, G: grey, B: grey, A: 255 })
             }
         }
     }
     f, _ = os.Create(sub[:len(sub) - 4] + "_grey.png")
     defer f.Close()
-    png.Encode(f, mdb)
+    png.Encode(f, mandgrey)
 }
+
+//
 
 func getbody(sub, u, p string) ( []uint8, error ) {
     URL := "http://www.pythonchallenge.com/pc/"
@@ -121,4 +154,5 @@ func getbody(sub, u, p string) ( []uint8, error ) {
 const Yell, Cyan, Rest string = "\033[33m", "\033[36m", "\033[0m"
 func yell(s string) { fmt.Println( Yell + s + Rest )}
 func cyan(s string) { fmt.Println( Cyan + s + Rest )}
+
 
