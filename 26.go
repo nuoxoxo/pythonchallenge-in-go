@@ -44,7 +44,6 @@ func main(){
     err := cmd.Run()
     if err != nil { fmt.Println(yell("err/out"), err) }
 
-    
     // bruteforce correction
     zipfile, err := os.Open("mybroken.zip")
     fmt.Println(yell("err/zip"), err)
@@ -73,20 +72,19 @@ func main(){
         data[i] = b
     }
 
-    // unzip mybroken.zip
-    //  broken but the image still shows
-    /*
-    cmd = exec.Command("unzip", "mybroken.zip")
-    cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
-    err = cmd.Run()
-    if err != nil { fmt.Println(yell("err/mybroken"), err) }
-    */
-
     // unzip fixed.zip
     cmd = exec.Command("unzip", "fixed.zip")
     cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
     err = cmd.Run()
     if err != nil { fmt.Println(yell("err/fixed"), err) }
+    _ = os.Rename("mybroken.gif", "mybrokenfixed.gif")
+
+    // unzip mybroken.zip
+    //  broken but the image still shows
+    cmd = exec.Command("unzip", "mybroken.zip")
+    cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
+    err = cmd.Run()
+    fmt.Println(yell("err/mybroken"), err, yell("\nbroken gif still looks nice/"))
 
     // rmv zip
     cmd = exec.Command("rm", "maze.jpg", "out.zip", "mybroken.zip")
