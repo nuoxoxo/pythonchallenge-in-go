@@ -3,7 +3,7 @@ name: Compilation checker
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */2 * * *"
+    - cron: "*/21 */2 * * *"
 
 jobs:
   build:
