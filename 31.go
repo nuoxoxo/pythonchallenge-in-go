@@ -14,61 +14,59 @@ import (
     "os"
     "bytes"
     "io"
-    "image/draw"
+    _"image/draw"
     "math/cmplx"
 )
 
 var mandgrey *image.RGBA
 var mandblue *gif.GIF
+var mdb *image.Gray
+var bcolor, gcolor []color.Color
+
+func abs(a, b uint8) uint8 {
+    if a > b { return a - b }
+    return b - a
+}
 
 func main(){
-    fmt.Println("bounds/", mandgrey.Bounds(), mandblue.Image[0].Bounds()) 
-
-    bounds := mandgrey.Bounds()
-    Y, X := bounds.Dy(), bounds.Dx()
-
-    //X, Y := mandgrey.Bounds().Dx(), mandgrey.Bounds().Dy()
-    mb := image.NewRGBA( mandblue.Image[0].Bounds() )
-    mg := image.NewRGBA( mandgrey.Bounds() ) // now both are *image.RGBA
-
-    fmt.Println(Cyan+"mb/Image type/"+Rest, reflect.TypeOf(mandblue.Image))
-    fmt.Println(Cyan+"mb/Image type[0]/"+Rest, reflect.TypeOf(mandblue.Image[0]))
-    draw.Draw(mb, bounds, mandblue.Image[0], bounds.Min, draw.Src)
-    draw.Draw(mg, bounds, mandgrey, bounds.Min, draw.Src)
-    /*var diff []struct {
-        X, Y  int
-        Color1, Color2 color.Color
-	}*/
-    var diff [][2]uint8
-    diffmap := make(map[[2]uint8]int)
-    var r,g,b uint32
-    for y := 0; y < Y; y++ {
-        for x := 0; x < X; x++ {
-            r, g, b, _ = mb.At(x, y).RGBA()
-            /*
-            L := uint8(0.299 * float64(r >> 8)) +
-                uint8(0.587 * float64(g >> 8)) +
-                uint8(0.114 * float64(b >> 8))
-            */
-            L := uint8(0.2126 * float64(r >> 8)) +
-                uint8(0.7152 * float64(g >> 8)) +
-                uint8(0.0722 * float64(b >> 8))
-            r, _, _, _ = mg.At(x, y).RGBA()
-            R := uint8(r >> 8)
-            //fmt.Println(mb.At(x,y), mg.At(x,y))//.RGBA())
-            if L != R {
-                //fmt.Println(L, Yell+"vs/"+Rest, R, L - R)
-                diff = append(diff, [2]uint8{L, R})
-                diffmap[[2]uint8{L, R}]++
-            }
+    fmt.Println(Cyan + "len/bcolor" + Rest, len(bcolor),
+        Cyan + "len/gcolor" + Rest, len(gcolor),
+        Cyan + "len/mdb" + Rest, len(mdb.Pix))
+    yell("should be/ 307200")
+    N := len(bcolor) // assert len1 == len2
+    if N != len(gcolor) { panic("len1 != len2") }
+    var r, rr, g, b uint32
+    var diff []byte
+    for i := 0; i < N; i++ {
+        r, g, b, _ = bcolor[i].RGBA()
+        r8, g8, b8 := float64(r >> 8), float64(g >> 8), float64(b >> 8)
+        grey := uint8(0.299*float64(r8) + 0.587*float64(g8) + 0.114*float64(b8))
+        rr, _, _, _ = gcolor[i].RGBA()
+        if grey != uint8(rr>>8) {
+            diff = append(diff, abs(grey, uint8(rr>>8)))
         }
+        //fmt.Println(lum, "-", uint8(rr >> 8))
     }
-    fmt.Println(diff[:42])
-    fmt.Println(len(diff), "/should be around 1600")
-    for k, v := range diffmap {
-        fmt.Println("diff/", k, v)
-    }
-    fmt.Println("len/", len(diffmap))
+    fmt.Print("len/", len(diff), diff[:42])
+    
+
+/*
+    fg, _ := os.Open("mandelbrot.gif")
+    defer fg.Close()
+    fp, _ := os.Open("mandelbrot_grey.png")
+    defer fp.Close()
+
+    dcg, _, _ := image.Decode(fg)
+    dcp, _, _ := image.Decode(fp)
+    fmt.Println(reflect.TypeOf(dcg), reflect.TypeOf(dcp))
+
+    var buffg, buffp bytes.Buffer
+    _ = gif.Encode(& buffg, dcg, nil) // use png.Encode for gif
+    //_ = png.Encode(& buffg, dcg) // use png.Encode for gif
+    _ = png.Encode(& buffp, dcp)
+    fmt.Println(buffg.Bytes()[:42], Yell + "buffer/gif" + Rest, len(buffg.Bytes()))
+    fmt.Println(buffp.Bytes()[:42], Yell + "buffer/png" + Rest, len(buffp.Bytes()))
+*/
 }
 
 func rgb8bit(c color.Color) (byte, byte, byte) {
@@ -132,29 +130,44 @@ func init(){
     fmt.Println(Cyan + "original mandblue/w/h" + Rest, W, H)
     // make new mandelbrot
     var L,T,X,Y float64 = fourfloats[0],fourfloats[1],fourfloats[2],fourfloats[3]
+
     //mandgrey = image.NewGray(image.Rect(0, 0, W, H))
     mandgrey = image.NewRGBA(image.Rect(0, 0, W, H))
     ///fmt.Println(Cyan + "mandgrey/typ" + Rest, reflect.TypeOf(mandgrey))
-    for h := H - 1; h > -1; h-- {
-    //for h := 0; h < H; h++ {
+    mdb = image.NewGray(image.Rect(0, 0, W, H))
+    for h := 0; h < H; h++ {
         for w := 0; w < W; w++ {
+            bcolor = append(bcolor, mandblue.Image[0].At(w, h))
             realpt := L + float64(w) * X / float64(W)
             imagpt := T + float64(h) * Y / float64(H)
             c := complex( realpt, imagpt )
+                //  left + x * width / img.width
+                //  top + y * height / img.height
             z := complex(0, 0)
             var i int
             for i = 0; i < 128; i++ {
                 z = z * z + c
-                if cmplx.Abs(z) > 4 {break}
-                //if real(z) * real(z) + imag(z) * imag(z) > 4 {break}
-                grey := uint8(255 * i / 128)
-                mandgrey.Set(w, H - 1 - h, color.RGBA{ R: grey, G: grey, B: grey, A: grey })
+                if cmplx.Abs(z) > 2 {break}
             }
+            grey := uint8(255 * i / 128)
+            mandgrey.Set(w, H - 1 - h, color.RGBA{ R: grey, G: grey, B: grey, A: 255 })
+            mdb.SetGray(w, h, color.Gray{Y: uint8(255 * i / 128)})
+            //gcolor = append(gcolor, color.RGBA{ R: grey, G: grey, B: grey, A: 255 })
+            //gcolor = append(gcolor, color.Gray{ Y: grey })
         }
     }
+    for h := 0; h < H; h++ {
+        for w := 0; w < W; w++ {
+            // append here to flatten it
+            gcolor = append(gcolor, mandgrey.At(w, h))
+        }
+    }
+
     f, _ = os.Create(sub[:len(sub) - 4] + "_grey.png")
     defer f.Close()
     png.Encode(f, mandgrey)
+
+    fmt.Println(L, T, X, Y)
 }
 
 //
