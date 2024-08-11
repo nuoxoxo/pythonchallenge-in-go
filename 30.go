@@ -5,13 +5,12 @@ import (
     "net/http"
     "io/ioutil"
     "strings"
-//)/*
     "image"
     "image/color"
     "image/png"
     "os"
     "strconv"
-)//*/
+)
 
 func main(){
     data, _ := getbody("yankeedoodle.html")
@@ -71,9 +70,8 @@ func main(){
         if n > 255 { panic(">255") }
         res = append(res, uint8(n))
     }
-    fmt.Println("res/:42", res[:42], len(res))
-    fmt.Println("res/str", string(res))
-
+    fmt.Println(yell("res/snip"), res[:42], len(res))
+    fmt.Println(yell("res/"), string(res))
 }
 
 func getbody(sub string) ( []uint8, error ) {
