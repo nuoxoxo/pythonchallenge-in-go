@@ -62,7 +62,7 @@ md5: bbb8b499a0eef99b52c7f13f4e78c24b
 Can you believe what one mistake can lead to?
 ```
 
-![](https://i.imgur.com/QK12wu6.jpeg)
+![](https://i.imgur.com/QK12wu6.jpeg)\
 ![](https://i.imgur.com/Hg8iRQ9.png)\
 ![](https://i.imgur.com/lA6gFck.png)\
 ![](https://i.imgur.com/GAgu3pk.gif)\
