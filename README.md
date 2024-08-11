@@ -3,7 +3,7 @@
 
 level | keyword
 ----- | -----------
-31| _kohsamui:thailand_
+31| _kohsamui:thailand_ 
 30| _grandpa_
 29| _yankeedoodle_
 28| _green\|grin.html - guido_
@@ -51,6 +51,7 @@ level | keyword
 - _20/21 -_ see 6 : create/open a `.zip`
 - _22 -_ init: see 20 for regexp and double `conn`
 - _26_
+
 ```
 Never mind that.
 
@@ -59,4 +60,48 @@ Have you found my broken zip?
 md5: bbb8b499a0eef99b52c7f13f4e78c24b
 
 Can you believe what one mistake can lead to?
+```
+
+![](https://i.imgur.com/lA6gFck.png)\
+![](https://i.imgur.com/GAgu3pk.gif)\
+![](https://i.imgur.com/ETQ1fYg.jpeg)\
+![](https://i.imgur.com/Hye1iM0.png) 
+![](https://i.imgur.com/YuCbiUW.png)\
+![](https://i.imgur.com/td4tsrf.png)
+![](https://i.imgur.com/7sMieBP.png)\
+![](https://i.imgur.com/QrE5Y2r.gif)\
+![](https://i.imgur.com/qrV3Fta.png)
+![](https://i.imgur.com/phzRKBP.png)
+
+
+
+
+```
+@@@@@@   @@@@@@@@@@   @@@@@@        @@@@        @@@@          @@        
+@@@@       @@@@@@       @@@@         @@@         @@@         @@@         
+@@@  @@@@@  @@@@  @@@@@  @@@  @@@@@@  @@  @@@@@@  @@  @@@@@@@@@@  @@@@@@  
+@@  @@@@@@@@@@@  @@@@@@@  @@  @@@@@@  @@  @@@@@@  @@  @@@@@@@@@@  @@@@@@  
+@@  @@@@@@@@@@@  @@@@@@@  @@         @@@         @@@        @@@@         
+@@  @@@@@@@@@@@  @@@@@@@  @@        @@@@        @@@@        @@@@        @
+@@  @@@@@@@@@@@  @@@@@@@  @@  @@@@@@@@@@  @@@@@@@@@@  @@@@@@@@@@  @@@  @
+@@@  @@@@@  @@@@  @@@@@  @@@  @@@@@@@@@@  @@@@@@@@@@  @@@@@@@@@@  @@@@  @
+@@@@       @@@@@@       @@@@  @@@@@@@@@@  @@@@@@@@@@         @@@  @@@@@  @
+@@@@@@   @@@@@@@@@@   @@@@@@  @@@@@@@@@@  @@@@@@@@@@          @@  @@@@@@  
+```
+
+```
+****************************************************************
+****************************************************************
+**                                                            **
+**   OO    OO    XX      YYYY    GG    GG  EEEEEE NN      NN  **
+**   OO    OO  XXXXXX   YYYYYY   GG   GG   EEEEEE  NN    NN   **
+**   OO    OO XXX  XXX YYY   YY  GG GG     EE       NN  NN    **
+**   OOOOOOOO XX    XX YY        GGG       EEEEE     NNNN     **
+**   OOOOOOOO XX    XX YY        GGG       EEEEE      NN      **
+**   OO    OO XXX  XXX YYY   YY  GG GG     EE         NN      **
+**   OO    OO  XXXXXX   YYYYYY   GG   GG   EEEEEE     NN      **
+**   OO    OO    XX      YYYY    GG    GG  EEEEEE     NN      **
+**                                                            **
+****************************************************************
+ **************************************************************
 ```
