@@ -2,7 +2,7 @@
 <br>
 
 level | keyword
------ | :----------
+----- | ----------
 31| _kohsamui:thailand - (currently working on)_ 
 || _• knew the answer now but handling images may be tricky in Go_ 
 30| _grandpa_
