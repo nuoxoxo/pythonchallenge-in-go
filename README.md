@@ -4,6 +4,7 @@
 level | keyword
 ----- | -----------
 31| _kohsamui:thailand - (currently working on)_ 
+|| knew the answer now but handling images may be tricky in Go
 30| _grandpa_
 29| _yankeedoodle_
 28| _green\|grin.html - guido_
