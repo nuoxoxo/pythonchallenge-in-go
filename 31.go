@@ -8,14 +8,14 @@ import (
     "strconv"
     "reflect"
     "image"
-    _"image/color"
+    "image/color"
     "image/gif"
     _"image/png"
-    _"os"
+    "os"
     "bytes"
     _"io"
     _"image/draw"
-    _"math/cmplx"
+    "math/cmplx"
 )
 
 func main(){
@@ -60,7 +60,7 @@ func init(){
     fmt.Println(string(data)[:42])
     fmt.Println(Yell + "type/data " + Rest, reflect.TypeOf(data))
 
-
+    // read original mandelbrot.GIF on main page
     bytereader := bytes.NewReader(data)
     img, err := gif.Decode( bytereader )
     if err != nil { fmt.Println("gif.Decode/err", err) }
@@ -68,17 +68,75 @@ func init(){
     if ! ok { fmt.Println("Paletted/not") }
     pal := imgpal.Palette
     bounds := imgpal.Bounds()
+    W, H := bounds.Max.X, bounds.Max.Y
     fmt.Println("bounds/", bounds)
-    for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
-        for x := bounds.Min.X; x < bounds.Max.X; x++ {
+    flag := false
+    for y := 0; y < H; y++ {
+        for x := 0; x < W; x++ {
             idx := imgpal.ColorIndexAt(x, y)
             col := pal[idx]
             fmt.Println("idx/", idx, "col/", col)
-            if x == 42 {return} // to be modif. - TODO
+            if x == 42 {flag = true} // to be modif. - TODO
+        }
+        if flag {break}
+    }
+
+
+    // TODO - next step is to create the new GIF w/ the given floats and maxIter
+
+    // Step/ make new mandelbrot
+    var L,T,X,Y float64 = fourfloats[0],fourfloats[1],fourfloats[2],fourfloats[3]
+
+    // define a greyscale palette with 256 levels of grey
+    var greypalette color.Palette
+    for i := 0; i < 256; i++ {
+        greypalette = append(greypalette, color.Gray{ Y: uint8(i) })
+    }
+    newmandelbrot := image.NewPaletted(image.Rect(0, 0, W, H), greypalette)
+
+    // Generate the Mandelbrot fractal
+    for h := 0; h < H; h++ {
+        for w := 0; w < W; w++ {
+            realpt := L + float64(w)*X/float64(W)
+            imagpt := T + float64(h)*Y/float64(H)
+            c := complex(realpt, imagpt)
+            z := complex(0, 0)
+            var i int
+            for i = 0; i < 128; i++ {
+                z = z*z + c
+                if cmplx.Abs(z) > 2 {
+                    break
+                }
+            }
+
+            grey := uint8(255 * i / 128)
+
+            newmandelbrot.SetColorIndex(w, H-1-h, grey)
         }
     }
 
-    // TODO - next step is to create the new GIF w/ the given floats and maxIter
+    outFile, err := os.Create("mandelbrot2.gif")
+    if err != nil { panic(err) }
+    defer outFile.Close()
+    err = gif.Encode(outFile, newmandelbrot, nil)
+    if err != nil { panic(err) }
+
+    // reading pal2
+    pal2 := newmandelbrot.Palette
+    //bounds := imgpal.Bounds()
+    //W, H := bounds.Max.X, bounds.Max.Y
+    //fmt.Println("bounds/", bounds)
+    flag = false
+    for y := 0; y < H; y++ {
+        for x := 0; x < W; x++ {
+            idx := newmandelbrot.ColorIndexAt(x, y)
+            col := pal2[idx]
+            fmt.Println("idx2/", idx, "col/", col)
+            if x == 42 {flag = true} // to be modif. - TODO
+        }
+        if flag {break}
+    }
+
 }
 
 
