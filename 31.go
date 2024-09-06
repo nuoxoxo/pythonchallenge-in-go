@@ -10,19 +10,12 @@ import (
     "image"
     "image/color"
     "image/gif"
-    "image/png"
     "os"
     "bytes"
-    _"io"
-    _"image/draw"
     "math/cmplx"
 )
 
 func main(){
-
-}
-
-func init(){
 
     // main page
 
@@ -52,7 +45,9 @@ func init(){
     }
     fmt.Println(Cyan + "fourfloats/" + Rest, fourfloats)
 
+
     // get/original mandelbrot.GIF on main page
+
 
     prev := sub[:5]
     re = regexp.MustCompile(`(?s)img src="(.*?)"`)
@@ -65,31 +60,37 @@ func init(){
     fmt.Println(string(data)[:42])
     fmt.Println(Yell + "type/data " + Rest, reflect.TypeOf(data))
 
+
     // read original mandelbrot.GIF on main page
+
 
     bytereader := bytes.NewReader(data)
     img, err := gif.Decode( bytereader )
     if err != nil { fmt.Println("gif.Decode/err", err) }
-    imgpal, ok := img.(*image.Paletted)
+    mandb_paletted, ok := img.(*image.Paletted)
     if ! ok { fmt.Println("Paletted/not") }
-    pal := imgpal.Palette
-    bounds := imgpal.Bounds()
+    bounds := mandb_paletted.Bounds()
     W, H := bounds.Max.X, bounds.Max.Y
     fmt.Println("bounds/", bounds)
+
+    // DBG
+    /*
+    pal := mandb_paletted.Palette
     flag := false
     for y := 0; y < H; y++ {
         for x := 0; x < W; x++ {
-            idx := imgpal.ColorIndexAt(x, y)
+            idx := mandb_paletted.ColorIndexAt(x, y)
             col := pal[idx]
             fmt.Println("idx/", idx, "col/", col)
             if x == 42 {flag = true} // to be modif. - TODO
         }
         if flag {break}
     }
+    */
 
 
-    // TODO - next step is to create the new GIF w/ the given floats and maxIter
     // Step/ make new mandelbrot
+
 
     var L,T,X,Y float64 = fourfloats[0],fourfloats[1],fourfloats[2],fourfloats[3]
 
@@ -99,12 +100,13 @@ func init(){
     for i := 0; i < 256; i++ {
         greypalette = append(greypalette, color.Gray{ Y: uint8(i) })
     }
-    newmandelbrot := image.NewPaletted(image.Rect(0, 0, W, H), greypalette)
+    mandb_newdata := image.NewPaletted(image.Rect(0, 0, W, H), greypalette)
+
 
     // Generate the Mandelbrot fractal
 
+
     for h := 0; h < H; h++ {
-    //for h := H - 1; h > -1; h-- {
         for w := 0; w < W; w++ {
             realpt := L + float64(w) * (X / float64(W))
             imagpt := T + float64(h) * (Y / float64(H))
@@ -117,59 +119,38 @@ func init(){
                     break
                 }
             }
-
-            // BUG - this part
-
             if i == 128 { i-- }
-            var grey uint8
-            grey = uint8(i)// % 128)
-            newmandelbrot.SetColorIndex(w, H-1-h, grey)
-
-            /*
-            var grey uint8
-            if 0 < i && i < 127 {
-                grey = uint8(i)
-                newmandelbrot.SetColorIndex(w, H-1-h, grey)
-            } else {
-                grey = uint8(255 * (i / 128))
-            }
-            */
-            //grey := uint8(255 * (i / 128))
-
-            //newmandelbrot.SetColorIndex(w, h, grey)
-            //newmandelbrot.SetColorIndex(w, H-1-h, grey)
+            var grey uint8 = uint8(i) // BUG - solved
+            mandb_newdata.SetColorIndex(w, H - 1 - h, grey)
         }
     }
 
     outFile, err := os.Create("mandelbrot2.gif")
     if err != nil { panic(err) }
     defer outFile.Close()
-    err = gif.Encode(outFile, newmandelbrot, nil)
+    err = gif.Encode(outFile, mandb_newdata, nil)
     if err != nil { panic(err) }
 
-    // reading pal2
-
-    pal2 := newmandelbrot.Palette
-    //bounds := imgpal.Bounds()
-    //W, H := bounds.Max.X, bounds.Max.Y
-    //fmt.Println("bounds/", bounds)
+    // DBG
+    /*
+    pal2 := mandb_newdata.Palette
     flag = false
     for y := 0; y < H; y++ {
         for x := 0; x < W; x++ {
-            idx := newmandelbrot.ColorIndexAt(x, H-y-1) // trying ...
-            //idx := newmandelbrot.ColorIndexAt(x, y)
+            idx := mandb_newdata.ColorIndexAt(x, H-y-1)
             col := pal2[idx]
             fmt.Println("idx2/", idx, "col/", col)
-            if x == 42 {flag = true} // to be modif. - TODO
+            if x == 42 {flag = true} // to be modif.
         }
         if flag {break}
     }
+    */
 
     diffs := [][]uint8{}
     for y := 0; y < H; y++ {
         for x := 0; x < W; x++ {
-            a := imgpal.ColorIndexAt(x, y)
-            b := newmandelbrot.ColorIndexAt(x, y)
+            a := mandb_paletted.ColorIndexAt(x, y)
+            b := mandb_newdata.ColorIndexAt(x, y)
             if a != b && b != 128 {
                 diffs = append(diffs, []uint8{a, b})
             }
@@ -179,41 +160,34 @@ func init(){
     fmt.Println(":21/", diffs[:21])
 
     N := len(diffs)
-    // finding out factors, assert ---> should be 2 values
-    factors := []int{}
-    for N > 1 {
-        fac := 2
-        found := false
-        for fac < N / 2 + 1 {
-            if N % fac == 0 {
-                found = true
-                factors = append(factors, fac)
-                N /= fac
-                break
-            }
-            fac++
-        }
-        ///*
-        if ! found {
-            factors = append(factors, N)
+    factors := []int{} // finding out factors, assert: should be 2 values
+    fac := 2
+    for fac < N / 2 + 1 {
+        if N % fac == 0 {
+            factors = append(factors, fac)
+            N /= fac
             break
         }
-        //*/
+        fac++
     }
-    fmt.Println(factors)
-    newW, newH := factors[0], factors[1]
-    finaldata := image.NewGray(image.Rect(0, 0, newW, newH))
+    if len(factors) < 2 {
+        factors = append(factors, N)
+    }
+    fmt.Println("fac/", factors)
+    finalW, finalH := factors[0], factors[1]
+
+    finaldata := image.NewPaletted(image.Rect(0, 0, finalW, finalH), greypalette)
     for i, pair := range diffs {
         a, b := pair[0], pair[1]
-        pix := 255
+        pix := 0
         if a > b {
-            pix = 0
+            pix = 234
         }
-        finaldata.SetGray(i % newW, i / newW, color.Gray{ Y: uint8(pix) })
+        finaldata.SetColorIndex(i % finalW, i / finalW, uint8(pix))
     }
-    finalfile, _ := os.Create("what.png")
-    defer finalfile.Close()
-    png.Encode(finalfile, finaldata)
+    outfile, _ := os.Create("what_.gif")
+    defer outfile.Close()
+    _ = gif.Encode(outfile, finaldata, nil)
 }
 
 //
