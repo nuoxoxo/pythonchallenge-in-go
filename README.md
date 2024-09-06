@@ -3,8 +3,8 @@
 
 level | keyword
 ----- | ----------
-31| _kohsamui:thailand - (currently working on)_ 
-|| _• knew the answer now but handling images may be tricky in Go_ 
+32|
+31| _arecibo - kohsamui:thailand - (currently working on)_ 
 30| _grandpa_
 29| _yankeedoodle_
 28| _green\|grin.html - guido_
