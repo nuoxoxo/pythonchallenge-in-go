@@ -4,7 +4,7 @@
 level | keyword
 ----- | ----------
 32|
-31| _arecibo - kohsamui:thailand - (currently working on)_ 
+31| _arecibo - kohsamui:thailand_ 
 30| _grandpa_
 29| _yankeedoodle_
 28| _green\|grin.html - guido_
