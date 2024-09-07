@@ -18,26 +18,24 @@ import (
 func main(){
 
     // main page
-
     data, _ := getbody("ring/grandpa.html", "repeat", "switch")
     fmt.Println(string(data))
     yell("body ends/\n")
 
     // href
-
     re := regexp.MustCompile(`(?s)<a href="../(.*?)"`)
     sub := re.FindAllStringSubmatch(string(data), -1)[0][1]
     fmt.Println(Cyan + "sub/" + Rest, sub)
     data, _ = getbody(sub, "kohsamui", "thailand")
     fmt.Println(string(data))
     yell("body ends/todo\n")
-    // get/regex - `<window left="0.34" top="0.57" width="0.036" height="0.027"/>`
+    // get/regex
+    //  `<window left="0.34" top="0.57" width="0.036" height="0.027"/>`
     exp := `left="([\d.]+)"\s+top="([\d.]+)"\s+width="([\d.]+)"\s+height="([\d.]+)"`
     re = regexp.MustCompile(exp)
     matches := re.FindAllStringSubmatch(string(data), -1)
 
     // get the 4 floats
-
     var fourfloats [4]float64
     for i, m := range matches[0][1:] {
         val, _ := strconv.ParseFloat(string(m), 64)
@@ -45,10 +43,7 @@ func main(){
     }
     fmt.Println(Cyan + "fourfloats/" + Rest, fourfloats)
 
-
     // get/original mandelbrot.GIF on main page
-
-
     prev := sub[:5]
     re = regexp.MustCompile(`(?s)img src="(.*?)"`)
     sub = re.FindAllStringSubmatch(string(data), -1)[0][1]
@@ -60,10 +55,7 @@ func main(){
     fmt.Println(string(data)[:42])
     fmt.Println(Yell + "type/data " + Rest, reflect.TypeOf(data))
 
-
     // read original mandelbrot.GIF on main page
-
-
     bytereader := bytes.NewReader(data)
     img, err := gif.Decode( bytereader )
     if err != nil { fmt.Println("gif.Decode/err", err) }
@@ -73,39 +65,22 @@ func main(){
     W, H := bounds.Max.X, bounds.Max.Y
     fmt.Println("bounds/", bounds)
 
-    // DBG
-    /*
-    pal := mandb_paletted.Palette
-    flag := false
-    for y := 0; y < H; y++ {
-        for x := 0; x < W; x++ {
-            idx := mandb_paletted.ColorIndexAt(x, y)
-            col := pal[idx]
-            fmt.Println("idx/", idx, "col/", col)
-            if x == 42 {flag = true} // to be modif. - TODO
-        }
-        if flag {break}
-    }
-    */
-
+    // PalettedDBG
+    PalettedDBG(mandb_paletted, W, H)
+    fmt.Println(Yell + "PalettedDBG/ends" + Rest)
 
     // Step/ make new mandelbrot
-
 
     var L,T,X,Y float64 = fourfloats[0],fourfloats[1],fourfloats[2],fourfloats[3]
 
     // define a greyscale palette with 256 levels of grey
-
     var greypalette color.Palette
     for i := 0; i < 256; i++ {
         greypalette = append(greypalette, color.Gray{ Y: uint8(i) })
     }
     mandb_newdata := image.NewPaletted(image.Rect(0, 0, W, H), greypalette)
 
-
     // Generate the Mandelbrot fractal
-
-
     for h := 0; h < H; h++ {
         for w := 0; w < W; w++ {
             realpt := L + float64(w) * (X / float64(W))
@@ -131,20 +106,8 @@ func main(){
     err = gif.Encode(outFile, mandb_newdata, nil)
     if err != nil { panic(err) }
 
-    // DBG
-    /*
-    pal2 := mandb_newdata.Palette
-    flag = false
-    for y := 0; y < H; y++ {
-        for x := 0; x < W; x++ {
-            idx := mandb_newdata.ColorIndexAt(x, H-y-1)
-            col := pal2[idx]
-            fmt.Println("idx2/", idx, "col/", col)
-            if x == 42 {flag = true} // to be modif.
-        }
-        if flag {break}
-    }
-    */
+    // PalettedDBG
+    PalettedDBG(mandb_newdata, W, H)
 
     diffs := [][]uint8{}
     for y := 0; y < H; y++ {
@@ -156,6 +119,8 @@ func main(){
             }
         }
     }
+
+    // DBG
     fmt.Println("len/", len(diffs), "- assert/1679")
     fmt.Println(":21/", diffs[:21])
 
@@ -174,8 +139,8 @@ func main(){
         factors = append(factors, N)
     }
     fmt.Println("fac/", factors)
-    finalW, finalH := factors[0], factors[1]
 
+    finalW, finalH := factors[0], factors[1]
     finaldata := image.NewPaletted(image.Rect(0, 0, finalW, finalH), greypalette)
     for i, pair := range diffs {
         a, b := pair[0], pair[1]
@@ -206,4 +171,19 @@ func getbody(sub, u, p string) ( []uint8, error ) {
 const Yell, Cyan, Rest string = "\033[33m", "\033[36m", "\033[0m"
 func yell(s string) { fmt.Println( Yell + s + Rest )}
 func cyan(s string) { fmt.Println( Cyan + s + Rest )}
+
+func PalettedDBG(data *image.Paletted, W, H int) {
+    flag := false
+    pal := data.Palette
+    for y := 0; y < H; y++ {
+        for x := 0; x < W; x++ {
+            idx := data.ColorIndexAt(x, H - y - 1)
+            col := pal[idx]
+            fmt.Println("idx/", idx, "col/", col)
+            if x == 42 {flag = true}
+        }
+        if flag {break}
+    }
+    fmt.Println(Yell + "Paletted DBG/ends" + Rest)
+}
 
