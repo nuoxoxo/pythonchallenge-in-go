@@ -39,7 +39,7 @@ level | keyword
 
 ## notes/
 
-- _5/ -_ using `pickle` 🟡
+- _5/ -_ using `stalecucumber` for `pickle` 
 - _7/ -_ read and analyze w/ `res.At(x,y)`
 - _9/ -_ draw lines around a polygon
     - `image.NewRGBA(image.Rect(sx,sy,ex,ey))`
