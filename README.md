@@ -3,7 +3,8 @@
 
 level | keyword
 ----- | ----------
-32|
+33| __
+32| _python - beer_
 31| _arecibo - kohsamui:thailand_ 
 30| _grandpa_
 29| _yankeedoodle_
@@ -37,32 +38,9 @@ level | keyword
 1 | _ocr_
 0 | _-_
 
-## notes/
 
-- _5/ -_ using `stalecucumber` for `pickle` 
-- _7/ -_ read and analyze w/ `res.At(x,y)`
-- _9/ -_ draw lines around a polygon
-    - `image.NewRGBA(image.Rect(sx,sy,ex,ey))`
-    - `img.Set(x,y,colour)`
-- _11/ -_ new image w/ `image.NewRGBA( mypic.Bounds() )`
-- _16/ -_ longest substring of repeats 👉 YES
-    - not move, but _Rotate_ the pink segment
-- _18/ -_ now shows p3 correctly ~~common.png not written properly~~
-- _19/ -_ `Big endian` 👉🏻 write the most significant byte first - `Little endian`, the least significant byte first
-- _20/21 -_ see 6 : create/open a `.zip`
-- _22 -_ init: see 20 for regexp and double `conn`
-- _26_
 
-```
-Never mind that.
-
-Have you found my broken zip?
-
-md5: bbb8b499a0eef99b52c7f13f4e78c24b
-
-Can you believe what one mistake can lead to?
-```
-
+![](https://i.imgur.com/2XgEQxd.png) \
 ![](https://i.imgur.com/QK12wu6.jpeg)\
 ![](https://i.imgur.com/Hg8iRQ9.png)\
 ![](https://i.imgur.com/lA6gFck.png)\
