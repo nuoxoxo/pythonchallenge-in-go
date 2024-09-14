@@ -9,13 +9,78 @@ import (
     "bytes"
     "image/jpeg"
     "image/png"
+    "image/color"
     "image"
+    "math"
+    "os"
+    "strconv"
 )
 
 var beer1, beer2 []uint8
 
 func main() {
-    // 
+
+    // work with beer2, some steps are duplicated from init()
+    beer2_reader := bytes.NewReader(beer2)
+    beer2_decoder, _ := png.Decode( beer2_reader )
+    bounds := beer2_decoder.Bounds()
+    W, H := bounds.Max.X, bounds.Max.Y
+    file_index := 0
+
+    // 1st run?
+    pixels := []uint32{}
+    for y := 0; y < H; y++ {
+        for x := 0; x < W; x++ {
+            color := beer2_decoder.At(x, y)
+            scale, _, _, _ := color.RGBA()
+            scale /= 257 // uint32
+            pixels = append(pixels, scale)
+        }
+    }
+
+    for true {
+        // get the brightest pixel
+        max := uint32(0)
+        for _, pixel := range pixels {
+            if max < pixel {
+                max = pixel
+            }
+        }
+        // re-group pixels xcpt the brightest one
+        temp := []uint32{}
+        for _, pixel := range pixels {
+            if pixel < max - 1 {
+                temp = append(temp, pixel)
+            }
+        }
+        pixels = temp
+        if len(pixels) == 0 {
+            break
+        }
+        fmt.Println("\nmax/", max)
+        fmt.Println("ttl/", len(pixels))
+        sqrt := math.Sqrt(float64(len(pixels)))
+        side := int(sqrt)
+        fmt.Println("sqrt/", sqrt)
+        fmt.Println("side/", side)
+
+        // draw a res png
+        new_image := image.NewRGBA(image.Rect(0, 0, side, side))
+        pixel_index := 0
+        for y := 0; y < side; y++ {
+            for x := 0; x < side; x++ {
+                scale := uint8(pixels[pixel_index])
+                //scale := pixels[pixel_index]
+                color2set := color.RGBA{ scale, scale, scale, 255 }
+                new_image.Set(x, y, color2set)
+                pixel_index++
+            }
+        }
+        file, _ := os.Create(strconv.Itoa(file_index) + ".png")
+        defer file.Close()
+        _ = png.Encode(file, new_image)
+        file_index++
+    }
 }
 
 func init() {
@@ -55,10 +120,6 @@ func init() {
     W, H = bounds.Max.X, bounds.Max.Y
     fmt.Println("bounds/", bounds, "WH", W, H)
 
-    // paletted? 
-    _, ok := beer2_decoder.(*image.Paletted)
-    if !ok { fmt.Println("Paletted/not") }
-
     // check pixels
     dict := make(map[uint32]int)
     for y := 0; y < H; y++ {
@@ -74,6 +135,8 @@ func init() {
         }
     }
     fmt.Println(dict, "/dict")
+
+    fmt.Println(Cyan + "init/ends \n" + Rest)
 }
 
 func getbody(sub, u, p string) ( []uint8, error ) {
