@@ -49,7 +49,7 @@ func main() {
         // re-group pixels xcpt the brightest one
         temp := []uint32{}
         for _, pixel := range pixels {
-            if pixel < max - 1 {
+            if pixel < max {
                 temp = append(temp, pixel)
             }
         }
