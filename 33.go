@@ -53,14 +53,22 @@ func main() {
                 temp = append(temp, pixel)
             }
         }
+        // reached the end
         pixels = temp
         if len(pixels) == 0 {
             break
         }
+
+        sqrt := math.Sqrt(float64(len(pixels)))
+        // check if len(pixels) is a square number
+        //  ie. a square image is formable using the sqrt
+        if sqrt != math.Trunc(sqrt) {
+            continue
+        }
+        side := int(sqrt)
+
         fmt.Println("\nmax/", max)
         fmt.Println("ttl/", len(pixels))
-        sqrt := math.Sqrt(float64(len(pixels)))
-        side := int(sqrt)
         fmt.Println("sqrt/", sqrt)
         fmt.Println("side/", side)
 
@@ -70,9 +78,8 @@ func main() {
         for y := 0; y < side; y++ {
             for x := 0; x < side; x++ {
                 scale := uint8(pixels[pixel_index])
-                //scale := pixels[pixel_index]
-                color2set := color.RGBA{ scale, scale, scale, 255 }
-                new_image.Set(x, y, color2set)
+                toset := color.RGBA{ scale, scale, scale, 255 }
+                new_image.Set(x, y, toset)
                 pixel_index++
             }
         }
@@ -135,7 +142,6 @@ func init() {
         }
     }
     fmt.Println(dict, "/dict")
-
     fmt.Println(Cyan + "init/ends \n" + Rest)
 }
 
