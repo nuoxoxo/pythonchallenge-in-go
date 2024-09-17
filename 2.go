@@ -3,13 +3,13 @@ package main
 import (
     "fmt"
     "io/ioutil"
-    _"log"
     "net/http"
     "regexp"
 )
 
-// Compile(expr string)
-// MustCompile(expr string) - is like Compile but panics if an expr cannot be parsed
+// re
+//  Compile(expr string)
+//  MustCompile(expr string) - like Compile but panic if expr cannot be parsed
 
 func main(){
 
@@ -17,31 +17,22 @@ func main(){
     response, _ := http.Get( URL )
     defer response.Body.Close()
     body, _ := ioutil.ReadAll( response.Body )
-    //fmt.Println(string(body), "\nend/")
-    //re, _ := regexp.Compile(`<!--(.*?)-->`) 
-
-    // (?s) is a flag for `dotall` mode ie. single line incl. newlines
     re := regexp.MustCompile(`(?s)<!--(.*?)-->`)
-    
-    //matches := re.FindAllString( string(body) , -1)
     matches := re.FindAllStringSubmatch(string(body), -1)
+
     fmt.Println("len/", len(matches))
-    /*
-    for i, match := range matches {
-        for j, m := range match {
-            fmt.Println(i, j, m[:10])
-        }
-    }
-    */
-    // it's the 2nd match
-    instr, cmt := matches[0][1], matches[1][1]
-    fmt.Println(cmt[:42 * 42] + "\n", instr)
+
+    instr, cipher := matches[0][1], matches[1][1]
+
+    fmt.Println("\ncipher/", cipher[:42 * 10])
+    fmt.Println("\nmanual/", instr)
+
     dict := make(map[rune]int)
     res := []rune{}
-    for _, c := range (cmt) {
+    for _, c := range (cipher) {
         if ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') {
-            dict[c]++
             res = append(res, c)
+            dict[c]++
         }
     }
     for k, v := range dict {
