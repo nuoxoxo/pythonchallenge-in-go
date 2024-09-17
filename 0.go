@@ -5,12 +5,10 @@ import (
 )
 
 func main(){
-
-    var n int64 = 1
-    i := 0
-    for i < 38 {
+    var n uint64 = 1
+    for i := 0; i < 38; i++ {
         n *= 2
-        i++
+        fmt.Println(i, "\b/\t", n)
     }
-    fmt.Println(n)
+    fmt.Println("res/\t", n)
 }
