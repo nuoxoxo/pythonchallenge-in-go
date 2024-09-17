@@ -2,28 +2,35 @@ package main
 
 import (
     "fmt"
+    "io/ioutil"
+    "net/http"
+    "regexp"
 )
 
 func maketrans(s string) string {
-
     res := []rune{}
     for _, char := range s {
         nxt := int(char)
         if 'a' <= char && char <= 'z' {
-            nxt += + 2
+            nxt += 2
             if nxt >= 'z' {
                 nxt = nxt - 'z' + 'a' - 1
             }
         }
-        //fmt.Printf("%d/ %c %d - %c %d  \n", i, char, int(char), rune(nxt), int(nxt))
         res = append(res, rune(nxt))
     }
-    return string (res)
+    return string(res)
 }
 
 func main() {
-    s := "g fmnc wms bgblr rpylqjyrc gr zw fylb. rfyrq ufyr amknsrcpq ypc dmp. bmgle gr gl zw fylb gq glcddgagclr ylb rfyr'q ufw rfgq rcvr gq qm jmle. sqgle qrpgle.kyicrpylq() gq pcamkkclbcb. lmu ynnjw ml rfc spj."
-    fmt.Println("str/", maketrans(s))
-    fmt.Println("map/", maketrans("map"))
+    resp, _ := http.Get("http://www.pythonchallenge.com/pc/def/map.html")
+    defer resp.Body.Close()
+    body, _ := ioutil.ReadAll(resp.Body)
 
+    re := regexp.MustCompile(`(?s)<font color="#f000f0">(.*?)</tr></td>`)
+    sub := re.FindAllStringSubmatch(string(body), -1)[0][1]
+    fmt.Println("sub/", sub)
+
+    fmt.Println("str/", maketrans(sub))
+    fmt.Println("map/", maketrans("map"))
 }
